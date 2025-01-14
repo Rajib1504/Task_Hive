@@ -25,8 +25,8 @@ const Banner = () => {
       <SwiperSlide>
         <div className="relative">
           <img
-            src="https://i.ibb.co/gVF7pND/pexels-marily-torres-227778-776615.jpg"
-            alt="Pasta Dish"
+            src="https://i.ibb.co/XyYfGJ4/pexels-marily-torres-227778-776615-1.jpg"
+            alt="image"
             className="w-full object-center h-64 sm:h-80 md:h-96 lg:h-[500px] object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-primary opacity-40 to-transparent"></div>
@@ -57,7 +57,7 @@ const Banner = () => {
       <SwiperSlide>
         <div className="relative">
           <img
-            src="https://i.ibb.co/PTVRphk/pexels-sora-shimazaki-5668517.jpg"
+            src="https://i.ibb.co/BqHQWQK/pexels-sora-shimazaki-5668517-1.jpg"
             alt="Burger Dish"
             className="w-full h-64 sm:h-80 md:h-96 lg:h-[500px] object-cover"
           />
@@ -89,8 +89,8 @@ const Banner = () => {
       <SwiperSlide>
         <div className="relative">
           <img
-            src="https://i.ibb.co/FJZP1hc/pexels-leeloothefirst-6928994.jpg"
-            alt="Cheesecake"
+            src="https://i.ibb.co/hm5LwnX/pexels-leeloothefirst-6928994-1.jpg"
+            alt="image"
             className="w-full h-64 sm:h-80 md:h-96 object-top lg:h-[500px] object-cover "
           />
           {/* <div className="absolute inset-0 bg-gradient-to-r from-[#FF7A45] to-transparent"></div> */}
