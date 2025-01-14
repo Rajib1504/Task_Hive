@@ -34,7 +34,7 @@ const Navbar = () => {
     </>
   );
   return (
-    <div>
+    <div className="">
       <div className="navbar bg-primary">
         <div className="navbar-start">
           <div className="dropdown">

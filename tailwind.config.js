@@ -7,6 +7,7 @@ export default {
         primary: "#EEF5FF", // background
         secondary: "#86B6F6", // text  color
         borderColor: "#B4D4FF", // border color
+        buttonHover: "#045b78", // button hover color
         buttonColor: "#176B87", // button color
       },
     },
