@@ -1,19 +1,33 @@
 import { CircleUserRound } from "lucide-react";
+import { useContext, useState } from "react";
+import { Link } from "react-router-dom";
 const Navbar = () => {
+  const [user] = useState(null);
   const link = (
     <>
-      <li>
-        <a>Login</a>
-      </li>
-      <li>
-        <a>Register</a>
-      </li>
-      <li>
-        <a>Available Coin </a>
-      </li>
-      <li>
-        <a>Dashboard</a>
-      </li>
+      {!user && (
+        <>
+          <li>
+            <Link to={"/login"}>Login</Link>
+          </li>
+          <li>
+            <Link to={"/register"}> Register</Link>
+          </li>
+        </>
+      )}
+
+      {user && (
+        <>
+          {" "}
+          <li>
+            <a>Available Coin </a>
+          </li>
+          <li>
+            <a>Dashboard</a>
+          </li>
+        </>
+      )}
+
       <li>
         <a>Join As Developer</a>
       </li>
@@ -47,18 +61,30 @@ const Navbar = () => {
               {link}
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl">daisyUI</a>
+          {user ? (
+            <>
+              <Link to={"/"} className="btn btn-ghost text-xl">
+                Task_Hive
+              </Link>
+            </>
+          ) : (
+            <a className=" text-2xl font-bold">daisyUI</a>
+          )}
         </div>
-        <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">{link}</ul>
-        </div>
-        <div className="navbar-end">
-          <a className="btn">log out</a>
-          <div
-            className=" tooltip  tooltip-bottom"
-            data-tip='user'
-          >
-            {/* {user ? (
+        {user ? (
+          <div className="navbar-center hidden lg:flex">
+            <ul className="menu menu-horizontal px-1">{link}</ul>
+          </div>
+        ) : (
+          <div className="navbar-end hidden lg:flex">
+            <ul className="menu menu-horizontal px-1">{link}</ul>
+          </div>
+        )}
+        {user && (
+          <div className="navbar-end flex mr-10 gap-10 border-2 border-red-400">
+            <a className="btn">log out</a>
+            <div className=" tooltip  tooltip-bottom mr-4" data-tip="user">
+              {/* {user ? (
               <img
                 src='icon'
                 alt="User Icon"
@@ -66,9 +92,10 @@ const Navbar = () => {
               />
             ) : (
             )} */}
-            <CircleUserRound />
+              <CircleUserRound />
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
