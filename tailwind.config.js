@@ -5,7 +5,9 @@ export default {
     extend: {
       colors: {
         primary: "#EEF5FF", // background
-        secondary: "#ffed4a", // Replace with your desired secondary color
+        secondary: "#86B6F6", // text  color
+        borderColor: "#B4D4FF", // border color
+        buttonColor: "#176B87", // button color
       },
     },
   },

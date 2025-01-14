@@ -4,6 +4,11 @@ import { Link } from "react-router-dom";
 const Register = () => {
   const handleRegister = (e) => {
     e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    const photoURL = form.photoURL.value;
   };
   const handelGoogle = () => {};
   return (
@@ -26,7 +31,7 @@ const Register = () => {
                 type="text"
                 id="name"
                 name="name"
-                className="w-full px-4 py-2 mt-2 text-gray-700 bg-gray-100 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF5200]"
+                className="w-full px-4 py-2 mt-2 text-gray-700 bg-gray-100 border rounded-lg focus:outline-none focus:ring-2 focus:"
                 placeholder="Enter your name"
                 required
               />
@@ -43,7 +48,7 @@ const Register = () => {
                 type="email"
                 id="email"
                 name="email"
-                className="w-full px-4 py-2 mt-2 text-gray-700 bg-gray-100 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF5200]"
+                className="w-full px-4 py-2 mt-2 text-gray-700 bg-gray-100 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
                 placeholder="Enter your email"
                 required
               />
@@ -60,7 +65,7 @@ const Register = () => {
                 type="text"
                 id="photoURL"
                 name="photoURL"
-                className="w-full px-4 py-2 mt-2 text-gray-700 bg-gray-100 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF5200]"
+                className="w-full px-4 py-2 mt-2 text-gray-700 bg-gray-100 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
                 placeholder="Enter photo URL"
                 required
               />
@@ -77,7 +82,7 @@ const Register = () => {
                 type="password"
                 id="password"
                 name="password"
-                className="w-full px-4 py-2 mt-2 text-gray-700 bg-gray-100 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF5200]"
+                className="w-full px-4 py-2 mt-2 text-gray-700 bg-gray-100 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
                 placeholder="Enter your password"
                 required
               />
@@ -85,13 +90,13 @@ const Register = () => {
             {/* Submit Button */}
             <button
               type="submit"
-              className="w-full px-4 py-2 mt-4 text-white bg-gradient-to-r from-[#ef5919] to-[#c86638] rounded-lg hover:from-[#eb956d] hover:to-[#FF5200] transform hover:scale-105 transition duration-300 ease-in-out hover:shadow-lg focus:outline-none"
+              className="w-full px-4 py-2 mt-4 text-white bg-gradient-to-r from-buttonColor to-secondary rounded-lg hover:from-secondary hover:to-buttonColor transform hover:scale-105 transition duration-300 ease-in-out hover:shadow-lg focus:outline-none"
             >
               Submit
             </button>
           </form>
           {/* Google Login Button */}
-          <button className="w-full px-4 py-2 mt-4 text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-200 focus:outline-none">
+          <button className="w-full px-4 py-2 mt-4 text-gray-700  bg-secondary hover:from-secondary hover:to-buttonColor transform hover:scale-105 transition duration-300 ease-in border border-gray-300 rounded-lg focus:outline-none">
             <div
               onClick={handelGoogle}
               className="flex items-center gap-2 justify-center"
@@ -107,7 +112,7 @@ const Register = () => {
           {/* Link to Login Page */}
           <p className="mt-4 text-sm text-center  text-gray-600">
             Already have an account?{" "}
-            <Link to="/login" className="text-[#FF5200] hover:underline">
+            <Link to="/login" className="text-secondary hover:underline">
               Login
             </Link>
           </p>
