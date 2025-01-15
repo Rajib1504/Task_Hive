@@ -1,11 +1,39 @@
-import React from "react";
 import { Link } from "react-router-dom";
+import UseAuth from "../../Hooks/useAuth/UseAuth";
+import { toast } from "react-toastify";
 
 const Login = () => {
+  const { setUser, login, googleSignin } = UseAuth();
   const handleLogin = (e) => {
     e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log(email, password);
+    login(email, password)
+      .then((res) => {
+        const olduser = res.user;
+        setUser(olduser);
+        // console.log()
+        toast.success(`Login Successfull ${olduser.email}`);
+      })
+      .catch((err) => {
+        const errormessage = err.message;
+        toast.error(`Opps ! ${errormessage}`);
+      });
   };
-  const handelGoogle = () => {};
+  const handelGoogle = () => {
+    googleSignin(email, password)
+      .then((res) => {
+        const user = res.user;
+        setUser = user;
+        toast.success(`Login Successfull ${user.email}`);
+      })
+      .catch((err) => {
+        const error = err.message;
+        toast(`Opps! ${error}`);
+      });
+  };
   return (
     <>
       <div className="flex items-center min-h-screen justify-center pt-2 sm:pt-4  bg-gray-100">

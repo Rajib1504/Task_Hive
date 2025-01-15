@@ -1,10 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import UseAuth from "../../Hooks/useAuth/UseAuth";
 import { toast } from "react-toastify";
 
 const Register = () => {
-  const { user, setUser, register, loading, setLoading } = UseAuth();
+  const { setUser, register } = UseAuth();
+  const navigate = useNavigate();
   const handleRegister = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -24,7 +25,12 @@ const Register = () => {
       register(email, password).then((res) => {
         const newUser = res.user;
         setUser(newUser);
-        toast.success("Registration Successfull");
+        console.log(newUser);
+        toast.success(`Registration Successfull ${newUser.email}`);
+      });
+      navigate("/").catch((err) => {
+        const error = err.message;
+        toast.error(`oops! ${error}`);
       });
     }
   };
