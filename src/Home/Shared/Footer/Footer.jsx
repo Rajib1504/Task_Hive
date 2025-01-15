@@ -3,7 +3,7 @@ import React from "react";
 const Footer = () => {
   return (
     <div>
-      <footer className="footer mt-10 bg-base-200 text-base-content p-10">
+      <footer className="footer pt-10 bg-base-200 text-base-content p-10">
         <aside>
           <img
             src="https://i.ibb.co/ryJ15Cn/Black-White-Minimalist-Initials-Monogram-Jewelry-Logo-1-removebg-preview.png"

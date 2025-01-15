@@ -25,19 +25,20 @@ const Login = () => {
   const handelGoogle = () => {
     googleSignin(email, password)
       .then((res) => {
-        const user = res.user;
-        setUser = user;
-        toast.success(`Login Successfull ${user.email}`);
+        const googleUser = res.user;
+        setUser(googleUser);
+        toast.success(`Login Successfull ${googleUser.email}`);
       })
       .catch((err) => {
-        const error = err.message;
-        toast(`Opps! ${error}`);
+        const errorM = err.message;
+        console.log(errorM);
+        toast.error(`Opps! ${errorM}`);
       });
   };
   return (
     <>
-      <div className="flex items-center min-h-screen justify-center pt-2 sm:pt-4  bg-gray-100">
-        <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-md">
+      <div className="flex items-center min-h-screen justify-center pt-2 pb-4 sm:pt-4 bg-gradient-to-bl from-primary">
+        <div className="w-full max-w-md p-6 bg-gradient-to-tl from-primary rounded-lg shadow-md">
           <h2 className="text-3xl font-bold text-center text-gray-800 mb-4">
             Login
           </h2>
