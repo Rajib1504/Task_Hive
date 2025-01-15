@@ -29,7 +29,9 @@ const Navbar = () => {
       )}
 
       <li>
-        <a>Join As Developer</a>
+        <a href="https://github.com/Rajib1504" target="_blank">
+          Join As Developer
+        </a>
       </li>
     </>
   );
@@ -45,7 +47,7 @@ const Navbar = () => {
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
+                className="h-5 w-5 mb-2"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -67,12 +69,32 @@ const Navbar = () => {
           </div>
           {user ? (
             <>
-              <Link to={"/"} className="btn btn-ghost text-xl">
-                Task_Hive
-              </Link>
+              <div className="flex  justify-center items-center">
+                <Link
+                  to={"/"}
+                  className="btn btn-ghost text-2xl flex gap-2 items-center"
+                >
+                  <img
+                    src="https://i.ibb.co/ryJ15Cn/Black-White-Minimalist-Initials-Monogram-Jewelry-Logo-1-removebg-preview.png"
+                    className="h-14 w-16"
+                    alt=""
+                  />
+                  <p className=" text-2xl font-bold mb-3"> Task Hive</p>
+                </Link>
+              </div>
             </>
           ) : (
-            <a className=" text-2xl font-bold">daisyUI</a>
+            <>
+              <div className="flex  justify-center items-center">
+                <img
+                  src="https://i.ibb.co/ryJ15Cn/Black-White-Minimalist-Initials-Monogram-Jewelry-Logo-1-removebg-preview.png"
+                  alt=""
+                  className="h-14 w-16"
+                />
+
+                <a className=" text-2xl font-bold mb-3">Task Hive</a>
+              </div>
+            </>
           )}
         </div>
         {user ? (

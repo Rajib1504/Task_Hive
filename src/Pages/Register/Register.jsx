@@ -1,7 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import UseAuth from "../../Hooks/useAuth/UseAuth";
+import { toast } from "react-toastify";
 
 const Register = () => {
+  const { user, setUser, register, loading, setLoading } = UseAuth();
   const handleRegister = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -9,12 +12,27 @@ const Register = () => {
     const email = form.email.value;
     const password = form.password.value;
     const photoURL = form.photoURL.value;
+    const role = form.role.value;
+    const formdata = { name, email, password, photoURL, role };
+    console.log(formdata);
+    const regx = /^(?=.*[A-Z])(?=.*[a-z]).{6,}$/;
+    if (!regx.test(password)) {
+      toast.error("Password validation fail");
+    } else if (!email) {
+      toast.error("invalide email address");
+    } else {
+      register(email, password).then((res) => {
+        const newUser = res.user;
+        setUser(newUser);
+        toast.success("Registration Successfull");
+      });
+    }
   };
   const handelGoogle = () => {};
   return (
     <>
-      <div className="flex items-center pb-4 justify-center pt-2 sm:pt-4 bg-gray-100">
-        <div className="w-full max-w-md p-6 bg-white  rounded-lg shadow-md">
+      <div className="flex items-center pb-4 justify-center pt-2 sm:pt-4 bg-gradient-to-bl from-primary">
+        <div className="w-full  max-w-md p-6 bg-gradient-to-tl from-primary  rounded-lg shadow-md">
           <h2 className="text-3xl font-bold text-center  text-gray-800 mb-4">
             Register
           </h2>
@@ -86,6 +104,27 @@ const Register = () => {
                 placeholder="Enter your password"
                 required
               />
+            </div>
+            {/* Input */}
+            <div className="mb-4">
+              <label
+                htmlFor="role"
+                className="block text-sm font-medium text-gray-600"
+              >
+                Choose your Role
+              </label>
+              <select
+                name="role"
+                className="w-full px-4 py-2 mt-2 text-gray-700 bg-gray-100 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
+                id=""
+                defaultValue={"Select Role"}
+              >
+                <option defaultValue={"Select Role"} disabled>
+                  Select Role
+                </option>
+                <option value={"Worker"}>Worker</option>
+                <option value={"Buyer"}>Buyer</option>
+              </select>
             </div>
             {/* Submit Button */}
             <button
