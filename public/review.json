@@ -1,0 +1,33 @@
+[
+      {
+        "details": "TaskHive made my workflow so much easier! The seamless task management system and professional workers are top-notch.",
+        "name": "Emily Carter",
+        "_id": "001",
+        "rating": 5
+      },
+      {
+        "details": "I appreciate the secure payment system and the wide range of available tasks. TaskHive is my go-to platform for finding reliable workers.",
+        "name": "James Wilson",
+        "_id": "002",
+        "rating": 4.5
+      },
+      {
+        "details": "The user-friendly interface and supportive customer service have made TaskHive a pleasure to use. Highly recommend it!",
+        "name": "Sophia Johnson",
+        "_id": "003",
+        "rating": 4.7
+      },
+      {
+        "details": "TaskHive connects me with the best professionals. I always get my tasks completed efficiently and securely.",
+        "name": "Michael Lee",
+        "_id": "004",
+        "rating": 5
+      },
+      {
+        "details": "Great platform for both workers and buyers. The task tracking and coin management system are impressive.",
+        "name": "Olivia Brown",
+        "_id": "005",
+        "rating": 4.8
+      }
+    ]
+    

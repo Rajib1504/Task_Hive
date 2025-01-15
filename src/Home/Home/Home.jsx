@@ -4,6 +4,7 @@ import BestWorkers from "../BestWorkers/BestWorkers";
 import FaqSection from "../FaqSection/FaqSection";
 import TotalWork from "../TotalWork/TotalWork";
 import HappyWork from "../Happy work/HappyWork";
+import Testimonials from "../Testimonials/Testimonials";
 
 const Home = () => {
   return (
@@ -18,6 +19,8 @@ const Home = () => {
       <BestWorkers></BestWorkers>
       {/* faq section  */}
       <FaqSection></FaqSection>
+      {/* Testimonal section  */}
+      <Testimonials></Testimonials>
     </div>
   );
 };

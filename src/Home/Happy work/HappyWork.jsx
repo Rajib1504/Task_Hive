@@ -17,12 +17,12 @@ const FeaturedBenefits = () => {
             <div className="container mx-auto flex flex-col lg:flex-row items-center lg:justify-between">
               {/* Left Side Content */}
               <div className="w-full md:max-w-lg">
-                <div className="mb-5 border-l-8 border-borderColor pl-4">
-                  <h1 className="text-secondary text-3xl font-bold">
+                <div className="mb-5 md:border-l-8 border-l-4 border-borderColor pl-4">
+                  <h1 className="text-secondary md:text-3xl text-xl  font-bold">
                     Why Choose TaskHive?
                   </h1>
                 </div>
-                <p className="text-secondary text-lg mb-6">
+                <p className="text-secondary md:text-lg text-sm mb-6">
                   Unlock endless possibilities with seamless task management,
                   secure earnings, and a trusted community.
                 </p>
@@ -31,7 +31,7 @@ const FeaturedBenefits = () => {
                     <span className="bg-buttonColor p-2 rounded-full text-white mr-3">
                       <MdHd size={24} />
                     </span>
-                    <span className="text-lg text-secondary">
+                    <span className="md:text-lg text text-secondary">
                       Secure Payments & Transactions
                     </span>
                   </li>
@@ -39,13 +39,13 @@ const FeaturedBenefits = () => {
                     <span className="bg-buttonColor p-2 rounded-full text-white mr-3">
                       <MdGroup size={24} />
                     </span>
-                    <span className="text-lg text-secondary ">
+                    <span className="md:text-lg text text-secondary ">
                       Growing Network of Trusted Workers
                     </span>
                   </li>
                 </ul>
 
-                <button className="flex items-center gap-3 px-5 py-3 bg-buttonColor hover:bg-buttonHover text-lg rounded-lg text-white">
+                <button className="flex items-center gap-3 md:px-5 px-4 md:py-3 py-2 bg-buttonColor hover:bg-buttonHover text-lg rounded-lg text-white">
                   <FaPlay size={20} />
                   Get Started
                 </button>
