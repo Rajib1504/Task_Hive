@@ -1,8 +1,9 @@
 import { CircleUserRound } from "lucide-react";
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import UseAuth from "../../../Hooks/useAuth/UseAuth";
 const Navbar = () => {
-  const [user] = useState(null);
+  const { user } = UseAuth();
   const link = (
     <>
       {!user && (
@@ -73,10 +74,7 @@ const Navbar = () => {
           {user ? (
             <>
               <div className="flex  justify-center items-center">
-                <Link
-                  to={"/"}
-                  className="btn btn-ghost text-2xl flex gap-2 items-center"
-                >
+                <Link to={"/"} className="flex justify-center items-center">
                   <img
                     src="https://i.ibb.co/LkNYRKf/Black-and-White-Minimalist-Professional-Initial-Logo-removebg-preview.png"
                     className="h-18 w-16"
@@ -110,18 +108,23 @@ const Navbar = () => {
           </div>
         )}
         {user && (
-          <div className="navbar-end flex mr-10 gap-10 border-2 border-red-400">
-            <a className="btn">log out</a>
-            <div className=" tooltip  tooltip-bottom mr-4" data-tip="user">
-              {/* {user ? (
-              <img
-                src='icon'
-                alt="User Icon"
-                className="w-5 sm:w-10 rounded-full"
-              />
-            ) : (
-            )} */}
-              <CircleUserRound />
+          <div className="navbar-end flex gap-2 ">
+            <a className="btn btn-ghost border-borderColor text-red-300 ">
+              log out
+            </a>
+            <div
+              className=" tooltip  tooltip-bottom mr-4"
+              data-tip={user.displayName}
+            >
+              {user ? (
+                <img
+                  src="user.photoURL"
+                  alt="User Icon"
+                  className="w-5 sm:w-10 rounded-full"
+                />
+              ) : (
+                <CircleUserRound />
+              )}
             </div>
           </div>
         )}

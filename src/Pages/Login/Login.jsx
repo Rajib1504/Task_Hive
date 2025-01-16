@@ -3,7 +3,8 @@ import UseAuth from "../../Hooks/useAuth/UseAuth";
 import { toast } from "react-toastify";
 
 const Login = () => {
-  const { setUser, login, googleSignin } = UseAuth();
+  const { user, setUser, login, googleSignin } = UseAuth();
+  console.log(user);
   const handleLogin = (e) => {
     e.preventDefault();
     const form = e.target;
