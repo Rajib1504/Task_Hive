@@ -1,10 +1,10 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { data, Link, useNavigate } from "react-router-dom";
 import UseAuth from "../../Hooks/useAuth/UseAuth";
 import { toast } from "react-toastify";
 
 const Register = () => {
-  const { setUser, register } = UseAuth();
+  const { setUser, register, updateUserProfile } = UseAuth();
   const navigate = useNavigate();
   const handleRegister = (e) => {
     e.preventDefault();
@@ -24,8 +24,9 @@ const Register = () => {
     } else {
       register(email, password).then((res) => {
         const newUser = res.user;
-        setUser(newUser);
         console.log(newUser);
+        updateUserProfile(name, photoURL);
+        setUser(newUser);
         toast.success(`Registration Successfull ${newUser.email}`);
       });
       navigate("/").catch((err) => {

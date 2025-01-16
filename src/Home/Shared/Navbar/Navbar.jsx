@@ -87,10 +87,13 @@ const Navbar = () => {
                 <Link to={"/"} className="flex justify-center items-center">
                   <img
                     src="https://i.ibb.co/LkNYRKf/Black-and-White-Minimalist-Professional-Initial-Logo-removebg-preview.png"
-                    className="h-18 w-16"
+                    className="lg:h-16 lg:w-16 h-10 w-10"
                     alt=""
                   />
-                  <p className=" text-2xl font-bold "> Task Hive</p>
+                  <p className=" hidden md:block lg:block md:text-2xl lg:text-2xl font-bold ">
+                    {" "}
+                    Task Hive
+                  </p>
                 </Link>
               </div>
             </>
@@ -100,10 +103,12 @@ const Navbar = () => {
                 <img
                   src="https://i.ibb.co/LkNYRKf/Black-and-White-Minimalist-Professional-Initial-Logo-removebg-preview.png"
                   alt=""
-                  className="h-16 w-16"
+                  className="lg:h-16 lg:w-16 h-10 w-10"
                 />
 
-                <a className=" text-2xl font-bold ">Task Hive</a>
+                <a className=" hidden md:block lg:block lg:text-2xl md:text-2xl font-bold ">
+                  Task Hive
+                </a>
               </div>
             </>
           )}
@@ -121,7 +126,7 @@ const Navbar = () => {
           <div className="navbar-end flex gap-2 ">
             <button
               onClick={SignOut}
-              className="btn btn-ghost border-borderColor text-red-300 "
+              className="btn lg:btn-ghost btn-sm  border-borderColor text-red-300 "
             >
               log out
             </button>
