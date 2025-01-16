@@ -2,9 +2,11 @@ import React from "react";
 import { data, Link, useNavigate } from "react-router-dom";
 import UseAuth from "../../Hooks/useAuth/UseAuth";
 import { toast } from "react-toastify";
+import AxiosPublic from "./../../Hooks/Axios/AxiosPublic";
 
 const Register = () => {
   const { setUser, register, updateUserProfile } = UseAuth();
+  const axiosPublic = AxiosPublic();
   const navigate = useNavigate();
   const handleRegister = (e) => {
     e.preventDefault();
@@ -22,12 +24,27 @@ const Register = () => {
     } else if (!email) {
       toast.error("invalide email address");
     } else {
+      // register
       register(email, password).then((res) => {
         const newUser = res.user;
         console.log(newUser);
-        updateUserProfile(name, photoURL);
+        // updateUserProfile
+        updateUserProfile(name, photoURL).then(() => {
+          const userInfo = {
+            name: newUser.displayName,
+            email: newUser.email,
+            photo: newUser.photoURL,
+            role: formdata.role,
+          };
+          axiosPublic.post("/user", userInfo).then((res) => {
+            if (res.data.insertedId) {
+              console.log("user created to the database");
+              toast.success(`Registerd by ${newUser.email}`);
+              navigate("/");
+            }
+          });
+        });
         setUser(newUser);
-        toast.success(`Registration Successfull ${newUser.email}`);
       });
       navigate("/").catch((err) => {
         const error = err.message;
@@ -87,7 +104,7 @@ const Register = () => {
                 Photo URL
               </label>
               <input
-                type="text"
+                type="url"
                 id="photoURL"
                 name="photoURL"
                 className="w-full px-4 py-2 mt-2 text-gray-700 bg-gray-100 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
@@ -126,9 +143,6 @@ const Register = () => {
                 id=""
                 defaultValue={"Select Role"}
               >
-                <option defaultValue={"Select Role"} disabled>
-                  Select Role
-                </option>
                 <option value={"Worker"}>Worker</option>
                 <option value={"Buyer"}>Buyer</option>
               </select>
