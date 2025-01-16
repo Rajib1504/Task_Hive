@@ -2,11 +2,11 @@ import React from "react";
 import { data, Link, useNavigate } from "react-router-dom";
 import UseAuth from "../../Hooks/useAuth/UseAuth";
 import { toast } from "react-toastify";
-import AxiosPublic from "./../../Hooks/Axios/AxiosPublic";
+import useAxiosPublic from "../../Hooks/UseAxios/useAxiosPublic";
 
 const Register = () => {
   const { setUser, register, updateUserProfile } = UseAuth();
-  const axiosPublic = AxiosPublic();
+  const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
   const handleRegister = (e) => {
     e.preventDefault();
@@ -25,31 +25,34 @@ const Register = () => {
       toast.error("invalide email address");
     } else {
       // register
-      register(email, password).then((res) => {
-        const newUser = res.user;
-        console.log(newUser);
-        // updateUserProfile
-        updateUserProfile(name, photoURL).then(() => {
-          const userInfo = {
-            name: newUser.displayName,
-            email: newUser.email,
-            photo: newUser.photoURL,
-            role: formdata.role,
-          };
-          axiosPublic.post("/user", userInfo).then((res) => {
-            if (res.data.insertedId) {
-              console.log("user created to the database");
-              toast.success(`Registerd by ${newUser.email}`);
-              navigate("/");
-            }
+      register(email, password)
+        .then((res) => {
+          const newUser = res.user;
+          console.log(newUser);
+          // updateUserProfile
+          updateUserProfile(name, photoURL).then(() => {
+            const userInfo = {
+              name: newUser.displayName,
+              email: newUser.email,
+              photo: newUser.photoURL,
+              role: formdata.role,
+            };
+            axiosPublic.post("/user", userInfo).then((res) => {
+              if (res.data.insertedId) {
+                console.log("user created to the database");
+                toast.success(`Registerd by ${newUser.email}`);
+                navigate("/");
+              } else if (res.data.message === "user already exist") {
+                toast.error("User already exists with this email.");
+              }
+            });
           });
+          setUser(newUser);
+        })
+        .catch((err) => {
+          const error = err.message;
+          toast.error(`oops! ${error}`);
         });
-        setUser(newUser);
-      });
-      navigate("/").catch((err) => {
-        const error = err.message;
-        toast.error(`oops! ${error}`);
-      });
     }
   };
 

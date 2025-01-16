@@ -22,7 +22,7 @@ const Banner = () => {
       modules={[Autoplay, Pagination]}
       className="mySwiper"
     >
-      <SwiperSlide className="mt-18">
+      <SwiperSlide className="">
         <div className="relative  ">
           <img
             src="https://i.ibb.co/WVfQvkz/banner-1-11zon.jpg"
@@ -54,7 +54,7 @@ const Banner = () => {
           </div>
         </div>
       </SwiperSlide>
-      <SwiperSlide className="mt-18">
+      <SwiperSlide className="">
         <div className="relative">
           <img
             src="https://i.ibb.co/FgPMVJg/banner-2-11zon.jpg"
@@ -86,7 +86,7 @@ const Banner = () => {
           </div>
         </div>
       </SwiperSlide>
-      <SwiperSlide className="mt-18">
+      <SwiperSlide className="">
         <div className="relative">
           <img
             src="https://i.ibb.co/hm5LwnX/pexels-leeloothefirst-6928994-1.jpg"
@@ -118,7 +118,7 @@ const Banner = () => {
           </div>
         </div>
       </SwiperSlide>
-      <SwiperSlide className="mt-18">
+      <SwiperSlide className="">
         <div className="relative">
           <img
             src="https://i.ibb.co/vXN6w0p/pexels-jakubzerdzicki-28738504.jpg"

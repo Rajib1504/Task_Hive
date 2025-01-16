@@ -1,10 +1,18 @@
 import { CircleUserRound } from "lucide-react";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import UseAuth from "../../../Hooks/useAuth/UseAuth";
 import { toast } from "react-toastify";
+import { HiCurrencyDollar } from "react-icons/hi";
+import useAxiosPublic from "../../../Hooks/UseAxios/useAxiosPublic";
+import Loading from "../../../Loading/Loading";
 const Navbar = () => {
-  const { user, logOut } = UseAuth();
+  const [coin, setCoin] = useState(0);
+  const { user, logOut, loading } = UseAuth();
+  const axiosPublic = useAxiosPublic();
+  if (loading) {
+    <Loading></Loading>;
+  }
   const SignOut = () => {
     logOut()
       .then((res) => {
@@ -31,9 +39,6 @@ const Navbar = () => {
         <>
           {" "}
           <li>
-            <a>Available Coin </a>
-          </li>
-          <li>
             <a>Dashboard</a>
           </li>
         </>
@@ -49,6 +54,13 @@ const Navbar = () => {
       </li>
     </>
   );
+  useEffect(() => {
+    axiosPublic(`/user/${user?.email}`).then((res) => {
+      const coin = res.data.Coins;
+      setCoin(coin);
+    });
+  }, [user?.email]);
+
   return (
     <div className="z-50 sticky top-0 ">
       <div className="navbar bg-primary">
@@ -124,6 +136,10 @@ const Navbar = () => {
         )}
         {user && (
           <div className="navbar-end flex gap-2 ">
+            <button className="flex btn btn-sm justify-center items-center">
+              <HiCurrencyDollar className="text-yellow-400 text-2xl" />
+              {coin}
+            </button>
             <button
               onClick={SignOut}
               className="btn lg:btn-ghost btn-sm  border-borderColor text-red-300 "
@@ -132,11 +148,11 @@ const Navbar = () => {
             </button>
             <div
               className=" tooltip  tooltip-bottom mr-4"
-              data-tip={user.displayName}
+              data-tip={user?.displayName}
             >
               {user ? (
                 <img
-                  src="user.photoURL"
+                  src={user.photoURL}
                   alt="User Icon"
                   className="w-5 sm:w-10 rounded-full"
                 />
