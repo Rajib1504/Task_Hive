@@ -1,10 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import UseAuth from "../../Hooks/useAuth/UseAuth";
 import { toast } from "react-toastify";
 
 const Login = () => {
   const { user, setUser, login, googleSignin } = UseAuth();
-  console.log(user);
+  // console.log(user);
+  const navigate = useNavigate();
   const handleLogin = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -17,6 +18,7 @@ const Login = () => {
         setUser(olduser);
         // console.log()
         toast.success(`Login Successfull ${olduser.email}`);
+        navigate("/");
       })
       .catch((err) => {
         const errormessage = err.message;
@@ -29,6 +31,7 @@ const Login = () => {
         const googleUser = res.user;
         setUser(googleUser);
         toast.success(`Login Successfull ${googleUser.email}`);
+        navigate("/");
       })
       .catch((err) => {
         const errorM = err.message;

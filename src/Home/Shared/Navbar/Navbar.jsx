@@ -2,8 +2,18 @@ import { CircleUserRound } from "lucide-react";
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import UseAuth from "../../../Hooks/useAuth/UseAuth";
+import { toast } from "react-toastify";
 const Navbar = () => {
-  const { user } = UseAuth();
+  const { user, logOut } = UseAuth();
+  const SignOut = () => {
+    logOut()
+      .then((res) => {
+        toast.success("logout successfully");
+      })
+      .catch((err) => {
+        toast.error(err.message);
+      });
+  };
   const link = (
     <>
       {!user && (
@@ -109,9 +119,12 @@ const Navbar = () => {
         )}
         {user && (
           <div className="navbar-end flex gap-2 ">
-            <a className="btn btn-ghost border-borderColor text-red-300 ">
+            <button
+              onClick={SignOut}
+              className="btn btn-ghost border-borderColor text-red-300 "
+            >
               log out
-            </a>
+            </button>
             <div
               className=" tooltip  tooltip-bottom mr-4"
               data-tip={user.displayName}
