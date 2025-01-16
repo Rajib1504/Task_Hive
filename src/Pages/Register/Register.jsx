@@ -34,7 +34,7 @@ const Register = () => {
       });
     }
   };
-  const handelGoogle = () => {};
+
   return (
     <>
       <div className="flex items-center pb-4 justify-center pt-2 sm:pt-4 bg-gradient-to-bl from-primary">
@@ -140,20 +140,7 @@ const Register = () => {
               Submit
             </button>
           </form>
-          {/* Google Login Button */}
-          <button className="w-full px-4 py-2 mt-4 text-gray-700  bg-secondary hover:from-secondary hover:to-buttonColor transform hover:scale-105 transition duration-300 ease-in border border-gray-300 rounded-lg focus:outline-none">
-            <div
-              onClick={handelGoogle}
-              className="flex items-center gap-2 justify-center"
-            >
-              <img
-                className="w-6"
-                src="https://i.ibb.co/mSSztJP/google-logo-9808.png"
-                alt=""
-              />
-              <p className="">Google Login</p>
-            </div>
-          </button>
+
           {/* Link to Login Page */}
           <p className="mt-4 text-sm text-center  text-gray-600">
             Already have an account?{" "}

@@ -29,7 +29,10 @@ const Navbar = () => {
       )}
 
       <li>
-        <a href="https://github.com/Rajib1504" target="_blank">
+        <a
+          href="https://github.com/Programming-Hero-Web-Course4/b10a12-client-side-Rajib1504"
+          target="_blank"
+        >
           Join As Developer
         </a>
       </li>
@@ -75,11 +78,11 @@ const Navbar = () => {
                   className="btn btn-ghost text-2xl flex gap-2 items-center"
                 >
                   <img
-                    src="https://i.ibb.co/ryJ15Cn/Black-White-Minimalist-Initials-Monogram-Jewelry-Logo-1-removebg-preview.png"
-                    className="h-14 w-16"
+                    src="https://i.ibb.co/LkNYRKf/Black-and-White-Minimalist-Professional-Initial-Logo-removebg-preview.png"
+                    className="h-18 w-16"
                     alt=""
                   />
-                  <p className=" text-2xl font-bold mb-3"> Task Hive</p>
+                  <p className=" text-2xl font-bold "> Task Hive</p>
                 </Link>
               </div>
             </>
@@ -87,12 +90,12 @@ const Navbar = () => {
             <>
               <div className="flex  justify-center items-center">
                 <img
-                  src="https://i.ibb.co/ryJ15Cn/Black-White-Minimalist-Initials-Monogram-Jewelry-Logo-1-removebg-preview.png"
+                  src="https://i.ibb.co/LkNYRKf/Black-and-White-Minimalist-Professional-Initial-Logo-removebg-preview.png"
                   alt=""
-                  className="h-14 w-16"
+                  className="h-16 w-16"
                 />
 
-                <a className=" text-2xl font-bold mb-3">Task Hive</a>
+                <a className=" text-2xl font-bold ">Task Hive</a>
               </div>
             </>
           )}

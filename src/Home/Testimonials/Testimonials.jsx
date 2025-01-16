@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 // swiper imports
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Navigation } from "swiper/modules";
+import { Pagination, Navigation, Autoplay } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+
 // rating imports
 import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
@@ -16,13 +17,13 @@ import SectionTitle from "../Shared/SectionTitle/SectionTitle";
 const Testimonials = () => {
   const [reviews, setReviews] = useState([]);
   useEffect(() => {
-    fetch("/review.json")
+    fetch("http://localhost:5000/review")
       .then((res) => res.json())
       .then((data) => setReviews(data));
   }, []);
   return (
     <div>
-      <section>
+      <section className="w-11/12 mx-auto">
         <SectionTitle
           subHeading={"---What Our Clients Say---"}
           heading={"TESTIMONIALS"}
@@ -32,11 +33,15 @@ const Testimonials = () => {
             slidesPerView={1}
             spaceBetween={30}
             loop={true}
+            autoplay={{
+              delay: 4000,
+              disableOnInteraction: false,
+            }}
             pagination={{
               clickable: true,
             }}
             navigation={true}
-            modules={[Pagination, Navigation]}
+            modules={[Pagination, Autoplay, Navigation]}
             className="mySwiper"
           >
             {reviews.map((review) => (

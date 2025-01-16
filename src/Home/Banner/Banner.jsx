@@ -25,7 +25,7 @@ const Banner = () => {
       <SwiperSlide className="mt-18">
         <div className="relative  ">
           <img
-            src="https://i.ibb.co/XyYfGJ4/pexels-marily-torres-227778-776615-1.jpg"
+            src="https://i.ibb.co/WVfQvkz/banner-1-11zon.jpg"
             alt="image"
             className="w-full object-center h-64 sm:h-80 md:h-96 lg:h-[500px] object-cover"
           />
@@ -57,7 +57,7 @@ const Banner = () => {
       <SwiperSlide className="mt-18">
         <div className="relative">
           <img
-            src="https://i.ibb.co/BqHQWQK/pexels-sora-shimazaki-5668517-1.jpg"
+            src="https://i.ibb.co/FgPMVJg/banner-2-11zon.jpg"
             alt="Burger Dish"
             className="w-full h-64 sm:h-80 md:h-96 lg:h-[500px] object-cover"
           />

@@ -1,6 +1,7 @@
 import { FaPlay } from "react-icons/fa6";
-import { MdGroup, MdHd } from "react-icons/md";
+import { MdGroup, MdHd, MdMoney } from "react-icons/md";
 import SectionTitle from "../Shared/SectionTitle/SectionTitle";
+import { FaArrowRight, FaMoneyBill } from "react-icons/fa";
 
 const FeaturedBenefits = () => {
   return (
@@ -29,7 +30,7 @@ const FeaturedBenefits = () => {
                 <ul className="mb-6 space-y-3">
                   <li className="flex items-center">
                     <span className="bg-buttonColor p-2 rounded-full text-white mr-3">
-                      <MdHd size={24} />
+                      <FaMoneyBill size={24} />
                     </span>
                     <span className="md:text-lg text text-secondary">
                       Secure Payments & Transactions
@@ -46,7 +47,7 @@ const FeaturedBenefits = () => {
                 </ul>
 
                 <button className="flex items-center gap-3 md:px-5 px-4 md:py-3 py-2 bg-buttonColor hover:bg-buttonHover text-lg rounded-lg text-white">
-                  <FaPlay size={20} />
+                  <FaArrowRight size={20} />
                   Get Started
                 </button>
               </div>
@@ -54,7 +55,7 @@ const FeaturedBenefits = () => {
               {/* Right Side Image */}
               <div className="mt-10 lg:mt-0 lg:ml-10">
                 <img
-                  src="https://i.ibb.co/F4N7dm9/pexels-edmond-dantes-8555673.jpg"
+                  src="https://i.ibb.co/2SdqXd7/img-happy-section-11zon-1-11zon.jpg"
                   alt="Task Management"
                   className="rounded-lg shadow-lg w-full lg:w-[500px] object-cover transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-2xl"
                 />
