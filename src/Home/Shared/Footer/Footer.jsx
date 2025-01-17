@@ -3,7 +3,7 @@ import { Facebook, Phone, Mail, MapPin, Github, Linkedin } from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className="bg-primary-default border-t mt-6 border-gray-100 w-full">
+    <footer className="bg-primary-default border-t  border-gray-100 w-full">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
         {/* Main footer content - stacks on mobile, row on desktop */}
         <div className="flex flex-col md:flex-row justify-between items-center md:items-start gap-8">
