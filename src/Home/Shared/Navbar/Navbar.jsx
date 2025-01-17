@@ -1,6 +1,6 @@
 import { CircleUserRound } from "lucide-react";
 import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import UseAuth from "../../../Hooks/useAuth/UseAuth";
 import { toast } from "react-toastify";
 import { HiCurrencyDollar } from "react-icons/hi";
@@ -27,10 +27,10 @@ const Navbar = () => {
       {!user && (
         <>
           <li>
-            <Link to={"/login"}>Login</Link>
+            <NavLink to={"/login"}>Login</NavLink>
           </li>
           <li>
-            <Link to={"/register"}> Register</Link>
+            <NavLink to={"/register"}> Register</NavLink>
           </li>
         </>
       )}
@@ -39,7 +39,7 @@ const Navbar = () => {
         <>
           {" "}
           <li>
-            <a>Dashboard</a>
+            <NavLink to={"/dashbord"}>Dashboard</NavLink>
           </li>
         </>
       )}
@@ -96,7 +96,7 @@ const Navbar = () => {
           {user ? (
             <>
               <div className="flex  justify-center items-center">
-                <Link to={"/"} className="flex justify-center items-center">
+                <NavLink to={"/"} className="flex justify-center items-center">
                   <img
                     src="https://i.ibb.co/LkNYRKf/Black-and-White-Minimalist-Professional-Initial-Logo-removebg-preview.png"
                     className="lg:h-16 lg:w-16 h-10 w-10"
@@ -106,7 +106,7 @@ const Navbar = () => {
                     {" "}
                     Task Hive
                   </p>
-                </Link>
+                </NavLink>
               </div>
             </>
           ) : (
