@@ -1,4 +1,3 @@
-import React from "react";
 import { Briefcase, Clock, CheckCircle } from "lucide-react";
 import SectionTitle from "../Shared/SectionTitle/SectionTitle";
 
@@ -11,6 +10,8 @@ const TotalWork = () => {
           "Discover the impact we've made and the opportunities waiting for you."
         }
       ></SectionTitle>
+      {/* section start  */}
+
       <div className="max-w-6xl mx-auto mt-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-6 border border-gray-100 hover:border-blue-500 group">
