@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import UseAuth from "../../Hooks/useAuth/UseAuth";
 import { toast } from "react-toastify";
 
@@ -6,6 +6,8 @@ const Login = () => {
   const { user, setUser, login, googleSignin } = UseAuth();
   // console.log(user);
   const navigate = useNavigate();
+  const location = useLocation();
+  let from = location?.state?.from?.pathname || "/";
   const handleLogin = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -18,7 +20,8 @@ const Login = () => {
         setUser(olduser);
         // console.log()
         toast.success(`Login Successfull ${olduser.email}`);
-        navigate("/");
+
+        navigate(from, { replace: true });
       })
       .catch((err) => {
         const errormessage = err.message;
