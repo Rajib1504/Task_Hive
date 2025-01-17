@@ -1,55 +1,68 @@
 import React from "react";
 import DashbordNavbar from "../Dashbord/Dashbord_NavBar/DashbordNavbar";
 import Footer from "../Home/Shared/Footer/Footer";
+import { NavLink, Outlet } from "react-router-dom";
 
 const Dashbord = () => {
   return (
-    <div>
-      {/* navbar  */}
-      <DashbordNavbar></DashbordNavbar>
-      {/* side navigation bar */}
-      <div className="drawer-open">
-        <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
+    <div className="min-h-screen flex flex-col">
+      {/* Navbar */}
+      <DashbordNavbar />
 
-        <div className="drawer-side">
-          <label
-            htmlFor="my-drawer-2"
-            aria-label="close sidebar"
-            className="drawer-overlay"
-          ></label>
-          <ul className="menu bg-primary text-base-content min-h-full lg:w-40 w-30 md:p-4 lg:p-4 p-2">
-            {/* Sidebar content here */}
-            <li>
-              <a>Home</a>
+      {/* Main Content */}
+      <div className="flex flex-1 overflow-hidden">
+        {/* Sidebar */}
+        <div className="w-64 bg-primary   flex-shrink-0">
+          <ul className="menu p-4 space-y-2">
+            {/* Worker Section */}
+            <li className="bg-base-200">
+              <NavLink to={"/dashbord/workerHome"}>Worker Home</NavLink>
             </li>
-            <li>
-              <a>Task List</a>
+            <li className="bg-base-200">
+              <NavLink to={"/dashbord/taskList"}>Task List</NavLink>
             </li>
-            <li>
-              <a> Submissions</a>
+            <li className="bg-base-200">
+              <NavLink to={"/dashbord/submission"}>Submissions</NavLink>
             </li>
-            <li>
-              <a>Withdrawals</a>
+            <li className="bg-base-200">
+              <NavLink to={"/dashbord/withdrawals"}>Withdrawals</NavLink>
             </li>
-            <li>
-              <a>Add new Tasks</a>
+
+            {/* Buyer Section */}
+            <li className="bg-base-200">
+              <NavLink to={"/dashbord/buyerHome"}>Buyer Home</NavLink>
             </li>
-            <li>
-              <a>My Task's</a>
+            <li className="bg-base-200">
+              <NavLink to={"/dashbord/addNewTask"}>Add New Tasks</NavLink>
             </li>
-            <li>
-              <a>Purchase Coin</a>
+            <li className="bg-base-200">
+              <NavLink to={"/dashbord/myTasks"}>My Tasks</NavLink>
             </li>
-            <li>
-              <a>Mannage Users</a>
+            <li className="bg-base-200">
+              <NavLink to={"/dashbord/purchaseCoins"}>Purchase Coins</NavLink>
             </li>
-            <li>
-              <a>Mannage Task</a>
+
+            {/* Admin Section */}
+            <li className="bg-base-200">
+              <NavLink to={"/dashbord/adminHome"}>Admin Home</NavLink>
+            </li>
+            <li className="bg-base-200">
+              <NavLink to={"/dashbord/mannageRoutes"}>Manage Users</NavLink>
+            </li>
+            <li className="bg-base-200">
+              <NavLink to={"/dashbord/mannageTasks"}>Manage Tasks</NavLink>
             </li>
           </ul>
-          <Footer></Footer>
+        </div>
+
+        {/* Main Content Area */}
+        <div className="flex-1 overflow-auto bg-gray-50 p-6">
+          <Outlet />
         </div>
       </div>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 };

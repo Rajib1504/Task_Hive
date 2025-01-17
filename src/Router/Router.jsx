@@ -5,6 +5,18 @@ import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import Dashbord from "../Layout/Dashbord";
 import PrivateRoute from "./Private/PrivateRoute";
+import WorkerHome from "../Dashbord/Worker/Worker HOme/WorkerHome";
+
+import TaskList from "../Dashbord/Worker/TaskList/TaskList";
+import Subbmissions from "../Dashbord/Worker/Submissions/Subbmissions";
+import Withdrawals from "./../Dashbord/Worker/Withdrawals/Withdrawals";
+import BuyerHome from "../Dashbord/BuyerRoute/BuyerHome/BuyerHome";
+import AddNewTask from "../Dashbord/BuyerRoute/AddTask/AddNewTask";
+import MyTasks from "../Dashbord/BuyerRoute/My Tasks/MyTasks";
+import PurchaseCoins from "../Dashbord/BuyerRoute/PurchaseCoins/PurchaseCoins";
+import AdminHome from "../Dashbord/AdminRoutes/AdminHome/AdminHome";
+import MannageTasks from "../Dashbord/AdminRoutes/MannageTasks/MannageTasks";
+import MannageRoutes from "../Dashbord/AdminRoutes/MannageRoutes/MannageRoutes";
 
 const Router = createBrowserRouter([
   {
@@ -33,7 +45,54 @@ const Router = createBrowserRouter([
         <Dashbord></Dashbord>
       </PrivateRoute>
     ),
-    children: [],
+    children: [
+      {
+        path: "workerHome",
+        element: <WorkerHome></WorkerHome>,
+      },
+      {
+        path: "taskList",
+        element: <TaskList></TaskList>,
+      },
+      {
+        path: "submission",
+        element: <Subbmissions></Subbmissions>,
+      },
+      {
+        path: "withdrawals",
+        element: <Withdrawals></Withdrawals>,
+      },
+      // buyer routes
+      {
+        path: "buyerHome",
+        element: <BuyerHome></BuyerHome>,
+      },
+      {
+        path: "addNewTask",
+        element: <AddNewTask></AddNewTask>,
+      },
+      {
+        path: "myTasks",
+        element: <MyTasks></MyTasks>,
+      },
+      {
+        path: "purchaseCoins",
+        element: <PurchaseCoins></PurchaseCoins>,
+      },
+      // admin routes
+      {
+        path: "adminHome",
+        element: <AdminHome></AdminHome>,
+      },
+      {
+        path: "mannageRoutes",
+        element: <MannageRoutes></MannageRoutes>,
+      },
+      {
+        path: "mannageTasks",
+        element: <MannageTasks></MannageTasks>,
+      },
+    ],
   },
 ]);
 export default Router;

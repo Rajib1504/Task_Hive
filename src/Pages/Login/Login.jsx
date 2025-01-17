@@ -7,7 +7,7 @@ const Login = () => {
   // console.log(user);
   const navigate = useNavigate();
   const location = useLocation();
-  let from = location?.state?.from?.pathname || "/";
+  let from = location?.state?.from?.pathname || "/dashbord";
   const handleLogin = (e) => {
     e.preventDefault();
     const form = e.target;
