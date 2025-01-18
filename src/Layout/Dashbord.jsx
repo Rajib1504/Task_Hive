@@ -33,7 +33,7 @@ const Dashbord = () => {
               <NavLink to={"/dashbord/buyerHome"}>Buyer Home</NavLink>
             </li>
             <li className="bg-base-200">
-              <NavLink to={"/dashbord/addNewTask"}>Add New Tasks</NavLink>
+              <NavLink to={"/dashbord/addNewTask"}>Add New Task</NavLink>
             </li>
             <li className="bg-base-200">
               <NavLink to={"/dashbord/myTasks"}>My Tasks</NavLink>

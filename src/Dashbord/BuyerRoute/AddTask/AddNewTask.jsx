@@ -1,32 +1,44 @@
 import { useForm } from "react-hook-form";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import useAxiosPublic from "../../../Hooks/UseAxios/useAxiosPublic";
 import UseAxiosSecure from "../../../Hooks/UseAxios/UseAxiosSecure";
 import { toast } from "react-toastify";
+import UseAuth from "../../../Hooks/useAuth/UseAuth";
+import { useNavigate } from "react-router-dom";
 
 const AddNewTask = () => {
   const axiosPublic = useAxiosPublic();
+  const navigate = useNavigate();
   const axiosSecure = UseAxiosSecure();
   const image_hosting_key = import.meta.env.VITE_Image_Hosting_key;
   const image_upload_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
-
+  const { user } = UseAuth();
+  const [buyer, setBuyer] = useState({});
   useEffect(() => {
-    // axiosPublic.post('/addtask').then(res=>{
-    // const
-    // })
+    axiosPublic.get(`/user/${user.email}`).then((res) => {
+      const userDetails = res.data;
+      setBuyer(userDetails);
+    });
   }, []);
+  // console.log(buyer?.Coins);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
   const onSubmit = async (data) => {
-    console.log(data);
+    // console.log(data);
     // calculation for coins
     const worker = data.requiredWorkers;
-    const amount = data.payableAmount;
+    const amount = parseFloat(data.payableAmount);
+    // console.log(amount);
     const TotalCost = parseFloat(worker * amount);
-    console.log(TotalCost);
+    // console.log(TotalCost);
+    if (buyer.Coins < TotalCost) {
+      toast.warning("insufficient Coin.  Purchase Coin");
+      navigate("/dashbord/purchaseCoins");
+      return;
+    }
 
     // image uploade to the data base and get an url
     const imagefile = { image: data.image[0] };
@@ -36,7 +48,7 @@ const AddNewTask = () => {
         "content-type": "multipart/form-data",
       },
     });
-    console.log(res.data);
+    // console.log(res.data);
     // if()
     if (res.data.success) {
       // now sent the imge to the database
@@ -45,16 +57,28 @@ const AddNewTask = () => {
         details: data.details,
         image: res.data.data.display_url,
         deadline: data.deadline,
-        payableAmount: data.payableAmount,
-        requiredWorkers: data.requiredWorkers,
+        payableAmount: amount,
+        requiredWorkers: worker,
         submissionInfo: data.submissionInfo,
       };
-      console.log(taskData);
+      // console.log(taskData);
       const taskitems = await axiosSecure.post("/addtask", taskData);
-      console.log(taskitems.data);
-      if (taskitems.insertedId) {
-        toast.success("Task has added successfully");
+      if (taskitems.data.insertedId) {
+        toast.success("Task has been added successfully");
+        // deduct coins
+        setBuyer((prevBuyer) => ({
+          ...prevBuyer,
+          Coins: prevBuyer.Coins - TotalCost,
+        }));
+        // Update coins in database
+        await axiosSecure.post("/updatecoins", {
+          email: buyer.email,
+          newCoins: buyer.Coins - TotalCost,
+        });
+        toast.success("Coins deducted successfully");
       }
+    } else {
+      toast.error("Image upload failed. Please try again.");
     }
   };
   return (
@@ -177,19 +201,19 @@ const AddNewTask = () => {
               Task_image
             </label>
             <input
-              {...register("image", { required: true })}
+              {...register("image", { required: "image is required" })}
               type="file"
               className=" text file-input w-full max-w-xs"
             />
+            {errors.taskImage && (
+              <p className="text-red-500 text-sm">{errors.taskImage.message}</p>
+            )}
             {/* <input
               type="url"
               placeholder="Task_image"
               {...register("taskImage ", { required: "image is required" })}
               className=" pl-3 h-8 rounded-lg"
             /> */}
-            {errors.taskImage && (
-              <p className="text-red-500 text-sm">{errors.taskImage.message}</p>
-            )}
           </div>
           {/* submit button  */}
           <div className="flex justify-center mt-4">
