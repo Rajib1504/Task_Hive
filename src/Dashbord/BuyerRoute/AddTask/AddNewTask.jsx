@@ -1,12 +1,62 @@
 import { useForm } from "react-hook-form";
+import { useEffect } from "react";
+import useAxiosPublic from "../../../Hooks/UseAxios/useAxiosPublic";
+import UseAxiosSecure from "../../../Hooks/UseAxios/UseAxiosSecure";
+import { toast } from "react-toastify";
 
 const AddNewTask = () => {
+  const axiosPublic = useAxiosPublic();
+  const axiosSecure = UseAxiosSecure();
+  const image_hosting_key = import.meta.env.VITE_Image_Hosting_key;
+  const image_upload_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
+
+  useEffect(() => {
+    // axiosPublic.post('/addtask').then(res=>{
+    // const
+    // })
+  }, []);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = async (data) => {
+    console.log(data);
+    // calculation for coins
+    const worker = data.requiredWorkers;
+    const amount = data.payableAmount;
+    const TotalCost = parseFloat(worker * amount);
+    console.log(TotalCost);
+
+    // image uploade to the data base and get an url
+    const imagefile = { image: data.image[0] };
+    // set a file with the header because we can't add it with stringify because we nee it as a link
+    const res = await axiosPublic.post(image_upload_api, imagefile, {
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    });
+    console.log(res.data);
+    // if()
+    if (res.data.success) {
+      // now sent the imge to the database
+      const taskData = {
+        title: data.title,
+        details: data.details,
+        image: res.data.data.display_url,
+        deadline: data.deadline,
+        payableAmount: data.payableAmount,
+        requiredWorkers: data.requiredWorkers,
+        submissionInfo: data.submissionInfo,
+      };
+      console.log(taskData);
+      const taskitems = await axiosSecure.post("/addtask", taskData);
+      console.log(taskitems.data);
+      if (taskitems.insertedId) {
+        toast.success("Task has added successfully");
+      }
+    }
+  };
   return (
     <div>
       {/* {"Add an item"}
@@ -16,7 +66,7 @@ const AddNewTask = () => {
       </div>
 
       {/* from is starting from here  */}
-      <div className="shadow-md rounded-md bg-base-200 max-w-xl p-4">
+      <div className="shadow-md rounded-md bg-base-200 mx-auto max-w-xl p-4">
         <form onSubmit={handleSubmit(onSubmit)}>
           {/* title  */}
           <div className="flex flex-col gap-2">
@@ -49,45 +99,45 @@ const AddNewTask = () => {
             )}
           </div>
           {/* required workers  */}
-          <div className="flex mt-2 justify-between items-center">
-            <div className="flex flex-col gap-2">
-              <label htmlFor="required_workers" className="font-semibold">
-                Required_workers
-              </label>
-              <input
-                type="number"
-                placeholder={"90"}
-                {...register("requiredWorkers", {
-                  required: "number of worker should not be empty",
-                })}
-                className=" pl-3 h-8 rounded-lg"
-              />
-              {errors.requireWorkers && (
-                <p className="text-red-500 text-sm">
-                  {errors.register.message}
-                </p>
-              )}
-            </div>
-            {/* payble_amount  */}
-            <div className="flex flex-col gap-2 ">
-              <label htmlFor="payable_amount " className="font-semibold">
-                Payable_amount
-              </label>
-              <input
-                type="number"
-                placeholder={"100 $ "}
-                {...register("payableAmount", {
-                  required: "without money we are not accpting any tasks",
-                })}
-                className=" pl-3 h-8 rounded-lg"
-              />
-              {errors.payableAmount && (
-                <p className="text-red-500 text-sm">
-                  {errors.payableAmount.message}
-                </p>
-              )}
-            </div>
+
+          <div className="flex flex-col gap-2">
+            <label htmlFor="required_workers" className="font-semibold">
+              Required_workers
+            </label>
+            <input
+              type="number"
+              placeholder={"90"}
+              {...register("requiredWorkers", {
+                required: "number of worker should not be empty",
+                valueAsNumber: true,
+              })}
+              className=" pl-3 h-8 rounded-lg"
+            />
+            {errors.requireWorkers && (
+              <p className="text-red-500 text-sm">{errors.register.message}</p>
+            )}
           </div>
+          {/* payble_amount  */}
+          <div className="flex flex-col gap-2 ">
+            <label htmlFor="payable_amount " className="font-semibold">
+              Payable_amount
+            </label>
+            <input
+              type="number"
+              placeholder={"100 $ "}
+              {...register("payableAmount", {
+                required: "without money we are not accpting any tasks",
+                valueAsNumber: true,
+              })}
+              className=" pl-3 h-8 rounded-lg"
+            />
+            {errors.payableAmount && (
+              <p className="text-red-500 text-sm">
+                {errors.payableAmount.message}
+              </p>
+            )}
+          </div>
+
           {/* Task_deadline  */}
           <div className="flex flex-col gap-2">
             <label htmlFor="Deadline mt-2 " className="font-semibold">
@@ -126,17 +176,17 @@ const AddNewTask = () => {
             <label htmlFor="task_image mt-2 " className="font-semibold">
               Task_image
             </label>
-            {/* <input
+            <input
               {...register("image", { required: true })}
               type="file"
               className=" text file-input w-full max-w-xs"
-            /> */}
-            <input
+            />
+            {/* <input
               type="url"
               placeholder="Task_image"
               {...register("taskImage ", { required: "image is required" })}
               className=" pl-3 h-8 rounded-lg"
-            />
+            /> */}
             {errors.taskImage && (
               <p className="text-red-500 text-sm">{errors.taskImage.message}</p>
             )}

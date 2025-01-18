@@ -12,7 +12,7 @@ const Dashbord = () => {
       {/* Main Content */}
       <div className="flex flex-1 overflow-hidden">
         {/* Sidebar */}
-        <div className="w-64 bg-primary   flex-shrink-0">
+        <div className="lg:w-64 bg-primary   flex-shrink-0">
           <ul className="menu p-4 space-y-2">
             {/* Worker Section */}
             <li className="bg-base-200">
