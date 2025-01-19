@@ -6,17 +6,24 @@ const BuyerHome = () => {
   const axiosSecure = UseAxiosSecure();
   const [Buyer_data, setBuyer_data] = useState([]);
   const [pending_tasks, setPending_tasks] = useState(0);
+  const [totalPayment, setTotalPayment] = useState(0);
   useEffect(() => {
     axiosSecure.get(`/mytasks/${user.email}`).then((res) => {
       const totalTasks = res.data;
-      console.log(totalTasks);
+      // console.log(totalTasks);
       setBuyer_data(totalTasks);
       // total pending task calculation
       const totalPendding = totalTasks.reduce((total, tasks) => {
         return total + tasks.requiredWorkers;
       }, 0);
-      console.log(totalPendding);
+      // console.log(totalPendding);
       setPending_tasks(totalPendding);
+
+      // total payment calculate
+      const Payment = totalTasks.reduce((total, tasks) => {
+        return total + tasks.payableAmount * tasks.requiredWorkers;
+      }, 0);
+      setTotalPayment(Payment);
     });
   }, []);
   return (
@@ -35,7 +42,7 @@ const BuyerHome = () => {
         </div>
         <div className="flex justify-center items-center">
           <h2 className="font-bold lg:text-2xl">
-            My Total Payment:<span className="ml-3">312</span>
+            My Total Payment:<span className="ml-3">${totalPayment}</span>
           </h2>
         </div>
       </div>
