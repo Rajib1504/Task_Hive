@@ -54,6 +54,7 @@ const AddNewTask = () => {
       // now sent the imge to the database
       const taskData = {
         title: data.title,
+        email: user.email,
         details: data.details,
         image: res.data.data.display_url,
         deadline: data.deadline,
