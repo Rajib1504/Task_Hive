@@ -4,14 +4,24 @@ import UseAuth from "./../../../Hooks/useAuth/UseAuth";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { data } from "react-router-dom";
 import { toast } from "react-toastify";
+import Swal from "sweetalert2";
+import useAxiosPublic from "../../../Hooks/UseAxios/useAxiosPublic";
 
 const MyTasks = () => {
   const [Buyer_details, setBuyer_details] = useState([]);
   const [openModal, setIsModalOpen] = useState(false);
   const [task, setTask] = useState({});
+  const [buyer, setBuyer] = useState({});
   // console.log(Buyer_details);
   const axiosSecure = UseAxiosSecure();
+  const axiosPublic = useAxiosPublic();
   const { user } = UseAuth();
+  useEffect(() => {
+    axiosPublic.get(`/user/${user.email}`).then((res) => {
+      const userDetails = res.data;
+      setBuyer(userDetails);
+    });
+  }, []);
 
   useEffect(() => {
     axiosSecure
@@ -36,11 +46,11 @@ const MyTasks = () => {
     setTask(item);
   };
   // close model
-
   const closeModel = () => {
     setIsModalOpen(false);
     setTask(null);
   };
+  // update form
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -74,6 +84,39 @@ const MyTasks = () => {
       .catch((err) => {
         toast.error(err.message);
       });
+  };
+  // delete
+  const handleDelete = (item) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/mytask/${item._id}`).then((res) => {
+          if (res.data.deletedCount > 0) {
+            const TotalCost = parseFloat(
+              item?.requiredWorkers * item?.payableAmount
+            );
+            // Update coins in database
+            axiosSecure.post("/updatecoins", {
+              email: buyer.email,
+              newCoins: buyer.Coins + TotalCost,
+            });
+          }
+          console.log(res.data);
+        });
+        Swal.fire({
+          title: "Deleted!",
+          text: `Your task has been deleted.`,
+          icon: "success",
+        });
+      }
+    });
   };
   return (
     <div>
@@ -126,7 +169,12 @@ const MyTasks = () => {
                       onClick={() => handleUpdate(item)}
                       className="text-secondary lg:text-xl cursor-pointer"
                     />
-                    <FaTrash className="text-red-500 lg:text-xl cursor-pointer ml-4" />
+                    <FaTrash
+                      onClick={() => {
+                        handleDelete(item);
+                      }}
+                      className="text-red-500 lg:text-xl cursor-pointer ml-4"
+                    />
                   </td>
                 </tr>
               ))}
@@ -237,7 +285,6 @@ const MyTasks = () => {
               </div>
               {/* Submit Button */}
               <button
-                // onClick={()=>{handleUpdate()}}
                 type="submit"
                 className="w-full btn px-4 py-2 bg-buttonColor text-white font-semibold rounded-lg hover:bg-buttonHover"
               >

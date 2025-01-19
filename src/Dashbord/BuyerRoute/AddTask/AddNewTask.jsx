@@ -66,17 +66,17 @@ const AddNewTask = () => {
       const taskitems = await axiosSecure.post("/addtask", taskData);
       if (taskitems.data.insertedId) {
         toast.success("Task has been added successfully");
-        // deduct coins
-        setBuyer((prevBuyer) => ({
-          ...prevBuyer,
-          Coins: prevBuyer.Coins - TotalCost,
-        }));
+        // // deduct coins
+        // setBuyer((prevBuyer) => ({
+        //   ...prevBuyer,
+        //   Coins: prevBuyer.Coins - TotalCost,
+        // }));
         // Update coins in database
         await axiosSecure.post("/updatecoins", {
           email: buyer.email,
           newCoins: buyer.Coins - TotalCost,
         });
-        toast.success("Coins deducted successfully");
+        // toast.success("Coins deducted successfully");
       }
     } else {
       toast.error("Image upload failed. Please try again.");
