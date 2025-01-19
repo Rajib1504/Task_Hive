@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@smastrom/react-rating": "^1.5.0",
+    "@tanstack/react-router": "^1.97.3",
     "axios": "^1.7.9",
     "firebase": "^11.1.0",
     "lucide-react": "^0.471.1",
