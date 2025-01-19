@@ -5,11 +5,18 @@ const BuyerHome = () => {
   const { user } = UseAuth();
   const axiosSecure = UseAxiosSecure();
   const [Buyer_data, setBuyer_data] = useState([]);
+  const [pending_tasks, setPending_tasks] = useState(0);
   useEffect(() => {
     axiosSecure.get(`/mytasks/${user.email}`).then((res) => {
-      const data = res.data;
-      // console.log(data);
-      setBuyer_data(data);
+      const totalTasks = res.data;
+      console.log(totalTasks);
+      setBuyer_data(totalTasks);
+      // total pending task calculation
+      const totalPendding = totalTasks.reduce((total, tasks) => {
+        return total + tasks.requiredWorkers;
+      }, 0);
+      console.log(totalPendding);
+      setPending_tasks(totalPendding);
     });
   }, []);
   return (
@@ -23,7 +30,7 @@ const BuyerHome = () => {
         </div>
         <div className="flex justify-center items-center">
           <h2 className="font-bold lg:text-2xl">
-            Pendding Tasks:<span className="ml-3">10</span>
+            Pendding Tasks:<span className="ml-3">{pending_tasks}</span>
           </h2>
         </div>
         <div className="flex justify-center items-center">
