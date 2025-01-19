@@ -59,6 +59,12 @@ const MyTasks = () => {
       .then((res) => {
         // console.log(res.data);
         if (res.data.modifiedCount > 0) {
+          // update the local state
+          setBuyer_details((previousData) =>
+            previousData?.map((item) =>
+              item._id === task._id ? { ...item, ...updatedData } : item
+            )
+          );
           toast.success("Task has Updated successfully");
           closeModel(true);
         } else {
