@@ -1,23 +1,41 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import useAxiosPublic from "../../Hooks/UseAxios/useAxiosPublic";
 import UseAuth from "../../Hooks/useAuth/UseAuth";
 import { NavLink } from "react-router-dom";
 import { IoNotificationsOutline } from "react-icons/io5";
 import { FaCoins } from "react-icons/fa";
+import { useQuery } from "@tanstack/react-query";
+import Loading from "../../Loading/Loading";
+import { toast } from "react-toastify";
 
 const DashboardNavbar = () => {
-  const [User, setUser] = useState({});
   const { user } = UseAuth();
   const axiosPublic = useAxiosPublic();
 
-  useEffect(() => {
-    if (user?.email) {
-      axiosPublic.get(`/user/${user.email}`).then((res) => {
-        const person = res.data;
-        setUser(person);
-      });
-    }
-  }, [user?.email, axiosPublic]);
+  const {
+    data: User = {},
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["user", user?.email],
+    queryFn: async () => {
+      if (user?.email) {
+        const res = await axiosPublic.get(`/user/${user.email}`);
+        return res.data;
+      }
+      return {}; // Fallback for undefined email
+    },
+    enabled: !!user?.email, // Only fetch if user email exists
+    staleTime: 1000 * 60 * 5, // Cache the result for 5 minutes
+  });
+
+  if (isLoading) {
+    return <Loading></Loading>; // Add a proper loading state
+  }
+
+  if (isError) {
+    return toast.error("Something went wrong!");
+  }
 
   return (
     <nav className="bg-gradient-to-r from-primary to-secondary shadow-md">
