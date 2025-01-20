@@ -17,6 +17,7 @@ import PurchaseCoins from "../Dashbord/BuyerRoute/PurchaseCoins/PurchaseCoins";
 import AdminHome from "../Dashbord/AdminRoutes/AdminHome/AdminHome";
 import MannageTasks from "../Dashbord/AdminRoutes/MannageTasks/MannageTasks";
 import MannageRoutes from "../Dashbord/AdminRoutes/MannageRoutes/MannageRoutes";
+import TaskDetails from "../Dashbord/Worker/TaskList/TaskDetails";
 
 const Router = createBrowserRouter([
   {
@@ -53,6 +54,10 @@ const Router = createBrowserRouter([
       {
         path: "taskList",
         element: <TaskList></TaskList>,
+      },
+      {
+        path: "taskDetails",
+        element: <TaskDetails></TaskDetails>,
       },
       {
         path: "submission",

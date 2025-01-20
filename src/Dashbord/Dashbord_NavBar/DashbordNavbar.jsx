@@ -38,7 +38,7 @@ const DashboardNavbar = () => {
   }
 
   return (
-    <nav className="bg-gradient-to-r from-primary to-secondary shadow-md">
+    <nav className="bg-gradient-to-t from-primary to-secondary shadow-md">
       <div className="flex justify-between items-center px-3 w-full">
         {/* Logo */}
         <NavLink to={"/"}>

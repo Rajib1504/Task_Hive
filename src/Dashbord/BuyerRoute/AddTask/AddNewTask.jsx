@@ -55,6 +55,7 @@ const AddNewTask = () => {
       const taskData = {
         title: data.title,
         email: user.email,
+        name: user.displayName,
         details: data.details,
         image: res.data.data.display_url,
         deadline: data.deadline,
@@ -87,7 +88,7 @@ const AddNewTask = () => {
       {/* {"Add an item"}
       {"What's new?"} */}
       <div className="flex flex-col gap-2 my-3">
-        <h3 className="font-bold text-2xl text-center">Add an Task</h3>
+        <h3 className="font-bold text-2xl text-center">Add New Task</h3>
       </div>
 
       {/* from is starting from here  */}

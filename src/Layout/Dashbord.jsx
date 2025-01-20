@@ -56,7 +56,7 @@ const Dashbord = () => {
         </div>
 
         {/* Main Content Area */}
-        <div className="flex-1 overflow-auto bg-gray-50 p-6">
+        <div className="flex-1 overflow-auto bg-gray-50 sm:p-6">
           <Outlet />
         </div>
       </div>

@@ -1,7 +1,8 @@
-import { Calendar, Users, DollarSign, ExternalLink } from "lucide-react";
+import { Calendar, Users, DollarSign, ExternalLink, Link } from "lucide-react";
 import { useEffect, useState } from "react";
 import useAxiosPublic from "./../../../Hooks/UseAxios/useAxiosPublic";
 import UseAuth from "./../../../Hooks/useAuth/UseAuth";
+import { Link as RouterLink } from "react-router-dom";
 
 const TaskList = () => {
   const [tasks, setTasks] = useState([]);
@@ -10,7 +11,7 @@ const TaskList = () => {
   useEffect(() => {
     axiosPublic.get("/mytasks").then((res) => {
       const data = res.data;
-      console.log(data);
+      // console.log(data);
       setTasks(data);
     });
   }, []);
@@ -40,7 +41,7 @@ const TaskList = () => {
                 {task.title}
               </h3>
 
-              <p className="text-gray-600 mb-4 font-medium">{user?.email}</p>
+              <p className="text-gray-600 mb-4 font-medium">{task.email}</p>
 
               {/* Task Details */}
               <div className="space-y-3 mb-6">
@@ -61,10 +62,12 @@ const TaskList = () => {
               </div>
 
               {/* Button */}
-              <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center">
-                View Details
-                <ExternalLink className="w-4 h-4 ml-2" />
-              </button>
+              <RouterLink to={"/dashbord/taskDetails"}>
+                <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center">
+                  View Details
+                  <ExternalLink className="w-4 h-4 ml-2" />
+                </button>
+              </RouterLink>
             </div>
           </div>
         ))}
