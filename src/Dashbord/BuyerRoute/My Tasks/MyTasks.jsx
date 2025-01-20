@@ -41,7 +41,7 @@ const MyTasks = () => {
 
   // open model
   const handleUpdate = (item) => {
-    console.log(item);
+    // console.log(item);
     setIsModalOpen(true);
     setTask(item);
   };

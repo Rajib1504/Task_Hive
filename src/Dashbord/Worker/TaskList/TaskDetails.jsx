@@ -1,21 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Calendar, DollarSign, Users, FileText } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import UseAxiosSecure from "../../../Hooks/UseAxios/UseAxiosSecure";
+import { useParams } from "react-router-dom";
 
 const TaskDetails = () => {
+  const axiosSecure = UseAxiosSecure();
+  const [taskDetails, setTaskDetails] = useState();
+  //   console.log(taskDetails);
+  const params = useParams();
+  //   console.log(params.id);
+  const id = params.id;
+  useEffect(() => {
+    axiosSecure
+      .get(`/mytask/${id}`)
+      .then((res) => {
+        const data = res.data;
+        setTaskDetails(data);
+      })
+      .catch((err) => {
+        toast.err(err.message);
+      });
+  }, [id]);
   return (
     <div className="min-h-screen  bg-gray-50">
       {/* Hero Section with Image */}
       <div className="relative h-36 sm:h-80 md:h-96 lg:h-96 w-full">
         <img
-          src="https://i.ibb.co/F3LNXsz/img-happy-section-11zon-1.jpg"
+          src={taskDetails?.image}
           alt="Job Cover"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-center object-cover"
         />
         <div className="absolute inset-0 bg-black bg-opacity-40">
           <div className="container mx-auto px-4 h-full flex items-end pb-4 sm:pb-6 md:pb-8">
             <div className="text-white">
               <h1 className="text-md sm:text-3xl md:text-4xl font-bold mb-2">
-                Eveniet vitae nulla
+                {taskDetails?.title}
               </h1>
               <div className="flex items-center space-x-2">
                 <span className="bg-blue-600 px-2 py-1 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-semibold">
@@ -38,7 +58,7 @@ const TaskDetails = () => {
                 Job Details
               </h2>
               <p className="text-gray-600 leading-relaxed text-sm  text-center sm:text-left sm:text-base">
-                Et commodo asperiore
+                {taskDetails?.details}
               </p>
             </div>
 
@@ -50,7 +70,7 @@ const TaskDetails = () => {
               <div className="flex justify-center sm:justify-start items-start space-x-2">
                 <FileText className=" hidden sm:block w-5 h-5 sm:w-6 sm:h-6 text-blue-600 mt-1" />
                 <p className="text-gray-600 leading-relaxed text-sm  sm:text-left sm:text-base">
-                  Nisi incididunt quam
+                  {taskDetails?.submissionInfo}
                 </p>
               </div>
             </div>
@@ -76,7 +96,7 @@ const TaskDetails = () => {
                     </span>
                   </div>
                   <span className="font-semibold text-sm sm:text-base">
-                    1981-07-10
+                    {taskDetails?.deadline}
                   </span>
                 </div>
 
@@ -91,7 +111,7 @@ const TaskDetails = () => {
                     </span>
                   </div>
                   <span className="font-semibold text-sm sm:text-base">
-                    $87
+                    {taskDetails?.payableAmount}
                   </span>
                 </div>
 
@@ -105,7 +125,9 @@ const TaskDetails = () => {
                       Workers Needed
                     </span>
                   </div>
-                  <span className="font-semibold text-sm sm:text-base">12</span>
+                  <span className="font-semibold text-sm sm:text-base">
+                    {taskDetails?.requiredWorkers}
+                  </span>
                 </div>
               </div>
 
@@ -122,6 +144,26 @@ const TaskDetails = () => {
           </div>
         </div>
       </div>
+
+      {/* model for submition  */}
+      {/* <button
+        className="btn"
+        onClick={() => document.getElementById("my_modal_3").showModal()}
+      >
+        open modal
+      </button>
+      <dialog id="my_modal_3" className="modal">
+        <div className="modal-box">
+          <form method="dialog"> */}
+      {/* if there is a button in form, it will close the modal */}
+      {/* <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+              ✕
+            </button>
+          </form>
+          <h3 className="font-bold text-lg">Hello!</h3>
+          <p className="py-4">Press ESC key or click on ✕ button to close</p>
+        </div>
+      </dialog> */}
     </div>
   );
 };
