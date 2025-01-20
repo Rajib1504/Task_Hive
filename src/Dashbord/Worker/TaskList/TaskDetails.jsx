@@ -1,12 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Calendar, DollarSign, Users, FileText } from "lucide-react";
-import { useQuery } from "@tanstack/react-query";
 import UseAxiosSecure from "../../../Hooks/UseAxios/UseAxiosSecure";
 import { useParams } from "react-router-dom";
+import Loading from "../../../Loading/Loading";
+import { toast } from "react-toastify";
+import UseAuth from "../../../Hooks/useAuth/UseAuth";
 
 const TaskDetails = () => {
   const axiosSecure = UseAxiosSecure();
-  const [taskDetails, setTaskDetails] = useState();
+  const [taskDetails, setTaskDetails] = useState(null);
+  //   console.log(taskDetails);
+  const [isLoading, setIsLoading] = useState(true);
+  const { user } = UseAuth();
+  console.log(user);
   //   console.log(taskDetails);
   const params = useParams();
   //   console.log(params.id);
@@ -17,11 +23,51 @@ const TaskDetails = () => {
       .then((res) => {
         const data = res.data;
         setTaskDetails(data);
+        setIsLoading(false);
       })
       .catch((err) => {
-        toast.err(err.message);
+        toast.error(err.message);
+        setIsLoading(false);
       });
   }, [id]);
+  if (isLoading) {
+    return <Loading></Loading>;
+  }
+
+  //     form area for submit
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const submited_data = e.target.submitionDetails.value;
+    //     console.log(submited_data);
+    document.getElementById("my_modal_3").close();
+    const Worker_submitions_data = {
+      task_id: taskDetails?._id,
+      task_title: taskDetails?.title,
+      payable_amount: taskDetails?.payableAmount,
+      worker_email: user?.email,
+      submission_details: submited_data,
+      worker_name: user?.displayName,
+      Buyer_name: taskDetails?.name,
+      Buyer_email: taskDetails?.email,
+      current_date: new Date().toISOString().split("T")[0],
+      status: "pending",
+    };
+
+    axiosSecure
+      .post("/submitData", Worker_submitions_data)
+      .then((res) => {
+        const result = res.data;
+        //   console.log(result);
+        if (result.insertedId) {
+          toast.success(
+            `${user.displayName}'s Request hasbeen taken successfully`
+          );
+        }
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
   return (
     <div className="min-h-screen  bg-gray-50">
       {/* Hero Section with Image */}
@@ -132,38 +178,47 @@ const TaskDetails = () => {
               </div>
 
               {/* Apply Button */}
-              <button className="w-full mt-6 sm:mt-8 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 sm:py-3 rounded-lg transition-colors duration-200">
+              <button
+                onClick={() =>
+                  document.getElementById("my_modal_3").showModal()
+                }
+                className="w-full mt-6 sm:mt-8 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 sm:py-3 rounded-lg transition-colors duration-200"
+              >
                 Submit task
               </button>
-
-              {/* Share Button */}
-              {/* <button className="w-full mt-4 border border-gray-300 hover:bg-gray-50 text-gray-700 font-semibold py-2 px-4 sm:py-3 rounded-lg transition-colors duration-200">
-                Share Job
-              </button> */}
             </div>
           </div>
         </div>
       </div>
 
       {/* model for submition  */}
-      {/* <button
-        className="btn"
-        onClick={() => document.getElementById("my_modal_3").showModal()}
-      >
-        open modal
-      </button>
+      {/* You can open the modal using document.getElementById('ID').showModal() method */}
+
       <dialog id="my_modal_3" className="modal">
         <div className="modal-box">
-          <form method="dialog"> */}
-      {/* if there is a button in form, it will close the modal */}
-      {/* <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+          <form method="dialog">
+            {/* if there is a button in form, it will close the modal */}
+            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
               ✕
             </button>
           </form>
-          <h3 className="font-bold text-lg">Hello!</h3>
-          <p className="py-4">Press ESC key or click on ✕ button to close</p>
+          <form onSubmit={handleSubmit}>
+            <h3 className="font-bold text-center text-lg sm:text-xl md:text-2xl">
+              Submission Details{" "}
+            </h3>
+            <p className="py-4">Submit your work details bellow:</p>
+
+            <textarea
+              name="submitionDetails"
+              className="textarea p-2 textarea-bordered textarea-lg w-full "
+            ></textarea>
+            {/* task submition Button */}
+            <button className="w-full mt-4 sm:mt-6 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 sm:py-3 rounded-lg transition-colors duration-200">
+              Submit Your Work
+            </button>
+          </form>
         </div>
-      </dialog> */}
+      </dialog>
     </div>
   );
 };
