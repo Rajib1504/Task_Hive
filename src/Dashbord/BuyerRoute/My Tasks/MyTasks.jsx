@@ -137,47 +137,56 @@ const MyTasks = () => {
               </tr>
             </thead>
             <tbody>
-              {/* Body of the Table */}
-              {Buyer_details.map((item, idx) => (
-                <tr key={item._id}>
-                  <th>
-                    <label>{idx + 1}</label>
-                  </th>
-                  <td>
-                    <div className="flex items-center gap-3">
-                      <div className="avatar">
-                        <div className="mask mask-squircle h-12 w-12">
-                          <img src={item.image} alt="task_image" />
-                        </div>
-                      </div>
-                      <div>
-                        <div className="font-bold">{item.title}</div>
-                        <div className="flex items-center justify-center gap-2 ">
-                          <div className="text-sm opacity-50 badge">
-                            vacancy:{item.requiredWorkers}
-                          </div>
-                          <div className="text-sm opacity-50 badge">
-                            payment: $ {item.payableAmount}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                  <td>Last Date: {item.deadline}</td>
-                  <td className="flex items-center gap-3">
-                    <FaEdit
-                      onClick={() => handleUpdate(item)}
-                      className="text-secondary lg:text-xl cursor-pointer"
-                    />
-                    <FaTrash
-                      onClick={() => {
-                        handleDelete(item);
-                      }}
-                      className="text-red-500 lg:text-xl cursor-pointer ml-4"
-                    />
+              {Buyer_details === 0 ? (
+                <tr>
+                  <td colSpan="4" className="text-center text-xl font-bold">
+                    No Data Found
                   </td>
                 </tr>
-              ))}
+              ) : (
+                <>
+                  {Buyer_details.map((item, idx) => (
+                    <tr key={item._id}>
+                      <th>
+                        <label>{idx + 1}</label>
+                      </th>
+                      <td>
+                        <div className="flex items-center gap-3">
+                          <div className="avatar">
+                            <div className="mask mask-squircle h-12 w-12">
+                              <img src={item.image} alt="task_image" />
+                            </div>
+                          </div>
+                          <div>
+                            <div className="font-bold">{item.title}</div>
+                            <div className="flex items-center justify-center gap-2 ">
+                              <div className="text-sm opacity-50 badge">
+                                vacancy:{item.requiredWorkers}
+                              </div>
+                              <div className="text-sm opacity-50 badge">
+                                payment: $ {item.payableAmount}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <td>Last Date: {item.deadline}</td>
+                      <td className="flex items-center gap-3">
+                        <FaEdit
+                          onClick={() => handleUpdate(item)}
+                          className="text-secondary lg:text-xl cursor-pointer"
+                        />
+                        <FaTrash
+                          onClick={() => {
+                            handleDelete(item);
+                          }}
+                          className="text-red-500 lg:text-xl cursor-pointer ml-4"
+                        />
+                      </td>
+                    </tr>
+                  ))}
+                </>
+              )}
             </tbody>
           </table>
         </div>
