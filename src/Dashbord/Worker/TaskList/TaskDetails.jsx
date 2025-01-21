@@ -60,7 +60,7 @@ const TaskDetails = () => {
         //   console.log(result);
         if (result.insertedId) {
           toast.success(
-            `${user.displayName}'s Request hasbeen taken successfully`
+            `${user.displayName}'s Request has been taken successfully`
           );
         }
       })
