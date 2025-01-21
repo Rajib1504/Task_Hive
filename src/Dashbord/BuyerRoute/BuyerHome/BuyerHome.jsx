@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import UseAuth from "./../../../Hooks/useAuth/UseAuth";
 import UseAxiosSecure from "./../../../Hooks/UseAxios/UseAxiosSecure";
+import { toast } from "react-toastify";
 const BuyerHome = () => {
   const { user } = UseAuth();
   const axiosSecure = UseAxiosSecure();
@@ -8,7 +9,8 @@ const BuyerHome = () => {
   const [pending_tasks, setPending_tasks] = useState(0);
   const [totalPayment, setTotalPayment] = useState(0);
   const [fullDetails, setFullDetails] = useState([]);
-  console.log("fulldetails is here", fullDetails);
+  console.log(fullDetails);
+  // console.log("fulldetails is here", fullDetails);
   // for state preview
   useEffect(() => {
     axiosSecure.get(`/mytasks/${user.email}`).then((res) => {
@@ -30,10 +32,9 @@ const BuyerHome = () => {
     });
   }, []);
   // for form preview
-
   useEffect(() => {
     axiosSecure
-      .get(`/submitData/${user.email}`)
+      .get(`/submitDatas/${user.email}`)
       .then((res) => {
         const data = res.data;
         setFullDetails(data);
@@ -46,6 +47,19 @@ const BuyerHome = () => {
   const pendingStatus = fullDetails.filter(
     (details) => details.status === "pending"
   );
+  // for aprouve button
+  const handleApprove = async (details) => {
+    console.log(details);
+    // axiosSecure.patch("");
+    const amount = details.payable_amount;
+    const { data } = await axiosSecure.patch(`/approve/${details._id}`, {
+      amount,
+    });
+    if (data.modifiedCount) {
+      toast.success("Task Accpted successfully");
+    }
+    // console.log(data);
+  };
 
   return (
     <>
@@ -75,10 +89,10 @@ const BuyerHome = () => {
             <tr>
               <th></th>
               <th>Worker_Name</th>
-              <th>Title</th>
-              <th>Amount Color</th>
-              <th>Details</th>
-              <th>Action</th>
+              <th className=" text-left pl-6">Title</th>
+              <th>Amount</th>
+              <th className="text-left pl-10 ">Details</th>
+              <th className="text-left pl-10">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -88,7 +102,7 @@ const BuyerHome = () => {
                   <th>{idx + 1}</th>
                   <td>{details.worker_name}</td>
                   <td>{details.task_title}</td>
-                  <td>{details.payable_amount}</td>
+                  <td> $ {details.payable_amount}</td>
                   <td>
                     <button
                       onClick={() =>
@@ -99,11 +113,14 @@ const BuyerHome = () => {
                       Submition Details
                     </button>
                   </td>
-                  <td>
-                    <select name="Action" id="">
-                      <option value="Approve ">Approve</option>
-                      <option value="Reject  ">Reject</option>
-                    </select>
+                  <td className="flex gap-2 items-center">
+                    <button
+                      onClick={() => handleApprove(details)}
+                      className="btn btn-sm bg-green-400 "
+                    >
+                      Approve
+                    </button>
+                    <button className="btn btn-sm bg-red-400 ">Reject</button>
                   </td>
                 </tr>
               ))

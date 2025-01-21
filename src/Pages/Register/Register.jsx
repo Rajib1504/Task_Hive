@@ -3,8 +3,10 @@ import { data, Link, useNavigate } from "react-router-dom";
 import UseAuth from "../../Hooks/useAuth/UseAuth";
 import { toast } from "react-toastify";
 import useAxiosPublic from "../../Hooks/UseAxios/useAxiosPublic";
+import useCoins from "../../Hooks/UseCoins/UseCoins";
 
 const Register = () => {
+  const [, , refetch] = useCoins();
   const { setUser, register, updateUserProfile } = UseAuth();
   const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
@@ -41,6 +43,7 @@ const Register = () => {
               if (res.data.insertedId) {
                 console.log("user created to the database");
                 toast.success(`Registerd by ${newUser.email}`);
+                refetch();
                 navigate("/");
               } else if (res.data.message === "user already exist") {
                 toast.error("User already exists with this email.");

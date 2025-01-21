@@ -6,8 +6,11 @@ import { toast } from "react-toastify";
 import { HiCurrencyDollar } from "react-icons/hi";
 import useAxiosPublic from "../../../Hooks/UseAxios/useAxiosPublic";
 import Loading from "../../../Loading/Loading";
+import useCoins from "../../../Hooks/UseCoins/UseCoins";
 const Navbar = () => {
-  const [coin, setCoin] = useState(0);
+  // const [coin, setCoin] = useState(0);
+  const [coin] = useCoins();
+  console.log(coin);
   const { user, logOut, loading } = UseAuth();
   const axiosPublic = useAxiosPublic();
   if (loading) {
@@ -54,12 +57,12 @@ const Navbar = () => {
       </li>
     </>
   );
-  useEffect(() => {
-    axiosPublic(`/user/${user?.email}`).then((res) => {
-      const coin = res.data.Coins;
-      setCoin(coin);
-    });
-  }, [user?.email]);
+  // useEffect(() => {
+  //   axiosPublic(`/user/${user?.email}`).then((res) => {
+  //     const coin = res.data.Coins;
+  //     setCoin(coin);
+  //   });
+  // }, [user?.email]);
 
   return (
     <div className="z-50 sticky top-0 ">

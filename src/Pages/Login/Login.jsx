@@ -18,7 +18,7 @@ const Login = () => {
       .then((res) => {
         const olduser = res.user;
         setUser(olduser);
-        // console.log()
+        console.log();
         toast.success(`Login Successfull ${olduser.email}`);
 
         navigate(from, { replace: true });
