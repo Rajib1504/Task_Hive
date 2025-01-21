@@ -21,12 +21,6 @@ const Subbmissions = () => {
   }, []);
   return (
     <>
-      if(!user)
-      {
-        <div className="w-full text-center text-xl font-bold">
-          No Datat Found
-        </div>
-      }
       <div className="max-w-md mx-auto">
         <h3 className="text-lg sm:2xl md:4xl font-bold text-center pb-2 mb-4 border-b-2 ">
           {user?.displayName}'s Submitions count is {fullDetails.length}

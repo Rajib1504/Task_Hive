@@ -46,6 +46,7 @@ const BuyerHome = () => {
   const pendingStatus = fullDetails.filter(
     (details) => details.status === "pending"
   );
+
   return (
     <>
       {/* buyer state section  */}
@@ -89,7 +90,14 @@ const BuyerHome = () => {
                   <td>{details.task_title}</td>
                   <td>{details.payable_amount}</td>
                   <td>
-                    <button className="btn btn-sm">Submition Details</button>
+                    <button
+                      onClick={() =>
+                        document.getElementById("my_modal_1").showModal()
+                      }
+                      className="btn btn-sm"
+                    >
+                      Submition Details
+                    </button>
                   </td>
                   <td>
                     <select name="Action" id="">
@@ -109,6 +117,26 @@ const BuyerHome = () => {
           </tbody>
         </table>
       </div>
+
+      {/* popup with full details  */}
+      <dialog id="my_modal_1" className="modal">
+        <div className="modal-box">
+          <h3 className="font-bold text-lg text-center mb-2">
+            Submition Details
+          </h3>
+          {fullDetails.map((data) => (
+            <p key={data._id} className="p-2 border-2 rounded-md">
+              {data.submission_details}
+            </p>
+          ))}
+          <div className="modal-action">
+            <form method="dialog">
+              {/* if there is a button in form, it will close the modal */}
+              <button className="btn btn-outline">Close</button>
+            </form>
+          </div>
+        </div>
+      </dialog>
     </>
   );
 };
