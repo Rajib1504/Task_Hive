@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import UseAuth from "./../../../Hooks/useAuth/UseAuth";
 import UseAxiosSecure from "./../../../Hooks/UseAxios/UseAxiosSecure";
 import { toast } from "react-toastify";
+import useCoins from "../../../Hooks/UseCoins/UseCoins";
 const BuyerHome = () => {
   const { user } = UseAuth();
   const axiosSecure = UseAxiosSecure();
+  const [, , refetch] = useCoins();
   const [Buyer_data, setBuyer_data] = useState([]);
   const [pending_tasks, setPending_tasks] = useState(0);
   const [totalPayment, setTotalPayment] = useState(0);
@@ -57,10 +59,24 @@ const BuyerHome = () => {
     });
     if (data.modifiedCount) {
       toast.success("Task Accpted successfully");
+      refetch();
     }
     // console.log(data);
   };
-
+  const handleReject = async (details) => {
+    console.log(details);
+    try {
+      const { data } = await axiosSecure.patch(
+        `/approve/${details._id}?reject=${true}`
+      );
+      if (data.modifiedCount) {
+        toast.success("Task Rejected successfully");
+        refetch();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
       {/* buyer state section  */}
@@ -120,7 +136,12 @@ const BuyerHome = () => {
                     >
                       Approve
                     </button>
-                    <button className="btn btn-sm bg-red-400 ">Reject</button>
+                    <button
+                      onClick={() => handleReject(details)}
+                      className="btn btn-sm bg-red-400 "
+                    >
+                      Reject
+                    </button>
                   </td>
                 </tr>
               ))

@@ -7,11 +7,12 @@ import { FaCoins } from "react-icons/fa";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../../Loading/Loading";
 import { toast } from "react-toastify";
+import useCoins from "../../Hooks/UseCoins/UseCoins";
 
 const DashboardNavbar = () => {
   const { user } = UseAuth();
   const axiosPublic = useAxiosPublic();
-
+  const [coin] = useCoins();
   const {
     data: User = {},
     isLoading,
@@ -65,7 +66,8 @@ const DashboardNavbar = () => {
             <div className="flex items-center text-yellow-500">
               <FaCoins className="mr-1" />
               <span className="font-bold text-gray-800">
-                {User?.Coins || 0}
+                {/* {User?.Coins || 0} */}
+                {coin}
               </span>
             </div>
           </div>
