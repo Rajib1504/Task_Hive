@@ -40,6 +40,7 @@ const WorkerHome = () => {
   console.log(approve);
   return (
     <div>
+      {/* state section  */}
       <div className="flex justify-around items-center">
         <div className="flex justify-center items-center">
           <h2 className="font-bold lg:text-2xl">
@@ -56,6 +57,37 @@ const WorkerHome = () => {
             My Total Earning:<span className="ml-3">${income}</span>
           </h2>
         </div>
+      </div>
+      {/* table section  */}
+      <div className=" mt-3 overflow-x-auto">
+        <table className="table table-zebra">
+          {/* head */}
+          <thead>
+            <tr>
+              <th></th>
+              <th>Title</th>
+              <th>Payment</th>
+              <th>Buyer_name</th>
+              <th>status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {/* row 1 */}
+            {approve.map((detail, idx) => (
+              <tr key={detail._id}>
+                <th>{idx + 1}</th>
+                <td>{detail.task_title}</td>
+                <td>$ {detail.payable_amount}</td>
+                <td>{detail.Buyer_name}</td>
+                <td>
+                  <span className="badge bg-green-300  rounded-full px-3 py-2">
+                    {detail.status}
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );
