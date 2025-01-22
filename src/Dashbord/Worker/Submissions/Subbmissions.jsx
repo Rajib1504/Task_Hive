@@ -49,9 +49,21 @@ const Subbmissions = () => {
                 <td>{detail.Buyer_name}</td>
                 <td>
                   {" "}
-                  <span className="badge bg-secondary  rounded-full px-3 py-2">
-                    {detail.status}
-                  </span>
+                  {detail.status === "pending" && (
+                    <span className="badge bg-secondary  rounded-full px-3 py-2">
+                      {detail.status}
+                    </span>
+                  )}
+                  {detail.status === "Approved" && (
+                    <span className="badge bg-green-300  rounded-full px-3 py-2">
+                      {detail.status}
+                    </span>
+                  )}
+                  {detail.status === "Rejected" && (
+                    <span className="badge bg-red-300  rounded-full px-3 py-2">
+                      {detail.status}
+                    </span>
+                  )}
                 </td>
               </tr>
             ))}
