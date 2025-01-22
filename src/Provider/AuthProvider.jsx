@@ -10,11 +10,12 @@ import {
 import { useEffect, useState } from "react";
 import { createContext } from "react";
 import auth from "../FireBase/FireBase.config";
-import js from "@eslint/js";
+import useAxiosPublic from "./../Hooks/UseAxios/useAxiosPublic";
 
 export const AuthContext = createContext(null);
 const googleProvider = new GoogleAuthProvider();
 const AuthProvider = ({ children }) => {
+  const axiosPublic = useAxiosPublic();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const register = (email, password) => {
@@ -39,15 +40,29 @@ const AuthProvider = ({ children }) => {
     });
   };
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
+      if (currentUser && currentUser.email) {
+        const userinfo = { email: currentUser.email };
+        axiosPublic.post("/jwt", userinfo).then((res) => {
+          if (res.data.token) {
+            localStorage.setItem("access-token", res.data.token);
+            setLoading(false);
+          }
+        });
+      } else {
+        localStorage.removeItem("access-token");
+        setLoading(false);
+      }
+      setLoading(false);
+
       console.log("Current User", currentUser);
       setLoading(false);
     });
     return () => {
       return unsubscribe();
     };
-  }, []);
+  }, [axiosPublic]);
 
   // logout
   const logOut = () => {
