@@ -5,7 +5,6 @@ import { NavLink } from "react-router-dom";
 import { IoNotificationsOutline } from "react-icons/io5";
 import { FaCoins } from "react-icons/fa";
 import { useQuery } from "@tanstack/react-query";
-import Loading from "../../Loading/Loading";
 import { toast } from "react-toastify";
 import useCoins from "../../Hooks/UseCoins/UseCoins";
 
@@ -13,29 +12,39 @@ const DashboardNavbar = () => {
   const { user } = UseAuth();
   const axiosPublic = useAxiosPublic();
   const [coin] = useCoins();
+  // console.log(coin);
   const {
     data: User = {},
     isLoading,
     isError,
+    refetch,
   } = useQuery({
     queryKey: ["user", user?.email],
     queryFn: async () => {
-      if (user?.email) {
-        const res = await axiosPublic.get(`/user/${user.email}`);
-        return res.data;
+      try {
+        if (user?.email) {
+          const res = await axiosPublic.get(`/user/${user.email}`);
+          console.log(res.data);
+          return res.data;
+        }
+
+        return {}; // Fallback for undefined email
+      } catch (error) {
+        toast.error("Failed to fetch user data!");
+        throw error;
       }
-      return {}; // Fallback for undefined email
     },
-    enabled: !!user?.email, // Only fetch if user email exists
+    enabled: Boolean(user?.email), // Only fetch if user email exists
     staleTime: 1000 * 60 * 5, // Cache the result for 5 minutes
   });
 
   if (isLoading) {
-    return <Loading></Loading>; // Add a proper loading state
+    return <p className="text-center">loading....</p>; // Add a proper loading state
   }
 
   if (isError) {
-    return toast.error("Something went wrong!");
+    toast.error("Something went wrong!");
+    return null;
   }
 
   return (

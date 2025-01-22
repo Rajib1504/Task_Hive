@@ -1,34 +1,49 @@
-import React from "react";
+import React, { useEffect } from "react";
+import useAxiosPublic from "../../../Hooks/UseAxios/useAxiosPublic";
+import UseAuth from "../../../Hooks/useAuth/UseAuth";
+import { useQuery } from "@tanstack/react-query";
+
+import { toast } from "react-toastify";
+import Loading from "./../../../Loading/Loading";
 
 const WorkerHome = () => {
+  const axiosPublic = useAxiosPublic();
+  const { user } = UseAuth();
+  console.log(user.email);
+  const { data, error, isLoading } = useQuery({
+    queryKey: ["submition", user.email],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/submitDetails/${user?.email}`);
+      return res.data;
+    },
+  });
+  if (isLoading) {
+    return <Loading />;
+  }
+  if (error) {
+    toast.error("something went wrong" + error.message);
+    return null;
+  }
+
   return (
     <div>
-      worker Home here Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-      Explicabo distinctio, porro saepe dolorem aperiam, rerum quasi vel natus
-      quis corrupti animi eos harum doloribus laborum assumenda aliquam id
-      provident. Voluptatem recusandae, ipsa id corrupti vitae atque voluptatum
-      quidem delectus nemo rerum ab ratione magnam commodi, illo distinctio. Est
-      quaerat repellendus hic doloremque quas libero. Corporis distinctio maxime
-      laudantium tempora nobis, cumque minima, aspernatur obcaecati, optio sint
-      eligendi beatae veritatis! Vel deleniti numquam at provident iste modi
-      nulla facere qui, officia soluta inventore libero amet, sapiente quasi
-      accusantium quos! Similique voluptates, aliquam fugit ullam perferendis,
-      dolorem minus consequuntur tenetur laboriosam totam porro provident vitae
-      consectetur quo. Ut illum cum animi provident possimus, atque doloribus
-      quo officiis nostrum soluta facilis quod fugiat temporibus dolores a quas
-      aspernatur, quasi molestias, totam nesciunt commodi debitis suscipit?
-      Cupiditate molestiae libero eum, iste sint perspiciatis est ex dolor culpa
-      iusto officia vel excepturi earum officiis odio cumque quidem vitae
-      eveniet at fuga ea vero dicta! Fuga ab quam nemo quia magni debitis ipsam
-      mollitia in commodi. Itaque deserunt libero vel temporibus! Reprehenderit,
-      iste architecto. Praesentium rerum aliquid sunt in illum quo eveniet at!
-      Assumenda debitis soluta alias, reiciendis at ducimus eveniet ipsum modi
-      maiores id quis a nisi voluptate ad corporis repudiandae ipsam voluptatem
-      est consequatur neque, quo, saepe repellendus? Quo molestiae distinctio
-      voluptate harum aspernatur consectetur ducimus iusto asperiores dolorem
-      fugiat incidunt commodi ea ex eligendi doloremque dicta molestias sapiente
-      dolor architecto laborum id, animi repudiandae provident? Sit deserunt
-      iste doloremque.
+      <div className="flex justify-around items-center">
+        <div className="flex justify-center items-center">
+          <h2 className="font-bold lg:text-2xl">
+            Total Submission:<span className="ml-3">{data.length}</span>
+          </h2>
+        </div>
+        <div className="flex justify-center items-center">
+          <h2 className="font-bold lg:text-2xl">
+            Pending submissions:<span className="ml-3">12</span>
+          </h2>
+        </div>
+        <div className="flex justify-center items-center">
+          <h2 className="font-bold lg:text-2xl">
+            My Total Earning:<span className="ml-3">$50</span>
+          </h2>
+        </div>
+      </div>
     </div>
   );
 };
