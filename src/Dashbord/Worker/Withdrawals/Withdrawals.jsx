@@ -4,8 +4,12 @@ import { FaCoins } from "react-icons/fa";
 import Marquee from "react-fast-marquee";
 import { DollarSign, CreditCard, Wallet } from "lucide-react";
 import { toast } from "react-toastify";
+import useAxiosPublic from "../../../Hooks/UseAxios/useAxiosPublic";
+import UseAuth from "../../../Hooks/useAuth/UseAuth";
 const Withdrawals = () => {
   const [amount, setAmount] = useState(0);
+  const { user } = UseAuth();
+  const axiosPublic = useAxiosPublic();
   const [withdrawalCoins, setWithdrawalCoins] = useState();
   const [coin] = useCoins();
   // console.log(coin);
@@ -18,13 +22,34 @@ const Withdrawals = () => {
     const withdrawAmount = form.withdrawAmount.value;
     const method = form.method.value;
     const accountNumber = form.accountNumber.value;
+    const status = "pending";
+    const worker_email = user.email;
+    const worker_name = user.displayName;
+    const date = new Date();
     const withdrawalsData = {
       withdrawAmount,
       withdrawalCoins,
       method,
       accountNumber,
+      status,
+      worker_email,
+      worker_name,
+      date,
     };
     console.log(withdrawalsData);
+    axiosPublic
+      .post("/withdrawal", withdrawalsData)
+      .then((res) => {
+        const result = res.data;
+        console.log(result);
+        if (result.insertedId) {
+          toast.success("Withdrawal request is submitted");
+          form.reset();
+        }
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
   };
 
   // withdrawals form
