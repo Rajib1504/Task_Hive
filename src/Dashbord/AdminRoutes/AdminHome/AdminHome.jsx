@@ -55,6 +55,8 @@ const AdminHome = () => {
           </h2>
         </div>
       </div>
+      {/* withdrawals collection  */}
+      <div>withdrawls collection</div>
     </div>
   );
 };
