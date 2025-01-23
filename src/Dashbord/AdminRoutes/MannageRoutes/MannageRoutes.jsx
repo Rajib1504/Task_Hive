@@ -29,7 +29,10 @@ const MannageRoutes = () => {
   console.log(UserDetails);
   return (
     <div>
-      <SectionTitle heading={"All Users"} />
+      <SectionTitle
+        heading={"All Users"}
+        subHeading={"Total Avaible Users :" + UserDetails.length}
+      />
       {/* table   */}
       <div>
         <div className="overflow-x-auto">
@@ -37,9 +40,6 @@ const MannageRoutes = () => {
             {/* Head */}
             <thead>
               <tr>
-                <th>
-                  <label>Sl</label>
-                </th>
                 <th></th>
                 <th>Name</th>
                 <th>Email</th>
@@ -59,9 +59,6 @@ const MannageRoutes = () => {
                 <>
                   {UserDetails.map((item, idx) => (
                     <tr key={item._id}>
-                      <th>
-                        <label>{idx + 1}</label>
-                      </th>
                       <td>
                         <div className="flex items-center gap-3">
                           <div className="avatar">
