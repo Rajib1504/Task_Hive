@@ -1,17 +1,17 @@
 import React from "react";
 import useCoins from "./../../../Hooks/UseCoins/UseCoins";
 import { FaCoins } from "react-icons/fa";
-import { DollarSign } from "lucide-react";
 import Marquee from "react-fast-marquee";
-
+import { DollarSign, CreditCard, Wallet } from "lucide-react";
 const Withdrawals = () => {
   const [coin] = useCoins();
   console.log(coin);
   const dolar = (coin || 0) / 20;
   console.log(dolar);
+  const handleSubmit = () => {};
   return (
     <div>
-      <div className=" container">
+      <div className="">
         {/* text section  */}
         <div className="flex flex-col justify-center items-center gap-2">
           <h3 className="text-xl md:3xl font-bold sm:text-2xl text-center mb-3">
@@ -46,10 +46,111 @@ const Withdrawals = () => {
             </Marquee>
           </div>
           {/* Withdrawl form  */}
-          <div className="mt-6 shadow-lg sm:p-4 border-2 rounded-md mx-auto">
-            <h3 className="text-xl md:3xl font-bold sm:text-2xl text-center mb-3">
-              WithDrawal Form
-            </h3>
+          <div className="bg-white shadow-2xl rounded-2xl overflow-hidden max-w-md mx-auto transform transition-all duration-300 hover:shadow-3xl">
+            <div className="bg-gradient-to-r from-blue-600 to-blue-500 p-6 text-white">
+              <h3 className="text-2xl font-bold text-center flex items-center justify-center">
+                <Wallet className="mr-3 w-8 h-8" />
+                Withdrawal Form
+              </h3>
+            </div>
+
+            <form onSubmit={handleSubmit} className="p-6 space-y-6">
+              <div className="relative">
+                <label
+                  htmlFor="coinToWithdraw"
+                  className="absolute -top-2 left-3 bg-white px-1 text-xs text-gray-600"
+                >
+                  Coins To Withdraw
+                </label>
+                <div className="flex items-center border-2 rounded-lg overflow-hidden focus-within:border-blue-500 transition-all">
+                  <span className="bg-gray-100 p-3">
+                    <DollarSign className="w-5 h-5 text-gray-600" />
+                  </span>
+                  <input
+                    type="number"
+                    name="coinToWithdraw"
+                    id="coinToWithdraw"
+                    value=""
+                    // onChange={handleChange}
+                    className="w-full p-3 outline-none"
+                    placeholder="Enter coins"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="relative">
+                <label
+                  htmlFor="withdrawAmount"
+                  className="absolute -top-2 left-3 bg-white px-1 text-xs text-gray-600"
+                >
+                  Withdrawal Amount
+                </label>
+                <div className="flex items-center border-2 rounded-lg overflow-hidden focus-within:border-blue-500 transition-all">
+                  <span className="bg-gray-100 p-3">
+                    <CreditCard className="w-5 h-5 text-gray-600" />
+                  </span>
+                  <input
+                    type="number"
+                    name="withdrawAmount"
+                    id="withdrawAmount"
+                    value=""
+                    // onChange={handleChange}
+                    className="w-full p-3 outline-none"
+                    placeholder="Calculated amount"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="relative">
+                <label
+                  htmlFor="paymentSystem"
+                  className="absolute -top-2 left-3 bg-white px-1 text-xs text-gray-600"
+                >
+                  Payment System
+                </label>
+                <select
+                  name="paymentSystem"
+                  id="paymentSystem"
+                  value=""
+                  // onChange={handleChange}
+                  className="w-full p-3 border-2 rounded-lg appearance-none focus:border-blue-500 transition-all"
+                  required
+                >
+                  <option value="">Select Payment Method</option>
+                  <option value="Bikash">Bikash</option>
+                  <option value="Rocket">Rocket</option>
+                  <option value="Nagad">Nagad</option>
+                </select>
+              </div>
+
+              <div className="relative">
+                <label
+                  htmlFor="accountNumber"
+                  className="absolute -top-2 left-3 bg-white px-1 text-xs text-gray-600"
+                >
+                  Account Number
+                </label>
+                <input
+                  type="number"
+                  name="accountNumber"
+                  id="accountNumber"
+                  value=""
+                  // onChange={handleChange}
+                  className="w-full p-3 border-2 rounded-lg focus:border-blue-500 transition-all"
+                  placeholder="Enter account number"
+                  required
+                />
+              </div>
+
+              <button
+                type="submit"
+                className="w-full bg-gradient-to-r from-blue-600 to-blue-500 text-white py-4 rounded-lg hover:from-blue-700 hover:to-blue-600 transition-all transform hover:scale-[1.02] active:scale-100"
+              >
+                Submit Withdrawal
+              </button>
+            </form>
           </div>
         </div>
       </div>
