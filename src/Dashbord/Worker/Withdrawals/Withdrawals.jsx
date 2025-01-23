@@ -1,14 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import useCoins from "./../../../Hooks/UseCoins/UseCoins";
 import { FaCoins } from "react-icons/fa";
 import Marquee from "react-fast-marquee";
 import { DollarSign, CreditCard, Wallet } from "lucide-react";
+import { toast } from "react-toastify";
 const Withdrawals = () => {
+  const [amount, setAmount] = useState(0);
+  const [withdrawalCoins, setWithdrawalCoins] = useState();
   const [coin] = useCoins();
-  console.log(coin);
+  // console.log(coin);
   const dolar = (coin || 0) / 20;
-  console.log(dolar);
-  const handleSubmit = () => {};
+  // console.log(dolar);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const withdrawalCoins = form.withdrawalCoins.value;
+    const withdrawAmount = form.withdrawAmount.value;
+    const method = form.method.value;
+    const accountNumber = form.accountNumber.value;
+    const withdrawalsData = {
+      withdrawAmount,
+      withdrawalCoins,
+      method,
+      accountNumber,
+    };
+    console.log(withdrawalsData);
+  };
+
+  // withdrawals form
+  const handleChange = (e) => {
+    let withdrawal = e.target.value;
+    console.log(withdrawal);
+    if (withdrawal > coin) {
+      toast.error("withdrawalCoins can't be more then your available Coins");
+      withdrawal = coin;
+    }
+    setWithdrawalCoins(withdrawal);
+    setAmount(withdrawal / 20);
+  };
   return (
     <div>
       <div className="">
@@ -68,10 +97,9 @@ const Withdrawals = () => {
                   </span>
                   <input
                     type="number"
-                    name="coinToWithdraw"
-                    id="coinToWithdraw"
-                    value=""
-                    // onChange={handleChange}
+                    name="withdrawalCoins"
+                    onChange={handleChange}
+                    value={withdrawalCoins}
                     className="w-full p-3 outline-none"
                     placeholder="Enter coins"
                     required
@@ -94,11 +122,10 @@ const Withdrawals = () => {
                     type="number"
                     name="withdrawAmount"
                     id="withdrawAmount"
-                    value=""
-                    // onChange={handleChange}
+                    value={amount}
                     className="w-full p-3 outline-none"
                     placeholder="Calculated amount"
-                    required
+                    readOnly
                   />
                 </div>
               </div>
@@ -111,14 +138,14 @@ const Withdrawals = () => {
                   Payment System
                 </label>
                 <select
-                  name="paymentSystem"
-                  id="paymentSystem"
-                  value=""
-                  // onChange={handleChange}
+                  name="method"
                   className="w-full p-3 border-2 rounded-lg appearance-none focus:border-blue-500 transition-all"
+                  defaultValue={"choose_method"}
                   required
                 >
-                  <option value="">Select Payment Method</option>
+                  <option selected disabled value="Choose_method">
+                    Select Payment Method
+                  </option>
                   <option value="Bikash">Bikash</option>
                   <option value="Rocket">Rocket</option>
                   <option value="Nagad">Nagad</option>
@@ -135,21 +162,22 @@ const Withdrawals = () => {
                 <input
                   type="number"
                   name="accountNumber"
-                  id="accountNumber"
-                  value=""
-                  // onChange={handleChange}
                   className="w-full p-3 border-2 rounded-lg focus:border-blue-500 transition-all"
                   placeholder="Enter account number"
                   required
                 />
               </div>
 
-              <button
-                type="submit"
-                className="w-full bg-gradient-to-r from-blue-600 to-blue-500 text-white py-4 rounded-lg hover:from-blue-700 hover:to-blue-600 transition-all transform hover:scale-[1.02] active:scale-100"
-              >
-                Submit Withdrawal
-              </button>
+              {coin < 200 ? (
+                <p className="text-red-500 text-center">Insufficient Coin</p>
+              ) : (
+                <button
+                  type="submit"
+                  className="w-full bg-gradient-to-r from-blue-600 to-blue-500 text-white py-4 rounded-lg hover:from-blue-700 hover:to-blue-600 transition-all transform hover:scale-[1.02] active:scale-100"
+                >
+                  Submit Withdrawal
+                </button>
+              )}
             </form>
           </div>
         </div>

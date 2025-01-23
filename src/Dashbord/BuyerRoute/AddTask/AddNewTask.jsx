@@ -5,8 +5,10 @@ import UseAxiosSecure from "../../../Hooks/UseAxios/UseAxiosSecure";
 import { toast } from "react-toastify";
 import UseAuth from "../../../Hooks/useAuth/UseAuth";
 import { useNavigate } from "react-router-dom";
+import useCoins from "../../../Hooks/UseCoins/UseCoins";
 
 const AddNewTask = () => {
+  const [, , refetch] = useCoins();
   const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
   const axiosSecure = UseAxiosSecure();
@@ -67,6 +69,7 @@ const AddNewTask = () => {
       const taskitems = await axiosSecure.post("/addtask", taskData);
       if (taskitems.data.insertedId) {
         toast.success("Task has been added successfully");
+        refetch();
         // // deduct coins
         // setBuyer((prevBuyer) => ({
         //   ...prevBuyer,
