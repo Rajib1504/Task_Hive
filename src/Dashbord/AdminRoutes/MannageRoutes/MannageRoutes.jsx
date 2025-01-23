@@ -63,6 +63,8 @@ const MannageRoutes = () => {
       }
     });
   };
+  // update section
+  const handleChange = (id) => {};
   return (
     <div>
       <DashbordTitle
@@ -81,7 +83,10 @@ const MannageRoutes = () => {
                 <th>Email</th>
                 <th>Role</th>
                 <th>Coins</th>
-                <th>Action</th>
+                <th className="flex gap-3 ">
+                  <span className=" mr-6">Action</span>
+                  <span className=" mx-3">Delete</span>
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -109,6 +114,20 @@ const MannageRoutes = () => {
                       <td>{item.role}</td>
                       <td> {item.Coins}</td>
                       <td className="flex items-center  mt-3 gap-3">
+                        <select
+                          onChange={() => handleChange(item._id)}
+                          className="border-2 border-secondary rounded-md"
+                          name="roleChange"
+                          defaultValue={"default"}
+                          id=""
+                        >
+                          <option disabled value="default">
+                            {item.role}
+                          </option>
+                          <option value="Worker">Worker</option>
+                          <option value="Buyer">Buyer</option>
+                          <option value="Admin">Admin</option>
+                        </select>
                         <FaTrash
                           onClick={() => {
                             handleDelete(item._id);
