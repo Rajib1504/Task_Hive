@@ -3,8 +3,10 @@ import UseAxiosSecure from "../../../Hooks/UseAxios/UseAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../../../Loading/Loading";
 import { toast } from "react-toastify";
-import SectionTitle from "../../../Home/Shared/SectionTitle/SectionTitle";
+
 import { FaEdit, FaTrash } from "react-icons/fa";
+import Swal from "sweetalert2";
+import DashbordTitle from "../../../Home/Shared/SectionTitle/DashbordTitle";
 
 const MannageRoutes = () => {
   const axiosSecure = UseAxiosSecure();
@@ -26,10 +28,44 @@ const MannageRoutes = () => {
     toast.error(error);
     return null;
   }
-  console.log(UserDetails);
+  // delete section
+  const handleDelete = (id) => {
+    console.log(id);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure
+          .delete(`/user/${id}`)
+          .then((res) => {
+            const success = res.data;
+            console.log(success);
+            if (success.deletedCount > 0) {
+              return Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success",
+              });
+            }
+          })
+          .catch((error) => {
+            const errorme = error.message;
+            console.log(errorme);
+            toast.error(errorme);
+            return null;
+          });
+      }
+    });
+  };
   return (
     <div>
-      <SectionTitle
+      <DashbordTitle
         heading={"All Users"}
         subHeading={"Total Avaible Users :" + UserDetails.length}
       />
@@ -73,14 +109,10 @@ const MannageRoutes = () => {
                       <td>{item.role}</td>
                       <td> {item.Coins}</td>
                       <td className="flex items-center  mt-3 gap-3">
-                        <FaEdit
-                          // onClick={() => handleUpdate(item)}
-                          className="text-secondary lg:text-xl cursor-pointer"
-                        />
                         <FaTrash
-                          // onClick={() => {
-                          //   handleDelete(item);
-                          // }}
+                          onClick={() => {
+                            handleDelete(item._id);
+                          }}
                           className="text-red-500 lg:text-xl cursor-pointer ml-4"
                         />
                       </td>
