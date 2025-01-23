@@ -2,13 +2,14 @@ import { useEffect, useState } from "react";
 import UseAxiosSecure from "./../../../Hooks/UseAxios/UseAxiosSecure";
 import UseAuth from "./../../../Hooks/useAuth/UseAuth";
 import { FaEdit, FaTrash } from "react-icons/fa";
-import { data } from "react-router-dom";
+
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../../Hooks/UseAxios/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
 
 const MyTasks = () => {
-  const [Buyer_details, setBuyer_details] = useState([]);
+  // const [Buyer_details, setBuyer_details] = useState([]);
   const [openModal, setIsModalOpen] = useState(false);
   const [task, setTask] = useState({});
   const [buyer, setBuyer] = useState({});
@@ -20,24 +21,19 @@ const MyTasks = () => {
     axiosPublic.get(`/user/${user.email}`).then((res) => {
       const userDetails = res.data;
       setBuyer(userDetails);
+      refetch();
     });
   }, []);
 
-  useEffect(() => {
-    axiosSecure
-      .get(`/mytasks/${user?.email}`)
-      .then((res) => {
-        const Buyer_details = res.data;
-        const sorted_data = Buyer_details.sort(
-          (a, b) => new Date(b.deadline) - new Date(a.deadline)
-        );
-
-        setBuyer_details(sorted_data);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-  }, [axiosSecure, user?.email]);
+  const { data: Buyer_details = [], refetch } = useQuery({
+    queryKey: ["data", user?.email],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/mytasks/${user?.email}`);
+      return res.data.sort(
+        (a, b) => new Date(b.deadline) - new Date(a.deadline)
+      );
+    },
+  });
 
   // open model
   const handleUpdate = (item) => {
@@ -69,14 +65,9 @@ const MyTasks = () => {
       .then((res) => {
         // console.log(res.data);
         if (res.data.modifiedCount > 0) {
-          // update the local state
-          setBuyer_details((previousData) =>
-            previousData?.map((item) =>
-              item._id === task._id ? { ...item, ...updatedData } : item
-            )
-          );
           toast.success("Task has Updated successfully");
           closeModel(true);
+          refetch();
         } else {
           toast.error("something went wrong");
         }
@@ -107,8 +98,8 @@ const MyTasks = () => {
               email: buyer.email,
               newCoins: buyer.Coins + TotalCost,
             });
+            refetch();
           }
-          console.log(res.data);
         });
         Swal.fire({
           title: "Deleted!",

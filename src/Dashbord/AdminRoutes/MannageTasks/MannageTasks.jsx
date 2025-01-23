@@ -13,6 +13,7 @@ const MannageTasks = () => {
     data: tasks = [],
     isLoading,
     error,
+    refetch,
   } = useQuery({
     queryKey: ["data", axiosSecure],
     queryFn: async () => {
@@ -47,6 +48,7 @@ const MannageTasks = () => {
               text: `Your task has been deleted.`,
               icon: "success",
             });
+          refetch();
         });
       }
     });

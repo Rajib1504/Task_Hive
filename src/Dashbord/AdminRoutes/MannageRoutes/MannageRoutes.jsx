@@ -1,19 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import UseAxiosSecure from "../../../Hooks/UseAxios/UseAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../../../Loading/Loading";
 import { toast } from "react-toastify";
 
-import { FaEdit, FaTrash } from "react-icons/fa";
+import { FaTrash } from "react-icons/fa";
 import Swal from "sweetalert2";
 import DashbordTitle from "../../../Home/Shared/SectionTitle/DashbordTitle";
 
 const MannageRoutes = () => {
   const axiosSecure = UseAxiosSecure();
+  const [role, setRole] = useState("");
   const {
     data: UserDetails,
     isLoading,
     error,
+    refetch,
   } = useQuery({
     queryKey: ["data", axiosSecure],
     queryFn: async () => {
@@ -64,7 +66,20 @@ const MannageRoutes = () => {
     });
   };
   // update section
-  const handleChange = (id) => {};
+  const handleChange = (e, user) => {
+    const role = e.target.value;
+    try {
+      axiosSecure.patch(`/user/${user._id}`, { role }).then((res) => {
+        const result = res.data;
+        if (result.modifiedCount) {
+          toast.success("Role updated successfully");
+          refetch();
+        }
+      });
+    } catch (error) {
+      toast.error("fail to update role", error);
+    }
+  };
   return (
     <div>
       <DashbordTitle
@@ -115,15 +130,12 @@ const MannageRoutes = () => {
                       <td> {item.Coins}</td>
                       <td className="flex items-center  mt-3 gap-3">
                         <select
-                          onChange={() => handleChange(item._id)}
+                          onChange={(e) => handleChange(e, item)}
                           className="border-2 border-secondary rounded-md"
                           name="roleChange"
-                          defaultValue={"default"}
+                          value={item.role}
                           id=""
                         >
-                          <option disabled value="default">
-                            {item.role}
-                          </option>
                           <option value="Worker">Worker</option>
                           <option value="Buyer">Buyer</option>
                           <option value="Admin">Admin</option>
