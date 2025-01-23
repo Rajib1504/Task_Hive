@@ -41,6 +41,9 @@ const Dashbord = () => {
             <li className="bg-base-200">
               <NavLink to={"/dashbord/purchaseCoins"}>Purchase Coins</NavLink>
             </li>
+            <li className="bg-base-200">
+              <NavLink to={"/dashbord/paymentHistory"}>Payment History</NavLink>
+            </li>
 
             {/* Admin Section */}
             <li className="bg-base-200">

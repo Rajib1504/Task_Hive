@@ -6,7 +6,7 @@ import Register from "../Pages/Register/Register";
 import Dashbord from "../Layout/Dashbord";
 import PrivateRoute from "./Private/PrivateRoute";
 import WorkerHome from "../Dashbord/Worker/Worker HOme/WorkerHome";
-
+import PaymentHistory from "../Dashbord/BuyerRoute/PaymentHistory/PaymentHistory";
 import TaskList from "../Dashbord/Worker/TaskList/TaskList";
 import Subbmissions from "../Dashbord/Worker/Submissions/Subbmissions";
 import Withdrawals from "./../Dashbord/Worker/Withdrawals/Withdrawals";
@@ -84,6 +84,10 @@ const Router = createBrowserRouter([
       {
         path: "purchaseCoins",
         element: <PurchaseCoins></PurchaseCoins>,
+      },
+      {
+        path: "paymentHistory",
+        element: <PaymentHistory></PaymentHistory>,
       },
       // admin routes
       {
