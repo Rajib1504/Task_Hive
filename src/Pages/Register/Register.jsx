@@ -104,20 +104,19 @@ const Register = () => {
             {/* Photo URL */}
             <div className="mb-4">
               <label
-                htmlFor="photoURL"
+                htmlFor="task_image mt-2 "
                 className="block text-sm font-medium text-gray-600"
               >
-                Photo URL
+                Profile_image
               </label>
               <input
-                type="url"
-                id="photoURL"
-                name="photoURL"
-                className="w-full px-4 py-2 mt-2 text-gray-700 bg-gray-100 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
-                placeholder="Enter photo URL"
                 required
+                name="photoURL"
+                type="file"
+                className="w-full px-4 text file-input py-2 mt-2 text-gray-700 bg-gray-100 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
               />
             </div>
+
             {/* Password */}
             <div className="mb-4">
               <label
