@@ -17,6 +17,7 @@ const AdminHome = () => {
   // withdraw collection
   const {
     data: withdraw = [],
+    refetch,
     isLoading: withdrawLoaing,
     error: withdrawError,
   } = useQuery({
@@ -34,8 +35,16 @@ const AdminHome = () => {
     toast.error(error);
     return null;
   }
-  console.log(data);
-  console.log(withdraw);
+  // console.log(data);
+  // console.log(withdraw);
+  const handledelete = (id) => {
+    const res = axiosSecure.delete(`/mytask/${id}`);
+    console.log(res.data);
+    if (res.data.deletedCount) {
+      toast.success("task deleted successfully");
+      // refetch();
+    }
+  };
 
   // total_worker
   const totalWorker = data.filter((item) => item.role === "Worker");
@@ -96,7 +105,7 @@ const AdminHome = () => {
                   </td>
                   <td>{details.accountNumber}</td>
                   <td className="text-center"> $ {details.withdrawAmount}</td>
-                  <td onClick={() => handledelete(id)}>
+                  <td onClick={() => handledelete(details._id)}>
                     <FaTrash className="text-red-500 text-xl" />
                   </td>
                 </tr>
