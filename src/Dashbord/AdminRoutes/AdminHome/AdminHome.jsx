@@ -6,9 +6,11 @@ import { toast } from "react-toastify";
 import { FaCoins, FaTrash } from "react-icons/fa";
 import DashbordTitle from "../../../Home/Shared/SectionTitle/DashbordTitle";
 import { Coins } from "lucide-react";
+import useCoins from "../../../Hooks/UseCoins/UseCoins";
 
 const AdminHome = () => {
   const axiosSecure = UseAxiosSecure();
+  const [, , refetch] = useCoins();
   const { data, isLoading, error } = useQuery({
     queryKey: ["data"],
     queryFn: async () => {
@@ -19,7 +21,7 @@ const AdminHome = () => {
   // withdraw collection
   const {
     data: withdraw = [],
-    refetch,
+    refetch: fetchme,
     isLoading: withdrawLoaing,
     error: withdrawError,
   } = useQuery({
@@ -54,6 +56,7 @@ const AdminHome = () => {
     if (res.data.modifiedCount) {
       toast.success("withdrawal process successfully");
       refetch();
+      fetchme();
     }
   };
 

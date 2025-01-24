@@ -11,7 +11,7 @@ const Withdrawals = () => {
   const { user } = UseAuth();
   const axiosPublic = useAxiosPublic();
   const [withdrawalCoins, setWithdrawalCoins] = useState();
-  const [coin] = useCoins();
+  const [coin, , refetch] = useCoins();
   // console.log(coin);
   const dolar = (coin || 0) / 20;
   // console.log(dolar);
@@ -45,6 +45,7 @@ const Withdrawals = () => {
         if (result.insertedId) {
           toast.success("Withdrawal request is submitted");
           form.reset();
+          refetch();
         }
       })
       .catch((error) => {
