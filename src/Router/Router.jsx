@@ -19,6 +19,7 @@ import MannageTasks from "../Dashbord/AdminRoutes/MannageTasks/MannageTasks";
 import MannageRoutes from "../Dashbord/AdminRoutes/MannageRoutes/MannageRoutes";
 import TaskDetails from "../Dashbord/Worker/TaskList/TaskDetails";
 import Payment from "../Dashbord/Payment/Payment";
+import Adminroute from "./Private/Adminroute";
 
 const Router = createBrowserRouter([
   {
@@ -92,7 +93,11 @@ const Router = createBrowserRouter([
       // admin routes
       {
         path: "adminHome",
-        element: <AdminHome></AdminHome>,
+        element: (
+          <Adminroute>
+            <AdminHome></AdminHome>
+          </Adminroute>
+        ),
       },
       {
         path: "mannageRoutes",
