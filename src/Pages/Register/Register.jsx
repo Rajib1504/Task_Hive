@@ -4,19 +4,21 @@ import UseAuth from "../../Hooks/useAuth/UseAuth";
 import { toast } from "react-toastify";
 import useAxiosPublic from "../../Hooks/UseAxios/useAxiosPublic";
 import useCoins from "../../Hooks/UseCoins/UseCoins";
+import { imgUpload } from "../../Utils/Utils";
 
 const Register = () => {
   const [, , refetch] = useCoins();
   const { setUser, register, updateUserProfile } = UseAuth();
   const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
     const form = e.target;
     const name = form.name.value;
     const email = form.email.value;
     const password = form.password.value;
-    const photoURL = form.photoURL.value;
+    const imageUrl = form.image_url.files[0];
+    const photoURL = await imgUpload(imageUrl);
     const role = form.role.value;
     const formdata = { name, email, password, photoURL, role };
     console.log(formdata);
@@ -111,8 +113,9 @@ const Register = () => {
               </label>
               <input
                 required
-                name="photoURL"
+                name="image_url"
                 type="file"
+                accept="image/*"
                 className="w-full px-4 text file-input py-2 mt-2 text-gray-700 bg-gray-100 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
               />
             </div>

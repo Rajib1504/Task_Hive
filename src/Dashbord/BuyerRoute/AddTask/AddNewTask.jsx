@@ -16,13 +16,6 @@ const AddNewTask = () => {
   const image_hosting_key = import.meta.env.VITE_Image_Hosting_key;
   const image_upload_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
   const { user } = UseAuth();
-  // const [buyer, setBuyer] = useState({});
-  // useEffect(() => {
-  //   axiosPublic.get(`/user/${user.email}`).then((res) => {
-  //     const userDetails = res.data;
-  //     setBuyer(userDetails);
-  //   });
-  // }, []);
   const { data: buyer = {}, refetch: fetchme } = useQuery({
     queryKey: ["data", axiosPublic],
     queryFn: async () => {
