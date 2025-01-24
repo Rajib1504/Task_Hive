@@ -18,8 +18,8 @@ const Withdrawals = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
-    const withdrawalCoins = form.withdrawalCoins.value;
-    const withdrawAmount = form.withdrawAmount.value;
+    const withdrawalCoins = parseInt(form.withdrawalCoins.value);
+    const withdrawAmount = parseInt(form.withdrawAmount.value);
     const method = form.method.value;
     const accountNumber = form.accountNumber.value;
     const status = "pending";
@@ -193,7 +193,7 @@ const Withdrawals = () => {
                 />
               </div>
 
-              {coin < 200 ? (
+              {withdrawalCoins < 200 ? (
                 <p className="text-red-500 text-center">Insufficient Coin</p>
               ) : (
                 <button

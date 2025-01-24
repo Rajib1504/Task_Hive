@@ -5,6 +5,7 @@ import Loading from "../../../Loading/Loading";
 import { toast } from "react-toastify";
 import { FaCoins, FaTrash } from "react-icons/fa";
 import DashbordTitle from "../../../Home/Shared/SectionTitle/DashbordTitle";
+import { Coins } from "lucide-react";
 
 const AdminHome = () => {
   const axiosSecure = UseAxiosSecure();
@@ -38,15 +39,22 @@ const AdminHome = () => {
   }
   // console.log(data);
   // console.log(withdraw);
-  const handleApprove = (details) => {
-    const amount = details.withdrawAmount;
-    const res = axiosSecure.patch(`/witdrawal/${details._id}`, { amount });
+  const handleApprove = async (details) => {
+    const amount = parseInt(details.withdrawAmount);
+    const worker_email = details.worker_email;
+    const coins = parseInt(details.withdrawalCoins);
+    const worker_details = { amount, worker_email, coins };
+    // console.log(worker_details);
+    const res = await axiosSecure.patch(
+      `/witdrawal/${details._id}`,
+      worker_details
+    );
 
     console.log(res.data);
-    // if (res.data.updatedCount) {
-    //   toast.success("withdrawal process successfully");
-    //   refetch();
-    // }
+    if (res.data.modifiedCount) {
+      toast.success("withdrawal process successfully");
+      refetch();
+    }
   };
 
   // total_worker
