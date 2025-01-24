@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import Loading from "../../../Loading/Loading";
 import { toast } from "react-toastify";
 import { FaCoins, FaTrash } from "react-icons/fa";
+import DashbordTitle from "../../../Home/Shared/SectionTitle/DashbordTitle";
 
 const AdminHome = () => {
   const axiosSecure = UseAxiosSecure();
@@ -37,13 +38,15 @@ const AdminHome = () => {
   }
   // console.log(data);
   // console.log(withdraw);
-  const handledelete = (id) => {
-    const res = axiosSecure.delete(`/mytask/${id}`);
+  const handleApprove = (details) => {
+    const amount = details.withdrawAmount;
+    const res = axiosSecure.patch(`/witdrawal/${details._id}`, { amount });
+
     console.log(res.data);
-    if (res.data.deletedCount) {
-      toast.success("task deleted successfully");
-      // refetch();
-    }
+    // if (res.data.updatedCount) {
+    //   toast.success("withdrawal process successfully");
+    //   refetch();
+    // }
   };
 
   // total_worker
@@ -59,9 +62,10 @@ const AdminHome = () => {
   // console.log(avalible_coins);
 
   return (
-    <div className="bg-base-200">
+    <div>
+      <DashbordTitle heading={"Admin Home"}></DashbordTitle>
       {/* Admin state section  */}
-      <div className="flex justify-around  items-center">
+      <div className="flex justify-around mt-3 items-center">
         <div className="flex justify-center items-center">
           <h2 className="font-bold lg:text-2xl">
             Total Workers:
@@ -99,14 +103,19 @@ const AdminHome = () => {
               withdraw.map((details) => (
                 <tr key={details._id}>
                   <td>{details.worker_name}</td>
-                  <td className="flex gap-2 items-center justify-center">
+                  <td className="flex gap-2 items-center justify-start">
                     <FaCoins className="text-yellow-400" />
                     {details.withdrawalCoins}
                   </td>
                   <td>{details.accountNumber}</td>
-                  <td className="text-center"> $ {details.withdrawAmount}</td>
-                  <td onClick={() => handledelete(details._id)}>
-                    <FaTrash className="text-red-500 text-xl" />
+                  <td className=""> $ {details.withdrawAmount}</td>
+                  <td>
+                    <button
+                      onClick={() => handleApprove(details)}
+                      className="btn btn-sm bg-green-400 "
+                    >
+                      Success
+                    </button>
                   </td>
                 </tr>
               ))

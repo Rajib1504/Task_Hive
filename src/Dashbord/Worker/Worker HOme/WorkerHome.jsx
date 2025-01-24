@@ -73,19 +73,29 @@ const WorkerHome = () => {
           </thead>
           <tbody>
             {/* row 1 */}
-            {approve.map((detail, idx) => (
-              <tr key={detail._id}>
-                <th>{idx + 1}</th>
-                <td>{detail.task_title}</td>
-                <td>$ {detail.payable_amount}</td>
-                <td>{detail.Buyer_name}</td>
-                <td>
-                  <span className="badge bg-green-300  rounded-full px-3 py-2">
-                    {detail.status}
-                  </span>
+            {approve.length > 0 ? (
+              <div>
+                {approve.map((detail, idx) => (
+                  <tr key={detail._id}>
+                    <th>{idx + 1}</th>
+                    <td>{detail.task_title}</td>
+                    <td>$ {detail.payable_amount}</td>
+                    <td>{detail.Buyer_name}</td>
+                    <td>
+                      <span className="badge bg-green-300  rounded-full px-3 py-2">
+                        {detail.status}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </div>
+            ) : (
+              <tr>
+                <td colSpan="4" className="text-center">
+                  No Data Found
                 </td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
       </div>

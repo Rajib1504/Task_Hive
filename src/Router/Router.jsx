@@ -20,10 +20,12 @@ import MannageRoutes from "../Dashbord/AdminRoutes/MannageRoutes/MannageRoutes";
 import TaskDetails from "../Dashbord/Worker/TaskList/TaskDetails";
 import Payment from "../Dashbord/Payment/Payment";
 import Adminroute from "./Private/Adminroute";
+import Errror from "../Pages/ErrorPage/Errror";
 
 const Router = createBrowserRouter([
   {
     path: "/",
+    errorElement: <Errror></Errror>,
     element: <Main></Main>,
     children: [
       {
@@ -43,6 +45,7 @@ const Router = createBrowserRouter([
   // dashbord
   {
     path: "dashbord",
+    errorElement: <Errror></Errror>,
     element: (
       <PrivateRoute>
         <Dashbord></Dashbord>
@@ -94,9 +97,9 @@ const Router = createBrowserRouter([
       {
         path: "adminHome",
         element: (
-          <Adminroute>
-            <AdminHome></AdminHome>
-          </Adminroute>
+          // <Adminroute>
+          <AdminHome></AdminHome>
+          // </Adminroute>
         ),
       },
       {

@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import UseAuth from "../../../Hooks/useAuth/UseAuth";
 import { useNavigate } from "react-router-dom";
 import useCoins from "../../../Hooks/UseCoins/UseCoins";
+import { useQuery } from "@tanstack/react-query";
 
 const AddNewTask = () => {
   const [, , refetch] = useCoins();
@@ -15,13 +16,20 @@ const AddNewTask = () => {
   const image_hosting_key = import.meta.env.VITE_Image_Hosting_key;
   const image_upload_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
   const { user } = UseAuth();
-  const [buyer, setBuyer] = useState({});
-  useEffect(() => {
-    axiosPublic.get(`/user/${user.email}`).then((res) => {
-      const userDetails = res.data;
-      setBuyer(userDetails);
-    });
-  }, []);
+  // const [buyer, setBuyer] = useState({});
+  // useEffect(() => {
+  //   axiosPublic.get(`/user/${user.email}`).then((res) => {
+  //     const userDetails = res.data;
+  //     setBuyer(userDetails);
+  //   });
+  // }, []);
+  const { data: buyer = {}, refetch: fetchme } = useQuery({
+    queryKey: ["data", axiosPublic],
+    queryFn: async () => {
+      const res = axiosPublic.get(`/user/${user.email}`);
+      return res.data;
+    },
+  });
   // console.log(buyer?.Coins);
   const {
     register,
@@ -70,6 +78,7 @@ const AddNewTask = () => {
       if (taskitems.data.insertedId) {
         toast.success("Task has been added successfully");
         refetch();
+        fetchme();
         // // deduct coins
         // setBuyer((prevBuyer) => ({
         //   ...prevBuyer,
