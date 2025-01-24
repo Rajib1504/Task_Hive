@@ -97,6 +97,7 @@ const AdminHome = () => {
         </div>
       </div>
       {/* withdrawals collection  */}
+      <h2 className="text-center text-xl my-3">Withdrawal Requests</h2>
       <div className="overflow-x-auto mt-2 sm:mt-4">
         <table className="table">
           <thead>
