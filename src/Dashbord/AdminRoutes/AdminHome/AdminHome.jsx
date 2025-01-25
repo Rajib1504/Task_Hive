@@ -19,7 +19,7 @@ const AdminHome = () => {
       return res.data;
     },
   });
-  console.log(admin_State);
+  // console.log(admin_State);
 
   const [, , refetch] = useCoins();
   const { data, isLoading, error } = useQuery({
