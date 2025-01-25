@@ -36,7 +36,8 @@ const AddNewTask = () => {
     const amount = parseFloat(data.payableAmount);
     // console.log(amount);
     const TotalCost = parseFloat(worker * amount);
-    // console.log(TotalCost);
+    console.log(TotalCost);
+    console.log(coin - TotalCost);
     if (coin < TotalCost) {
       toast.warning("insufficient Coin.  Purchase Coin");
       navigate("/dashbord/purchaseCoins");
@@ -70,18 +71,15 @@ const AddNewTask = () => {
       const taskitems = await axiosSecure.post("/addtask", taskData);
       if (taskitems.data.insertedId) {
         toast.success("Task has been added successfully");
+
+        // Update coins in database
+        const updatedCoin = {
+          email: user.email,
+          newCoins: coin - TotalCost,
+        };
+        await axiosSecure.post("/updatecoins", updatedCoin);
         refetch();
         fetchme();
-        // // deduct coins
-        // setBuyer((prevBuyer) => ({
-        //   ...prevBuyer,
-        //   Coins: prevBuyer.Coins - TotalCost,
-        // }));
-        // Update coins in database
-        await axiosSecure.post("/updatecoins", {
-          email: buyer.email,
-          newCoins: buyer.Coins - TotalCost,
-        });
         // toast.success("Coins deducted successfully");
       }
     } else {

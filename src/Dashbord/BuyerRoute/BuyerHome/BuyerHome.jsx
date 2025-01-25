@@ -3,6 +3,7 @@ import UseAuth from "./../../../Hooks/useAuth/UseAuth";
 import UseAxiosSecure from "./../../../Hooks/UseAxios/UseAxiosSecure";
 import { toast } from "react-toastify";
 import useCoins from "../../../Hooks/UseCoins/UseCoins";
+import { useQuery } from "@tanstack/react-query";
 const BuyerHome = () => {
   const { user } = UseAuth();
   const axiosSecure = UseAxiosSecure();
@@ -14,25 +15,14 @@ const BuyerHome = () => {
   console.log(fullDetails);
   // console.log("fulldetails is here", fullDetails);
   // for state preview
-  useEffect(() => {
-    axiosSecure.get(`/mytasks/${user.email}`).then((res) => {
-      const totalTasks = res.data;
-      // console.log(totalTasks);
-      setBuyer_data(totalTasks);
-      // total pending task calculation
-      const totalPendding = totalTasks.reduce((total, tasks) => {
-        return total + tasks.requiredWorkers;
-      }, 0);
-      // console.log(totalPendding);
-      setPending_tasks(totalPendding);
-
-      // total payment calculate
-      const Payment = totalTasks.reduce((total, tasks) => {
-        return total + tasks.payableAmount * tasks.requiredWorkers;
-      }, 0);
-      setTotalPayment(Payment);
-    });
-  }, []);
+  const { data: buyer_State = {} } = useQuery({
+    queryKey: ["buyerStates", user.email],
+    queryFn: async () => {
+      const res = await axiosSecure(`/buyer-stats/${user.email}`);
+      return res.data;
+    },
+  });
+  console.log(buyer_State);
   // for form preview
   useEffect(() => {
     axiosSecure
@@ -83,17 +73,20 @@ const BuyerHome = () => {
       <div className="flex justify-around items-center">
         <div className="flex justify-center items-center">
           <h2 className="font-bold lg:text-2xl">
-            My Total Tasks:<span className="ml-3">{Buyer_data.length}</span>
+            My Total Tasks:
+            <span className="ml-3">{buyer_State.totalTaskCount}</span>
           </h2>
         </div>
         <div className="flex justify-center items-center">
           <h2 className="font-bold lg:text-2xl">
-            Pendding Tasks:<span className="ml-3">{pending_tasks}</span>
+            Pendding Tasks:
+            <span className="ml-3">{buyer_State.pendingTaskCount}</span>
           </h2>
         </div>
         <div className="flex justify-center items-center">
           <h2 className="font-bold lg:text-2xl">
-            My Total Payment:<span className="ml-3">${totalPayment}</span>
+            My Total Payment:
+            <span className="ml-3">${buyer_State.totalPayments}</span>
           </h2>
         </div>
       </div>
