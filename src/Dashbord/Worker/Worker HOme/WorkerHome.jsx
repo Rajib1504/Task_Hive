@@ -7,7 +7,7 @@ import Loading from "./../../../Loading/Loading";
 const WorkerHome = () => {
   const axiosSecure = UseAxiosSecure();
   const { user, loading } = UseAuth();
-  console.log(user.email);
+  // console.log(user.email);
   const { data: worker_State = {} } = useQuery({
     queryKey: ["workerStates", user.email],
     // enabled:
