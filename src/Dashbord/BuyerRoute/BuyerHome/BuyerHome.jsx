@@ -15,7 +15,7 @@ const BuyerHome = () => {
   console.log(fullDetails);
   // console.log("fulldetails is here", fullDetails);
   // for state preview
-  const { data: buyer_State = {} } = useQuery({
+  const { data: buyer_State = {}, refetch: fetch } = useQuery({
     queryKey: ["buyerStates", user.email],
     queryFn: async () => {
       const res = await axiosSecure(`/buyer-stats/${user.email}`);
@@ -48,8 +48,22 @@ const BuyerHome = () => {
       amount,
     });
     if (data.modifiedCount) {
+      const workerEmail = details.worker_email;
+      const notificationData = {
+        message: ` you have earned ${details.payable_amount} from ${details.user?.email} for completing ${details.task_title}`,
+        ToEmail: workerEmail,
+        actionRoute: "/dashbord/worker-home",
+        Time: new Date(),
+      };
+
+      const { data } = await axiosSecure.post(
+        "/notification",
+        notificationData
+      );
+      console.log(data);
       toast.success("Task Accpted successfully");
       refetch();
+      fetch();
     }
     // console.log(data);
   };
