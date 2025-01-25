@@ -6,32 +6,29 @@ import { toast } from "react-toastify";
 import UseAuth from "../../../Hooks/useAuth/UseAuth";
 import { useNavigate } from "react-router-dom";
 import useCoins from "../../../Hooks/UseCoins/UseCoins";
-import { useQuery } from "@tanstack/react-query";
-
+import Loading from "../../../Loading/Loading";
 const AddNewTask = () => {
   const [coin, , refetch] = useCoins();
   const axiosPublic = useAxiosPublic();
+  const [loading, setloading] = useState(false);
   const navigate = useNavigate();
   const axiosSecure = UseAxiosSecure();
   const image_hosting_key = import.meta.env.VITE_Image_Hosting_key;
   const image_upload_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
   const { user } = UseAuth();
-  const { data: buyer = {}, refetch: fetchme } = useQuery({
-    queryKey: ["data", axiosPublic],
-    queryFn: async () => {
-      const res = axiosPublic.get(`/user/${user.email}`);
-      return res.data;
-    },
-  });
-  // console.log(buyer?.Coins);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+  if (loading) {
+    <Loading></Loading>;
+  }
   const onSubmit = async (data) => {
     // console.log(data);
     // calculation for coins
+    setloading(true);
     const worker = data.requiredWorkers;
     const amount = parseFloat(data.payableAmount);
     // console.log(amount);
@@ -40,6 +37,7 @@ const AddNewTask = () => {
     console.log(coin - TotalCost);
     if (coin < TotalCost) {
       toast.warning("insufficient Coin.  Purchase Coin");
+      setloading(false);
       navigate("/dashbord/purchaseCoins");
       return;
     }
@@ -71,7 +69,7 @@ const AddNewTask = () => {
       const taskitems = await axiosSecure.post("/addtask", taskData);
       if (taskitems.data.insertedId) {
         toast.success("Task has been added successfully");
-
+        setloading(false);
         // Update coins in database
         const updatedCoin = {
           email: user.email,
@@ -79,7 +77,7 @@ const AddNewTask = () => {
         };
         await axiosSecure.post("/updatecoins", updatedCoin);
         refetch();
-        fetchme();
+
         // toast.success("Coins deducted successfully");
       }
     } else {
