@@ -9,7 +9,7 @@ import useCoins from "../../../Hooks/UseCoins/UseCoins";
 import { useQuery } from "@tanstack/react-query";
 
 const AddNewTask = () => {
-  const [, , refetch] = useCoins();
+  const [coin, , refetch] = useCoins();
   const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
   const axiosSecure = UseAxiosSecure();
@@ -37,7 +37,7 @@ const AddNewTask = () => {
     // console.log(amount);
     const TotalCost = parseFloat(worker * amount);
     // console.log(TotalCost);
-    if (buyer.Coins < TotalCost) {
+    if (coin < TotalCost) {
       toast.warning("insufficient Coin.  Purchase Coin");
       navigate("/dashbord/purchaseCoins");
       return;
