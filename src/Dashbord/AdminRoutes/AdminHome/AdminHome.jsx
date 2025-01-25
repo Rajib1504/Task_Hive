@@ -1,4 +1,3 @@
-import React from "react";
 import UseAxiosSecure from "../../../Hooks/UseAxios/UseAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../../../Loading/Loading";
@@ -10,6 +9,18 @@ import useCoins from "../../../Hooks/UseCoins/UseCoins";
 
 const AdminHome = () => {
   const axiosSecure = UseAxiosSecure();
+
+  // state
+  const { data: admin_State = {} } = useQuery({
+    queryKey: ["adminStates"],
+    // enabled:
+    queryFn: async () => {
+      const res = await axiosSecure(`/admin-stats`);
+      return res.data;
+    },
+  });
+  console.log(admin_State);
+
   const [, , refetch] = useCoins();
   const { data, isLoading, error } = useQuery({
     queryKey: ["data"],
@@ -52,25 +63,13 @@ const AdminHome = () => {
       worker_details
     );
 
-    console.log(res.data);
+    // console.log(res.data);
     if (res.data.modifiedCount) {
       toast.success("withdrawal process successfully");
       refetch();
       fetchme();
     }
   };
-
-  // total_worker
-  const totalWorker = data.filter((item) => item.role === "Worker");
-  // console.log(totalWorker);
-  // total_Buyer
-  const total_buyer = data.filter((item) => item.role === "Buyer");
-  // console.log(total_buyer);
-  // total_available_coins
-  const avalible_coins = data.reduce((total, item) => {
-    return total + item.Coins;
-  }, 0);
-  // console.log(avalible_coins);
 
   return (
     <div>
@@ -80,19 +79,25 @@ const AdminHome = () => {
         <div className="flex justify-center items-center">
           <h2 className="font-bold lg:text-2xl">
             Total Workers:
-            <span className="ml-3 text-secondary">{totalWorker.length}</span>
+            <span className="ml-3 text-secondary">
+              {admin_State.totalWorkers}
+            </span>
           </h2>
         </div>
         <div className="flex justify-center items-center">
           <h2 className="font-bold lg:text-2xl">
             Total Buyer:
-            <span className="ml-3 text-yellow-400">{total_buyer.length}</span>
+            <span className="ml-3 text-yellow-400">
+              {admin_State.totalBuyers}
+            </span>
           </h2>
         </div>
         <div className="flex justify-center items-center">
           <h2 className="font-bold lg:text-2xl">
             Total Available coins:
-            <span className="ml-3 text-green-400">{avalible_coins} $</span>
+            <span className="ml-3 text-green-400">
+              {admin_State.totalAvailableCoins} $
+            </span>
           </h2>
         </div>
       </div>
@@ -134,7 +139,7 @@ const AdminHome = () => {
             ) : (
               <tr>
                 <td colSpan="4" className="text-center">
-                  No Pending Data Found
+                  No Data Found
                 </td>
               </tr>
             )}
