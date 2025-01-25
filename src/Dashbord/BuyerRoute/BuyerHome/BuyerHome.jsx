@@ -60,7 +60,7 @@ const BuyerHome = () => {
         "/notification",
         notificationData
       );
-      console.log(data);
+      // console.log(data);
       toast.success("Task Accpted successfully");
       refetch();
       fetch();
