@@ -1,17 +1,18 @@
 import { Calendar, Users, DollarSign, ExternalLink } from "lucide-react";
 import { useEffect, useState } from "react";
-import useAxiosPublic from "../../../Hooks/UseAxios/useAxiosPublic";
+
 import UseAuth from "../../../Hooks/useAuth/UseAuth";
 import { useNavigate } from "react-router-dom";
+import UseAxiosSecure from "../../../Hooks/UseAxios/UseAxiosSecure";
 
 const TaskList = () => {
   const navigate = useNavigate();
   const [tasks, setTasks] = useState([]);
-  const axiosPublic = useAxiosPublic();
+  const axiosSecure = UseAxiosSecure();
   const { user } = UseAuth();
 
   useEffect(() => {
-    axiosPublic
+    axiosSecure
       .get("/mytasks")
       .then((res) => {
         const data = res.data;

@@ -37,7 +37,8 @@ const TaskDetails = () => {
   //     form area for submit
   const handleSubmit = (e) => {
     e.preventDefault();
-    const submited_data = e.target.submitionDetails.value;
+    const form = e.target;
+    const submited_data = form.submitionDetails.value;
     //     console.log(submited_data);
     document.getElementById("my_modal_3").close();
     const Worker_submitions_data = {
@@ -55,13 +56,26 @@ const TaskDetails = () => {
 
     axiosSecure
       .post("/submitData", Worker_submitions_data)
-      .then((res) => {
+      .then(async (res) => {
         const result = res.data;
         //   console.log(result);
         if (result.insertedId) {
+          const workerEmail = taskDetails?.email;
+          const notificationData = {
+            message: `${taskDetails?.title} has been submited successfully `,
+            ToEmail: workerEmail,
+            actionRoute: "/dashbord/worker-home",
+            Time: new Date(),
+          };
+
+          const { data } = await axiosSecure.post(
+            "/notification",
+            notificationData
+          );
           toast.success(
             `${user.displayName}'s Request has been taken successfully`
           );
+          form.reset();
         }
       })
       .catch((err) => {

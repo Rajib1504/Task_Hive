@@ -15,7 +15,7 @@ const Login = () => {
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password);
+    // console.log(email, password);
     login(email, password)
       .then((res) => {
         const olduser = res.user;
@@ -24,7 +24,7 @@ const Login = () => {
           .get(`/myRole/${res.user.email}`)
           .then((res) => {
             const role = res.data.role;
-            console.log(role);
+            // console.log(role);
             // Handle role logic
 
             if (role === "Worker") {

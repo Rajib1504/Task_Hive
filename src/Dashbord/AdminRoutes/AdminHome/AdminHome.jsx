@@ -65,6 +65,18 @@ const AdminHome = () => {
 
     // console.log(res.data);
     if (res.data.modifiedCount) {
+      const workerEmail = details.worker_email;
+      const notificationData = {
+        message: `withdrawal request has been Approve `,
+        ToEmail: workerEmail,
+        actionRoute: "/dashbord/worker-home",
+        Time: new Date(),
+      };
+
+      const { data } = await axiosSecure.post(
+        "/notification",
+        notificationData
+      );
       toast.success("withdrawal process successfully");
       refetch();
       fetchme();

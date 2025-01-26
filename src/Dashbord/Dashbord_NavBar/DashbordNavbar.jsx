@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import useAxiosPublic from "../../Hooks/UseAxios/useAxiosPublic";
+
 import UseAuth from "../../Hooks/useAuth/UseAuth";
 import { NavLink } from "react-router-dom";
 import { IoNotificationsOutline } from "react-icons/io5";
@@ -11,7 +11,7 @@ import UseAxiosSecure from "../../Hooks/UseAxios/UseAxiosSecure";
 
 const DashboardNavbar = () => {
   const { user } = UseAuth();
-  const axiosPublic = useAxiosPublic();
+
   const axiosSecure = UseAxiosSecure();
   const [notification, setNotification] = useState([]);
   const [coin] = useCoins();
@@ -26,7 +26,7 @@ const DashboardNavbar = () => {
     queryFn: async () => {
       try {
         if (user?.email) {
-          const res = await axiosPublic.get(`/user/${user.email}`);
+          const res = await axiosSecure.get(`/user/${user.email}`);
           // console.log(res.data);
           return res.data;
         }

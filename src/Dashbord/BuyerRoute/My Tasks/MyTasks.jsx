@@ -5,7 +5,6 @@ import { FaEdit, FaTrash } from "react-icons/fa";
 
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
-import useAxiosPublic from "../../../Hooks/UseAxios/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 
 const MyTasks = () => {
@@ -15,10 +14,10 @@ const MyTasks = () => {
   const [buyer, setBuyer] = useState({});
   // console.log(Buyer_details);
   const axiosSecure = UseAxiosSecure();
-  const axiosPublic = useAxiosPublic();
+
   const { user } = UseAuth();
   useEffect(() => {
-    axiosPublic.get(`/user/${user.email}`).then((res) => {
+    axiosSecure.get(`/user/${user.email}`).then((res) => {
       const userDetails = res.data;
       setBuyer(userDetails);
       refetch();
