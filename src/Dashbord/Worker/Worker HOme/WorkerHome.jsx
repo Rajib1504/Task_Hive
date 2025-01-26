@@ -10,6 +10,8 @@ const WorkerHome = () => {
   // console.log(user.email);
   const { data: worker_State = {} } = useQuery({
     queryKey: ["workerStates", user.email],
+    enabled:
+      !loading && !!user?.email && !!localStorage.getItem("access-token"),
     // enabled:
     queryFn: async () => {
       const res = await axiosSecure(`/worker-stats/${user.email}`);
@@ -24,6 +26,8 @@ const WorkerHome = () => {
     isLoading,
   } = useQuery({
     queryKey: ["submition", user.email],
+    enabled:
+      !loading && !!user?.email && !!localStorage.getItem("access-token"),
     queryFn: async () => {
       const res = await axiosSecure.get(`/submitDetails/${user?.email}`);
       return res.data;

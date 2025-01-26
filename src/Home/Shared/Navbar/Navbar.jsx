@@ -7,9 +7,11 @@ import { HiCurrencyDollar } from "react-icons/hi";
 import useAxiosPublic from "../../../Hooks/UseAxios/useAxiosPublic";
 import Loading from "../../../Loading/Loading";
 import useCoins from "../../../Hooks/UseCoins/UseCoins";
+import UseRole from "../../../Hooks/UseRole/UseRole";
 const Navbar = () => {
   // const [coin, setCoin] = useState(0);
   const [coin] = useCoins();
+  const [role] = UseRole();
   // console.log(coin);
   const { user, logOut, loading } = UseAuth();
   const axiosPublic = useAxiosPublic();
@@ -42,7 +44,15 @@ const Navbar = () => {
         <>
           {" "}
           <li>
-            <NavLink to={"/dashbord"}>Dashboard</NavLink>
+            <NavLink
+              to={`${
+                (role === "Worker" && "/dashbord/workerHome") ||
+                (role === "Buyer" && "/dashbord/buyerHome") ||
+                (role === "Admin" && "/dashbord/adminHome")
+              }`}
+            >
+              Dashboard
+            </NavLink>
           </li>
         </>
       )}

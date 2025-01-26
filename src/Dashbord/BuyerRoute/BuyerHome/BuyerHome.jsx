@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import useCoins from "../../../Hooks/UseCoins/UseCoins";
 import { useQuery } from "@tanstack/react-query";
 const BuyerHome = () => {
-  const { user } = UseAuth();
+  const { user, loading } = UseAuth();
   // console.log(user.email);
   const axiosSecure = UseAxiosSecure();
   const [, , refetch] = useCoins();
@@ -15,6 +15,8 @@ const BuyerHome = () => {
   // for state preview
   const { data: buyer_State = {}, refetch: fetchState } = useQuery({
     queryKey: ["buyerStates", user.email],
+    enabled:
+      !loading && !!user?.email && !!localStorage.getItem("access-token"),
     queryFn: async () => {
       const res = await axiosSecure(`/buyer-stats/${user.email}`);
       return res.data;
@@ -25,6 +27,8 @@ const BuyerHome = () => {
 
   const { data: fullDetails = [], refetch: fetchForm } = useQuery({
     queryKey: ["fulldetails"],
+    enabled:
+      !loading && !!user?.email && !!localStorage.getItem("access-token"),
     queryFn: async () => {
       const data = await axiosSecure.get(`/submitDatas/${user.email}`);
       return data.data;

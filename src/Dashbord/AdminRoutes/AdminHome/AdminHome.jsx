@@ -6,14 +6,16 @@ import { FaCoins, FaTrash } from "react-icons/fa";
 import DashbordTitle from "../../../Home/Shared/SectionTitle/DashbordTitle";
 import { Coins } from "lucide-react";
 import useCoins from "../../../Hooks/UseCoins/UseCoins";
+import UseAuth from "../../../Hooks/useAuth/UseAuth";
 
 const AdminHome = () => {
   const axiosSecure = UseAxiosSecure();
-
+  const { user, loading } = UseAuth();
   // state
   const { data: admin_State = {} } = useQuery({
     queryKey: ["adminStates"],
-    // enabled:
+    enabled: !!localStorage.getItem("access-token"),
+
     queryFn: async () => {
       const res = await axiosSecure(`/admin-stats`);
       return res.data;
@@ -24,6 +26,7 @@ const AdminHome = () => {
   const [, , refetch] = useCoins();
   const { data, isLoading, error } = useQuery({
     queryKey: ["data"],
+    enabled: !!localStorage.getItem("access-token"),
     queryFn: async () => {
       const res = await axiosSecure.get("/userData");
       return res.data;
@@ -37,6 +40,7 @@ const AdminHome = () => {
     error: withdrawError,
   } = useQuery({
     queryKey: ["withdraw", axiosSecure],
+    enabled: !!localStorage.getItem("access-token"),
     queryFn: async () => {
       const res = await axiosSecure("/withdrawal");
       return res.data;
@@ -89,7 +93,7 @@ const AdminHome = () => {
       {/* Admin state section  */}
       <div className="flex justify-around mt-3 items-center">
         <div className="flex justify-center items-center">
-          <h2 className="font-bold lg:text-2xl">
+          <h2 className="font-bold text-xm md:text-sm lg:text-2xl">
             Total Workers:
             <span className="ml-3 text-secondary">
               {admin_State.totalWorkers}
