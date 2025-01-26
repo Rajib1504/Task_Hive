@@ -4,12 +4,12 @@ import { FaCoins } from "react-icons/fa";
 import Marquee from "react-fast-marquee";
 import { DollarSign, CreditCard, Wallet } from "lucide-react";
 import { toast } from "react-toastify";
-import useAxiosPublic from "../../../Hooks/UseAxios/useAxiosPublic";
 import UseAuth from "../../../Hooks/useAuth/UseAuth";
+import UseAxiosSecure from "../../../Hooks/UseAxios/UseAxiosSecure";
 const Withdrawals = () => {
   const [amount, setAmount] = useState(0);
   const { user } = UseAuth();
-  const axiosPublic = useAxiosPublic();
+  const axiosSecure = UseAxiosSecure();
   const [withdrawalCoins, setWithdrawalCoins] = useState();
   const [coin, , refetch] = useCoins();
   // console.log(coin);
@@ -37,7 +37,7 @@ const Withdrawals = () => {
       date,
     };
     console.log(withdrawalsData);
-    axiosPublic
+    axiosSecure
       .post("/withdrawal", withdrawalsData)
       .then((res) => {
         const result = res.data;

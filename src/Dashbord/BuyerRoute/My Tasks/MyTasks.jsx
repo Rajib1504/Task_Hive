@@ -88,7 +88,7 @@ const MyTasks = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosSecure.delete(`/mytask/${item._id}`).then((res) => {
+        axiosSecure.delete(`/mytasks/${item._id}`).then((res) => {
           if (res.data.deletedCount > 0) {
             const TotalCost = parseFloat(
               item?.requiredWorkers * item?.payableAmount
