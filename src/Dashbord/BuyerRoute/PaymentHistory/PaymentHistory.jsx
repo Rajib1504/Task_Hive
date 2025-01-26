@@ -28,7 +28,7 @@ const PaymentHistory = () => {
     toast.error(error.message);
     return null;
   }
-  console.log(Payments);
+  // console.log(Payments);
   return (
     <div>
       <SectionTitle heading={"Payment History"}></SectionTitle>

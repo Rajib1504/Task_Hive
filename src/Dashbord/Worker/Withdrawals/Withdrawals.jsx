@@ -36,12 +36,12 @@ const Withdrawals = () => {
       worker_name,
       date,
     };
-    console.log(withdrawalsData);
+    // console.log(withdrawalsData);
     axiosSecure
       .post("/withdrawal", withdrawalsData)
       .then((res) => {
         const result = res.data;
-        console.log(result);
+        // console.log(result);
         if (result.insertedId) {
           toast.success("Withdrawal request is submitted");
           form.reset();
@@ -56,7 +56,7 @@ const Withdrawals = () => {
   // withdrawals form
   const handleChange = (e) => {
     let withdrawal = e.target.value;
-    console.log(withdrawal);
+    // console.log(withdrawal);
     if (withdrawal > coin) {
       toast.error("withdrawalCoins can't be more then your available Coins");
       withdrawal = coin;

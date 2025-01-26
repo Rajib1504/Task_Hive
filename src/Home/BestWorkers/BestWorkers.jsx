@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 const BestWorkers = () => {
   const axiosPublic = useAxiosPublic();
   const [topUsers, setTopUsers] = useState([]);
-  console.log(topUsers);
+  // console.log(topUsers);
   useEffect(() => {
     if (axiosPublic) {
       axiosPublic

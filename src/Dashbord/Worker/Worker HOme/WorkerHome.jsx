@@ -16,7 +16,7 @@ const WorkerHome = () => {
       return res.data;
     },
   });
-  console.log(worker_State);
+  // console.log(worker_State);
 
   const {
     data = [],

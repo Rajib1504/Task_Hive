@@ -66,9 +66,9 @@ const CheckoutForm = ({ price }) => {
           date: new Date(),
           //   status: "pending"
         };
-        console.log(payment);
+        // console.log(payment);
         const res = await axiosSecure.post("/payments", payment);
-        console.log(res.data);
+        // console.log(res.data);
         if (res.data?.insertedId) {
           refetch();
           toast.success("payment succeded. Thank you.");

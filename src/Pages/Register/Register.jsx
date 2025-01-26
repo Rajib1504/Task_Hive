@@ -23,7 +23,7 @@ const Register = () => {
     const photoURL = await imgUpload(imageUrl);
     const role = form.role.value;
     const formdata = { name, email, password, photoURL, role };
-    console.log(formdata);
+    // console.log(formdata);
     const regx = /^(?=.*[A-Z])(?=.*[a-z]).{6,}$/;
     if (!regx.test(password)) {
       toast.error("Password validation fail");
@@ -34,7 +34,7 @@ const Register = () => {
       register(email, password)
         .then((res) => {
           const newUser = res.user;
-          console.log(newUser);
+          // console.log(newUser);
           // updateUserProfile
           updateUserProfile(name, photoURL).then(() => {
             const userInfo = {
@@ -45,7 +45,7 @@ const Register = () => {
             };
             axiosPublic.post("/user", userInfo).then((res) => {
               if (res.data.insertedId) {
-                console.log("user created to the database");
+                // console.log("user created to the database");
                 toast.success(`Registerd by ${newUser.email}`);
                 setLoading(false);
                 refetch();

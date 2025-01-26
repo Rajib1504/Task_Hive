@@ -10,7 +10,7 @@ import useCoins from "../../../Hooks/UseCoins/UseCoins";
 const Navbar = () => {
   // const [coin, setCoin] = useState(0);
   const [coin] = useCoins();
-  console.log(coin);
+  // console.log(coin);
   const { user, logOut, loading } = UseAuth();
   const axiosPublic = useAxiosPublic();
   if (loading) {

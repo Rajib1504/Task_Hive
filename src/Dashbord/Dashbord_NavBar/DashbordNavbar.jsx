@@ -24,7 +24,7 @@ const DashboardNavbar = () => {
       try {
         if (user?.email) {
           const res = await axiosPublic.get(`/user/${user.email}`);
-          console.log(res.data);
+          // console.log(res.data);
           return res.data;
         }
 

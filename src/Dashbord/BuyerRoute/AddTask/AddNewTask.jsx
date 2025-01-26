@@ -30,8 +30,8 @@ const AddNewTask = () => {
     const amount = parseFloat(data.payableAmount);
     // console.log(amount);
     const TotalCost = parseFloat(worker * amount);
-    console.log(TotalCost);
-    console.log(coin - TotalCost);
+    // console.log(TotalCost);
+    // console.log(coin - TotalCost);
     if (coin < TotalCost) {
       toast.warning("insufficient Coin.  Purchase Coin");
       setloading(false);

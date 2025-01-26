@@ -6,14 +6,14 @@ import useCoins from "../../../Hooks/UseCoins/UseCoins";
 import { useQuery } from "@tanstack/react-query";
 const BuyerHome = () => {
   const { user } = UseAuth();
-  console.log(user.email);
+  // console.log(user.email);
   const axiosSecure = UseAxiosSecure();
   const [, , refetch] = useCoins();
   const [Buyer_data, setBuyer_data] = useState([]);
   const [pending_tasks, setPending_tasks] = useState(0);
   const [totalPayment, setTotalPayment] = useState(0);
   const [fullDetails, setFullDetails] = useState([]);
-  console.log(fullDetails);
+  // console.log(fullDetails);
   // console.log("fulldetails is here", fullDetails);
   // for state preview
   const { data: buyer_State = {}, refetch: fetch } = useQuery({
@@ -23,7 +23,7 @@ const BuyerHome = () => {
       return res.data;
     },
   });
-  console.log(buyer_State);
+  // console.log(buyer_State);
   // for form preview
   useEffect(() => {
     axiosSecure
@@ -42,7 +42,7 @@ const BuyerHome = () => {
   );
   // for aprouve button
   const handleApprove = async (details) => {
-    console.log(details);
+    // console.log(details);
     // axiosSecure.patch("");
     const amount = details.payable_amount;
     const { data } = await axiosSecure.patch(`/approve/${details._id}`, {
@@ -69,7 +69,7 @@ const BuyerHome = () => {
     // console.log(data);
   };
   const handleReject = async (details) => {
-    console.log(details);
+    // console.log(details);
     try {
       const { data } = await axiosSecure.patch(
         `/approve/${details._id}?reject=${true}`
@@ -79,7 +79,7 @@ const BuyerHome = () => {
         refetch();
       }
     } catch (error) {
-      console.log(error);
+      toast.error(error);
     }
   };
   return (

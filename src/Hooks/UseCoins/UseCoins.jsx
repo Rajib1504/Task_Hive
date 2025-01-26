@@ -5,7 +5,7 @@ import UseAuth from "../useAuth/UseAuth";
 const useCoins = () => {
   const axiosSecure = UseAxiosSecure();
   const { user, loading } = UseAuth();
-  console.log(user);
+  // console.log(user);
   const {
     data: coin = 0,
     isLoading,
