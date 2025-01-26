@@ -17,7 +17,7 @@ const Dashbord = () => {
         <div className="lg:w-64 bg-primary   flex-shrink-0">
           <ul className="menu p-4 space-y-2">
             {/* Worker Section */}
-            {role === "worker" && (
+            {role === "Worker" && (
               <div>
                 {" "}
                 <li className="bg-base-200">

@@ -15,12 +15,12 @@ const Login = () => {
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    // console.log(email, password);
+    console.log(email, password);
     login(email, password)
       .then((res) => {
         const olduser = res.user;
         setUser(olduser);
-        // console.log();
+        console.log();
         toast.success(`Login Successfull ${olduser.email}`);
         setLoading(false);
         navigate(from, { replace: true });

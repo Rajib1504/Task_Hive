@@ -5,10 +5,13 @@ import UseAxiosSecure from "../UseAxios/UseAxiosSecure";
 const UseRole = () => {
   const axiosSecure = UseAxiosSecure();
   const { user, loading } = UseAuth();
+  console.log(user);
   const { data: role = "", isLoading } = useQuery({
-    queryKey: ["userRole", user.email],
+    queryKey: ["userRole", user?.email],
+    enabled:
+      !loading && !!user?.email && !!localStorage.getItem("access-token"),
     queryFn: async () => {
-      const res = await axiosSecure(`/userRole/${user.email}`);
+      const res = await axiosSecure(`/userRole/${user?.email}`);
       return res.data.role;
     },
   });
