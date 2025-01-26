@@ -6,6 +6,7 @@ import useCoins from "../../../Hooks/UseCoins/UseCoins";
 import { useQuery } from "@tanstack/react-query";
 const BuyerHome = () => {
   const { user } = UseAuth();
+  console.log(user.email);
   const axiosSecure = UseAxiosSecure();
   const [, , refetch] = useCoins();
   const [Buyer_data, setBuyer_data] = useState([]);
