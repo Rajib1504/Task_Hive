@@ -12,11 +12,8 @@ const BuyerHome = () => {
   const [Buyer_data, setBuyer_data] = useState([]);
   const [pending_tasks, setPending_tasks] = useState(0);
   const [totalPayment, setTotalPayment] = useState(0);
-  const [fullDetails, setFullDetails] = useState([]);
-  // console.log(fullDetails);
-  // console.log("fulldetails is here", fullDetails);
   // for state preview
-  const { data: buyer_State = {}, refetch: fetch } = useQuery({
+  const { data: buyer_State = {}, refetch: fetchState } = useQuery({
     queryKey: ["buyerStates", user.email],
     queryFn: async () => {
       const res = await axiosSecure(`/buyer-stats/${user.email}`);
@@ -25,17 +22,14 @@ const BuyerHome = () => {
   });
   // console.log(buyer_State);
   // for form preview
-  useEffect(() => {
-    axiosSecure
-      .get(`/submitDatas/${user.email}`)
-      .then((res) => {
-        const data = res.data;
-        setFullDetails(data);
-      })
-      .catch((err) => {
-        toast.error(err.message);
-      });
-  }, [axiosSecure, user]);
+
+  const { data: fullDetails = [], refetch: fetchForm } = useQuery({
+    queryKey: ["fulldetails"],
+    queryFn: async () => {
+      const data = await axiosSecure.get(`/submitDatas/${user.email}`);
+      return data.data;
+    },
+  });
   // logic for get the status  === pending
   const pendingStatus = fullDetails.filter(
     (details) => details.status === "pending"
@@ -64,7 +58,8 @@ const BuyerHome = () => {
       // console.log(data);
       toast.success("Task Accpted successfully");
       refetch();
-      fetch();
+      fetchState();
+      fetchForm();
     }
     // console.log(data);
   };
@@ -75,8 +70,23 @@ const BuyerHome = () => {
         `/approve/${details._id}?reject=${true}`
       );
       if (data.modifiedCount) {
+        const workerEmail = details.worker_email;
+        const notificationData = {
+          message: `${details.task_title} has been rejected`,
+          ToEmail: workerEmail,
+          actionRoute: "/dashbord/worker-home",
+          Time: new Date(),
+        };
+
+        const { data } = await axiosSecure.post(
+          "/notification",
+          notificationData
+        );
+
         toast.success("Task Rejected successfully");
         refetch();
+        fetchState();
+        fetchForm();
       }
     } catch (error) {
       toast.error(error);

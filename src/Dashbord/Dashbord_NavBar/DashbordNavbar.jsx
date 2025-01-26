@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import useAxiosPublic from "../../Hooks/UseAxios/useAxiosPublic";
 import UseAuth from "../../Hooks/useAuth/UseAuth";
 import { NavLink } from "react-router-dom";
@@ -7,10 +7,13 @@ import { FaCoins } from "react-icons/fa";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import useCoins from "../../Hooks/UseCoins/UseCoins";
+import UseAxiosSecure from "../../Hooks/UseAxios/UseAxiosSecure";
 
 const DashboardNavbar = () => {
   const { user } = UseAuth();
   const axiosPublic = useAxiosPublic();
+  const axiosSecure = UseAxiosSecure();
+  const [notification, setNotification] = useState([]);
   const [coin] = useCoins();
   // console.log(coin);
   const {
@@ -46,7 +49,11 @@ const DashboardNavbar = () => {
     toast.error("Something went wrong!");
     return null;
   }
-
+  const handleNotification = async () => {
+    const data = await axiosSecure(`/notification/${user?.email}`);
+    setNotification(data.data);
+    console.log(data.data);
+  };
   return (
     <nav className="bg-gradient-to-t from-primary to-secondary shadow-md">
       <div className="flex justify-between items-center px-3 w-full">
@@ -82,28 +89,27 @@ const DashboardNavbar = () => {
           </div>
 
           {/* Notifications Section */}
-          <div className="relative">
-            <IoNotificationsOutline className="lg:text-3xl text-xl md:text-3xl cursor-pointer text-gray-700 hover:text-gray-900 transition duration-200" />
-            <div className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-              3 {/* Example notification count */}
-            </div>
-            {/* Dropdown for Notifications */}
-            <div className="absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-lg border hidden group-hover:block">
-              <ul>
-                <li className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                  New task assigned to you!
-                </li>
-                <li className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                  Payment request approved.
-                </li>
-                <li className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                  5 new messages in chat.
-                </li>
-                <li className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 text-center font-semibold">
-                  View All Notifications
-                </li>
+          <div className="relative" onClick={handleNotification}>
+            <div className="dropdown dropdown-end">
+              <div tabIndex={0} role="button">
+                <IoNotificationsOutline className="lg:text-3xl mt-2 text-xl md:text-3xl cursor-pointer text-gray-700 hover:text-gray-900 transition duration-200" />
+              </div>
+              <ul
+                tabIndex={0}
+                className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
+              >
+                {notification.map((item, idx) => (
+                  <li key={idx}>
+                    <p>{item.message}</p>
+                  </li>
+                ))}
               </ul>
             </div>
+
+            {/* Dropdown for Notifications */}
+            {/* <div className="absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-lg border z-10 group-hover:block">
+              <ul></ul>
+            </div> */}
           </div>
         </div>
       </div>

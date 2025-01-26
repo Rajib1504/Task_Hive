@@ -1,10 +1,10 @@
 import React from "react";
-import SectionTitle from "./../../../Home/Shared/SectionTitle/SectionTitle";
 import UseAxiosSecure from "../../../Hooks/UseAxios/UseAxiosSecure";
 import UseAuth from "../../../Hooks/useAuth/UseAuth";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../../../Loading/Loading";
 import { toast } from "react-toastify";
+import DashbordTitle from "../../../Home/Shared/SectionTitle/DashbordTitle";
 
 const PaymentHistory = () => {
   const axiosSecure = UseAxiosSecure();
@@ -31,7 +31,7 @@ const PaymentHistory = () => {
   // console.log(Payments);
   return (
     <div>
-      <SectionTitle heading={"Payment History"}></SectionTitle>
+      <DashbordTitle heading={"Payment History"}></DashbordTitle>
       <div>
         {/* table section for payment history  */}
         {/* table section  */}
