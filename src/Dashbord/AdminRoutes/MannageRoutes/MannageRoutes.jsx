@@ -47,7 +47,8 @@ const MannageRoutes = () => {
           .delete(`/user/${id}`)
           .then((res) => {
             const success = res.data;
-            console.log(success);
+            // console.log(success);
+            refetch();
             if (success.deletedCount > 0) {
               return Swal.fire({
                 title: "Deleted!",

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { data, Link, useNavigate } from "react-router-dom";
 import UseAuth from "../../Hooks/useAuth/UseAuth";
 import { toast } from "react-toastify";
@@ -8,10 +8,12 @@ import { imgUpload } from "../../Utils/Utils";
 
 const Register = () => {
   const [, , refetch] = useCoins();
+  const [loading, setLoading] = useState(false);
   const { setUser, register, updateUserProfile } = UseAuth();
   const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
   const handleRegister = async (e) => {
+    setLoading(true);
     e.preventDefault();
     const form = e.target;
     const name = form.name.value;
@@ -45,10 +47,12 @@ const Register = () => {
               if (res.data.insertedId) {
                 console.log("user created to the database");
                 toast.success(`Registerd by ${newUser.email}`);
+                setLoading(false);
                 refetch();
                 navigate("/");
               } else if (res.data.message === "user already exist") {
                 toast.error("User already exists with this email.");
+                setLoading(false);
               }
             });
           });
@@ -57,6 +61,7 @@ const Register = () => {
         .catch((err) => {
           const error = err.message;
           toast.error(`oops! ${error}`);
+          setLoading(false);
         });
     }
   };
@@ -160,7 +165,11 @@ const Register = () => {
               type="submit"
               className="w-full px-4 py-2 mt-4 text-white bg-gradient-to-r from-buttonColor to-secondary rounded-lg hover:from-secondary hover:to-buttonColor transform hover:scale-105 transition duration-300 ease-in-out hover:shadow-lg focus:outline-none"
             >
-              Submit
+              {loading ? (
+                <span className="loading loading-spinner text-white"></span>
+              ) : (
+                <p>Submit</p>
+              )}
             </button>
           </form>
 
