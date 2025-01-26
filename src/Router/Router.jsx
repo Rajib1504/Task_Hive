@@ -21,6 +21,8 @@ import TaskDetails from "../Dashbord/Worker/TaskList/TaskDetails";
 import Payment from "../Dashbord/Payment/Payment";
 import Adminroute from "./Private/Adminroute";
 import Errror from "../Pages/ErrorPage/Errror";
+import WorkerRoute from "./Private/WorkerRoute";
+import BuyerRoute from "./Private/BuyerRoute";
 
 const Router = createBrowserRouter([
   {
@@ -54,66 +56,151 @@ const Router = createBrowserRouter([
     children: [
       {
         path: "workerHome",
-        element: <WorkerHome></WorkerHome>,
+        element: (
+          <PrivateRoute>
+            <WorkerRoute>
+              <WorkerHome></WorkerHome>
+            </WorkerRoute>
+          </PrivateRoute>
+        ),
       },
       {
         path: "taskList",
-        element: <TaskList></TaskList>,
+        element: (
+          <PrivateRoute>
+            <WorkerRoute>
+              <TaskList></TaskList>
+            </WorkerRoute>
+          </PrivateRoute>
+        ),
       },
       {
         path: "taskDetails/:id",
-        element: <TaskDetails></TaskDetails>,
+        element: (
+          <PrivateRoute>
+            <WorkerRoute>
+              <TaskDetails></TaskDetails>
+            </WorkerRoute>
+          </PrivateRoute>
+        ),
       },
       {
         path: "submission",
-        element: <Subbmissions></Subbmissions>,
+        element: (
+          <PrivateRoute>
+            <WorkerRoute>
+              <TaskDetails></TaskDetails>
+            </WorkerRoute>
+          </PrivateRoute>
+        ),
       },
       {
         path: "withdrawals",
-        element: <Withdrawals></Withdrawals>,
+        element: (
+          <PrivateRoute>
+            <WorkerRoute>
+              {" "}
+              <Withdrawals></Withdrawals>
+            </WorkerRoute>
+          </PrivateRoute>
+        ),
       },
       // buyer routes
       {
         path: "buyerHome",
-        element: <BuyerHome></BuyerHome>,
+        element: (
+          <PrivateRoute>
+            <BuyerRoute>
+              <BuyerHome></BuyerHome>
+            </BuyerRoute>
+          </PrivateRoute>
+        ),
       },
       {
         path: "addNewTask",
-        element: <AddNewTask></AddNewTask>,
+        element: (
+          <PrivateRoute>
+            <BuyerRoute>
+              {" "}
+              <AddNewTask></AddNewTask>
+            </BuyerRoute>
+          </PrivateRoute>
+        ),
       },
       {
         path: "myTasks",
-        element: <MyTasks></MyTasks>,
+        element: (
+          <PrivateRoute>
+            <BuyerRoute>
+              <MyTasks></MyTasks>
+            </BuyerRoute>
+          </PrivateRoute>
+        ),
       },
       {
         path: "purchaseCoins",
-        element: <PurchaseCoins></PurchaseCoins>,
+        element: (
+          <PrivateRoute>
+            <BuyerRoute>
+              {" "}
+              <PurchaseCoins></PurchaseCoins>
+            </BuyerRoute>
+          </PrivateRoute>
+        ),
       },
       {
         path: "paymentHistory",
-        element: <PaymentHistory></PaymentHistory>,
+        element: (
+          <PrivateRoute>
+            <BuyerRoute>
+              <PaymentHistory></PaymentHistory>
+            </BuyerRoute>
+          </PrivateRoute>
+        ),
       },
       // admin routes
       {
         path: "adminHome",
         element: (
-          // <Adminroute>
-          <AdminHome></AdminHome>
-          // </Adminroute>
+          <PrivateRoute>
+            <Adminroute>
+              <AdminHome></AdminHome>
+            </Adminroute>
+          </PrivateRoute>
         ),
       },
       {
         path: "mannageRoutes",
-        element: <MannageRoutes></MannageRoutes>,
+        element: (
+          <PrivateRoute>
+            <Adminroute>
+              {" "}
+              <MannageRoutes></MannageRoutes>
+            </Adminroute>
+          </PrivateRoute>
+        ),
       },
       {
         path: "mannageTasks",
-        element: <MannageTasks></MannageTasks>,
+        element: (
+          <PrivateRoute>
+            <Adminroute>
+              <MannageTasks></MannageTasks>
+            </Adminroute>
+          </PrivateRoute>
+        ),
       },
       // payment
       {
         path: "payment",
-        element: <Payment></Payment>,
+        element: (
+          <PrivateRoute>
+            <Adminroute>
+              {" "}
+              <Payment></Payment>
+            </Adminroute>
+          </PrivateRoute>
+        ),
       },
     ],
   },
