@@ -1,14 +1,16 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import UseAuth from "../../Hooks/useAuth/UseAuth";
 import { toast } from "react-toastify";
+import { useState } from "react";
 
 const Login = () => {
   const { user, setUser, login, googleSignin } = UseAuth();
-  // console.log(user);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   let from = location?.state?.from?.pathname || "/dashbord";
   const handleLogin = (e) => {
+    setLoading(true);
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
@@ -20,12 +22,13 @@ const Login = () => {
         setUser(olduser);
         console.log();
         toast.success(`Login Successfull ${olduser.email}`);
-
+        setLoading(false);
         navigate(from, { replace: true });
       })
       .catch((err) => {
         const errormessage = err.message;
         toast.error(`Opps ! ${errormessage}`);
+        setLoading(false);
       });
   };
   const handelGoogle = () => {
@@ -34,12 +37,15 @@ const Login = () => {
         const googleUser = res.user;
         setUser(googleUser);
         toast.success(`Login Successfull ${googleUser.email}`);
+        setLoading(false);
+
         navigate("/");
       })
       .catch((err) => {
         const errorM = err.message;
-        console.log(errorM);
+        // console.log(errorM);
         toast.error(`Opps! ${errorM}`);
+        setLoading(false);
       });
   };
   return (
@@ -99,7 +105,11 @@ const Login = () => {
               className="w-full px-4 py-2 mt-4 text-white bg-gradient-to-r from-buttonColor to-secondary rounded-lg hover:from-secondary hover:to-buttonColor transform hover:scale-105 transition duration-300 ease-in-out hover:shadow-lg focus:outline-none
       "
             >
-              Login
+              {loading ? (
+                <span className="loading loading-spinner text-white"></span>
+              ) : (
+                <p>Loading</p>
+              )}
             </button>
           </form>
           {/* Google Login Button */}
