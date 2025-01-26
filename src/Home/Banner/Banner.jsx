@@ -23,12 +23,18 @@ const Banner = () => {
       className="mySwiper"
     >
       <SwiperSlide className="">
-        <div className="relative  ">
+        <div
+          className="relative"
+          // style={{
+          //   backgroundImage: `linear-gradient(0deg, black,transparent), url(${latest_article?.image})`,
+          // }}
+        >
           <img
             src="https://i.ibb.co/WVfQvkz/banner-1-11zon.jpg"
             alt="image"
             className="w-full object-center h-64 sm:h-80 md:h-96 lg:h-[500px] object-cover"
           />
+
           <div className="absolute inset-0 bg-gradient-to-r from-primary opacity-40 to-transparent"></div>
           <div className="absolute top-1/2 left-10 transform -translate-y-[50%] text-left text-white">
             <h2 className="text-xl sm:text-2xl lg:text-4xl font-bold">
