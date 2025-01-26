@@ -6,7 +6,6 @@ import { toast } from "react-toastify";
 import UseAuth from "../../../Hooks/useAuth/UseAuth";
 import { useNavigate } from "react-router-dom";
 import useCoins from "../../../Hooks/UseCoins/UseCoins";
-import Loading from "../../../Loading/Loading";
 const AddNewTask = () => {
   const [coin, , refetch] = useCoins();
   const axiosPublic = useAxiosPublic();
@@ -22,9 +21,7 @@ const AddNewTask = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  if (loading) {
-    <Loading></Loading>;
-  }
+
   const onSubmit = async (data) => {
     // console.log(data);
     // calculation for coins
@@ -96,6 +93,7 @@ const AddNewTask = () => {
       <div className="shadow-md rounded-md bg-base-200 mx-auto max-w-xl p-4">
         <form onSubmit={handleSubmit(onSubmit)}>
           {/* title  */}
+
           <div className="flex flex-col gap-2">
             <label htmlFor="Title" className="font-semibold">
               Task_title
@@ -220,10 +218,16 @@ const AddNewTask = () => {
           </div>
           {/* submit button  */}
           <div className="flex justify-center mt-4">
-            <input
-              className="btn border-borderColor border-2 bg-primary  w-11/12"
-              type="submit"
-            />
+            {loading ? (
+              <div className="btn border-borderColor border-2 bg-primary  w-11/12">
+                <span className="loading loading-spinner text-info"></span>
+              </div>
+            ) : (
+              <input
+                className="btn border-borderColor border-2 bg-primary  w-11/12"
+                type="submit"
+              />
+            )}
           </div>
         </form>
       </div>

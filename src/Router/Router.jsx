@@ -46,7 +46,7 @@ const Router = createBrowserRouter([
   },
   // dashbord
   {
-    path: "dashbord",
+    path: "/dashbord",
     errorElement: <Errror></Errror>,
     element: (
       <PrivateRoute>
@@ -54,12 +54,12 @@ const Router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
+      // {
+      //   path: "/dashbord",
+      //   // element: <Navigate to={"/dashbord/workerHome"} replace></Navigate>,
+      // },
       {
-        path: "/dashbord",
-        element: <Navigate to={"/dashbord/workerHome"} replace></Navigate>,
-      },
-      {
-        path: "workerHome",
+        path: "/dashbord/workerHome",
         element: (
           <PrivateRoute>
             <WorkerRoute>
@@ -69,7 +69,7 @@ const Router = createBrowserRouter([
         ),
       },
       {
-        path: "taskList",
+        path: "/dashbord/taskList",
         element: (
           <PrivateRoute>
             <WorkerRoute>
@@ -79,7 +79,7 @@ const Router = createBrowserRouter([
         ),
       },
       {
-        path: "taskDetails/:id",
+        path: "/dashbord/taskDetails/:id",
         element: (
           <PrivateRoute>
             <WorkerRoute>
@@ -89,7 +89,7 @@ const Router = createBrowserRouter([
         ),
       },
       {
-        path: "submission",
+        path: "/dashbord/submission",
         element: (
           <PrivateRoute>
             <WorkerRoute>
