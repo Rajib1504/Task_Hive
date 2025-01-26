@@ -8,7 +8,6 @@ import PrivateRoute from "./Private/PrivateRoute";
 import WorkerHome from "../Dashbord/Worker/Worker HOme/WorkerHome";
 import PaymentHistory from "../Dashbord/BuyerRoute/PaymentHistory/PaymentHistory";
 import TaskList from "../Dashbord/Worker/TaskList/TaskList";
-import Subbmissions from "../Dashbord/Worker/Submissions/Subbmissions";
 import Withdrawals from "./../Dashbord/Worker/Withdrawals/Withdrawals";
 import BuyerHome from "../Dashbord/BuyerRoute/BuyerHome/BuyerHome";
 import AddNewTask from "../Dashbord/BuyerRoute/AddTask/AddNewTask";
@@ -23,6 +22,7 @@ import Adminroute from "./Private/Adminroute";
 import Errror from "../Pages/ErrorPage/Errror";
 import WorkerRoute from "./Private/WorkerRoute";
 import BuyerRoute from "./Private/BuyerRoute";
+import Subbmissions from "./../Dashbord/Worker/Submissions/Subbmissions";
 
 const Router = createBrowserRouter([
   {
@@ -89,7 +89,7 @@ const Router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <WorkerRoute>
-              <TaskDetails></TaskDetails>
+              <Subbmissions></Subbmissions>
             </WorkerRoute>
           </PrivateRoute>
         ),
@@ -193,14 +193,7 @@ const Router = createBrowserRouter([
       // payment
       {
         path: "payment",
-        element: (
-          <PrivateRoute>
-            <Adminroute>
-              {" "}
-              <Payment></Payment>
-            </Adminroute>
-          </PrivateRoute>
-        ),
+        element: <Payment></Payment>,
       },
     ],
   },
