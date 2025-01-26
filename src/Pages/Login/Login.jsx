@@ -2,13 +2,13 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import UseAuth from "../../Hooks/useAuth/UseAuth";
 import { toast } from "react-toastify";
 import { useState } from "react";
-
+import useAxiosPublic from "../../Hooks/UseAxios/useAxiosPublic";
 const Login = () => {
   const { user, setUser, login, googleSignin } = UseAuth();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const location = useLocation();
-  let from = location?.state?.from?.pathname || "/dashbord";
+  const axiosPublic = useAxiosPublic();
+  // let from = location?.state?.from?.pathname || "/dashbord";
   const handleLogin = (e) => {
     setLoading(true);
     e.preventDefault();
@@ -20,10 +20,29 @@ const Login = () => {
       .then((res) => {
         const olduser = res.user;
         setUser(olduser);
-        console.log();
-        toast.success(`Login Successfull ${olduser.email}`);
-        setLoading(false);
-        navigate(from, { replace: true });
+        axiosPublic
+          .get(`/myRole/${res.user.email}`)
+          .then((res) => {
+            const role = res.data.role;
+            console.log(role);
+            // Handle role logic
+
+            if (role === "Worker") {
+              navigate("/dashbord/workerHome");
+            } else if (role === "Buyer") {
+              navigate("/dashbord/buyerHome");
+            } else if (role === "Admin") {
+              navigate("/dashbord/adminHome");
+            }
+            toast.success(`Login Successfull ${olduser.email}`);
+            setLoading(false);
+          })
+          .catch((err) => {
+            toast.error("Failed to fetch role");
+            console.error(err);
+          });
+
+        // navigate("/dashbord");
       })
       .catch((err) => {
         const errormessage = err.message;

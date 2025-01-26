@@ -5,7 +5,7 @@ import { NavLink, Outlet } from "react-router-dom";
 import UseRole from "../Hooks/UseRole/UseRole";
 
 const Dashbord = () => {
-  const [role] = UseRole();
+  const [role, isLoading] = UseRole();
   return (
     <div className="min-h-screen flex flex-col">
       {/* Navbar */}
@@ -17,7 +17,9 @@ const Dashbord = () => {
         <div className="lg:w-64 bg-primary   flex-shrink-0">
           <ul className="menu p-4 space-y-2">
             {/* Worker Section */}
-            {role === "Worker" && (
+            {isLoading ? (
+              <li>Loading menu...</li>
+            ) : role === "Worker" ? (
               <div>
                 {" "}
                 <li className="bg-base-200">
@@ -33,9 +35,7 @@ const Dashbord = () => {
                   <NavLink to={"/dashbord/withdrawals"}>Withdrawals</NavLink>
                 </li>
               </div>
-            )}
-
-            {role === "Buyer" && (
+            ) : role === "Buyer" ? (
               <div>
                 {/* Buyer Section */}
                 <li className="bg-base-200">
@@ -58,9 +58,7 @@ const Dashbord = () => {
                   </NavLink>
                 </li>
               </div>
-            )}
-
-            {role === "Admin" && (
+            ) : (
               <div>
                 {/* Admin Section */}
 

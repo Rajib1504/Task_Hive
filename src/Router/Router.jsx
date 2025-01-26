@@ -55,7 +55,7 @@ const Router = createBrowserRouter([
     ),
     children: [
       {
-        path: "/dashbord/workerHome",
+        path: "workerHome",
         element: (
           <WorkerRoute>
             <WorkerHome></WorkerHome>

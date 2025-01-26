@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import UseAuth from "./../useAuth/UseAuth";
 const axiosSecure = axios.create({
-  baseURL: "https://task-hive-server-ten.vercel.app",
+  baseURL: "http://localhost:5000",
 });
 const UseAxiosSecure = () => {
   const { logOut } = UseAuth();
