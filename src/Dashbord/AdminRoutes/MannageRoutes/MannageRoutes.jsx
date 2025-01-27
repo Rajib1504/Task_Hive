@@ -59,7 +59,7 @@ const MannageRoutes = () => {
           })
           .catch((error) => {
             const errorme = error.message;
-            console.log(errorme);
+            // console.log(errorme);
             toast.error(errorme);
             return null;
           });

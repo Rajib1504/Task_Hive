@@ -52,7 +52,7 @@ const DashboardNavbar = () => {
   const handleNotification = async () => {
     const data = await axiosSecure(`/notification/${user?.email}`);
     setNotification(data.data);
-    console.log(data.data);
+    // console.log(data.data);
   };
   return (
     <nav className="bg-gradient-to-t from-primary to-secondary shadow-md">

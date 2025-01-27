@@ -24,7 +24,7 @@ const Login = () => {
           .get(`/myRole/${res.user.email}`)
           .then((res) => {
             const role = res.data.role;
-            console.log(role);
+            // console.log(role);
             // Handle role logic
 
             if (role === "Worker") {
