@@ -6,6 +6,7 @@ import TotalWork from "../TotalWork/TotalWork";
 import HappyWork from "../Happy work/HappyWork";
 import Testimonials from "../Testimonials/Testimonials";
 import Location from "../Location/Location";
+import Refferal from "../Refferal/Refferal";
 
 const Home = () => {
   return (
@@ -18,6 +19,8 @@ const Home = () => {
       <TotalWork></TotalWork>
       {/* best worker section  */}
       <BestWorkers></BestWorkers>
+      {/* refferal section  */}
+      <Refferal/>
       {/* faq section  */}
       <FaqSection></FaqSection>
       {/* Testimonal section  */}

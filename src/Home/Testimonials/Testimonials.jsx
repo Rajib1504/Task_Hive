@@ -28,7 +28,7 @@ const Testimonials = () => {
           subHeading={"---What Our Clients Say---"}
           heading={"TESTIMONIALS"}
         ></SectionTitle>
-        <div className="my-20">
+        <div className="mb-20">
           <Swiper
             slidesPerView={1}
             spaceBetween={30}
