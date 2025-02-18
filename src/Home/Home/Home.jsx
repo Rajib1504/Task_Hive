@@ -5,6 +5,7 @@ import FaqSection from "../FaqSection/FaqSection";
 import TotalWork from "../TotalWork/TotalWork";
 import HappyWork from "../Happy work/HappyWork";
 import Testimonials from "../Testimonials/Testimonials";
+import Location from "../Location/Location";
 
 const Home = () => {
   return (
@@ -21,6 +22,8 @@ const Home = () => {
       <FaqSection></FaqSection>
       {/* Testimonal section  */}
       <Testimonials></Testimonials>
+      {/* location  */}
+      <Location/>
     </div>
   );
 };
