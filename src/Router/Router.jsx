@@ -24,6 +24,7 @@ import WorkerRoute from "./Private/WorkerRoute";
 import BuyerRoute from "./Private/BuyerRoute";
 import Subbmissions from "./../Dashbord/Worker/Submissions/Subbmissions";
 import Blog from './../Pages/Blog/Blog';
+import Team from "../Pages/Team/Team";
 
 const Router = createBrowserRouter([
   {
@@ -49,6 +50,11 @@ const Router = createBrowserRouter([
 
     path:'/blog',
     element:<Blog/>
+  },
+  {
+
+    path:'/team',
+    element:<Team/>
   },
   // dashbord
   {
