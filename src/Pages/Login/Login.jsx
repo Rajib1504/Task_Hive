@@ -70,6 +70,7 @@ const Login = () => {
   return (
     <>
       <div className="flex items-center min-h-screen justify-center pt-2 pb-4 sm:pt-4 bg-gradient-to-bl from-primary">
+        
         <div className="w-full max-w-md p-6 bg-gradient-to-tl from-primary rounded-lg shadow-md">
           <h2 className="text-3xl font-bold text-center text-gray-800 mb-4">
             Login

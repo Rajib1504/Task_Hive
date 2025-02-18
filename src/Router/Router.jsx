@@ -23,6 +23,7 @@ import Errror from "../Pages/ErrorPage/Errror";
 import WorkerRoute from "./Private/WorkerRoute";
 import BuyerRoute from "./Private/BuyerRoute";
 import Subbmissions from "./../Dashbord/Worker/Submissions/Subbmissions";
+import Blog from './../Pages/Blog/Blog';
 
 const Router = createBrowserRouter([
   {
@@ -43,6 +44,11 @@ const Router = createBrowserRouter([
         element: <Register></Register>,
       },
     ],
+  },
+  {
+
+    path:'/blog',
+    element:<Blog/>
   },
   // dashbord
   {

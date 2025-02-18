@@ -32,6 +32,12 @@ const Navbar = () => {
       {!user && (
         <>
           <li>
+            <NavLink to={"/"}>Home</NavLink>
+          </li>
+          <li>
+            <NavLink to={"/blog"}>Blogs</NavLink>
+          </li>
+          <li>
             <NavLink to={"/login"}>Login</NavLink>
           </li>
           <li>
@@ -44,6 +50,9 @@ const Navbar = () => {
         <>
           {" "}
           <li>
+            <NavLink to={"/"}>Home</NavLink>
+          </li>
+          <li>
             <NavLink
               to={`${
                 (role === "Worker" && "/dashbord/workerHome") ||
@@ -53,6 +62,9 @@ const Navbar = () => {
             >
               Dashboard
             </NavLink>
+          </li>
+          <li>
+            <NavLink to={"/blog"}>Blogs</NavLink>
           </li>
         </>
       )}
@@ -75,7 +87,7 @@ const Navbar = () => {
   // }, [user?.email]);
 
   return (
-    <div className="z-50 sticky top-0 ">
+    <div className="z-50 container sticky top-0 ">
       <div className="navbar bg-primary">
         <div className="navbar-start">
           <div className="dropdown">
@@ -86,7 +98,7 @@ const Navbar = () => {
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 mb-2"
+                className="h-5 w-5 "
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -109,13 +121,13 @@ const Navbar = () => {
           {user ? (
             <>
               <div className="flex  justify-center items-center">
-                <NavLink to={"/"} className="flex justify-center items-center">
+                <NavLink to={"/"} className="flex  justify-center items-center">
                   <img
                     src="https://i.ibb.co/LkNYRKf/Black-and-White-Minimalist-Professional-Initial-Logo-removebg-preview.png"
-                    className="lg:h-16 lg:w-16 h-10 w-10"
+                    className="lg:h-16 lg:w-16  h-10 w-10"
                     alt=""
                   />
-                  <p className=" hidden md:block lg:block md:text-2xl lg:text-2xl font-bold ">
+                  <p className=" hidden md:block  lg:block md:text-2xl lg:text-2xl font-bold ">
                     {" "}
                     Task Hive
                   </p>
@@ -152,13 +164,13 @@ const Navbar = () => {
               <div className=" hidden lg:flex">
             <ul className="menu menu-horizontal px-1">{link}</ul>
           </div>
-            <button className="flex btn btn-sm justify-center items-center">
+            <button className="flex btn btn-xs lg:btn-sm md:btn-sm justify-center items-center">
               <HiCurrencyDollar className="text-yellow-400 text-2xl" />
               {coin}
             </button>
             <button
               onClick={SignOut}
-              className="btn lg:btn-ghost btn-sm  border-borderColor text-red-300 "
+              className="btn lg:btn-ghost btn-xs md:btn-sm  border-borderColor text-red-300 "
             >
               log out
             </button>
