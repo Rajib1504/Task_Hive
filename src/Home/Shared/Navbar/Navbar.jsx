@@ -138,17 +138,20 @@ const Navbar = () => {
             </>
           )}
         </div>
-        {user ? (
-          <div className="navbar-center hidden lg:flex">
-            <ul className="menu menu-horizontal px-1">{link}</ul>
-          </div>
-        ) : (
+        {!user && 
+          // <div className="navbar-center  hidden lg:flex">
+          //   <ul className="menu menu-horizontal px-1">{link}</ul>
+          // </div>
+       (
           <div className="navbar-end hidden lg:flex">
             <ul className="menu menu-horizontal px-1">{link}</ul>
           </div>
         )}
         {user && (
           <div className="navbar-end flex gap-2 ">
+              <div className=" hidden lg:flex">
+            <ul className="menu menu-horizontal px-1">{link}</ul>
+          </div>
             <button className="flex btn btn-sm justify-center items-center">
               <HiCurrencyDollar className="text-yellow-400 text-2xl" />
               {coin}
