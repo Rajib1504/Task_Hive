@@ -133,6 +133,7 @@ const Login = () => {
             </button>
           </form>
           {/* Google Login Button */}
+         <p className="text-red-400 text-sm mt-2">Register first if you don't have an account</p> 
           <button
             onClick={handelGoogle}
             className="w-full px-4 py-2 mt-4 text-gray-700 border  bg-secondary hover:from-secondary hover:to-buttonColor transform hover:scale-105 transition duration-300 ease-in rounded-lg focus:outline-none"

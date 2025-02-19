@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { FaListAlt, FaClock, FaDollarSign } from 'react-icons/fa';
 import UseAuth from "./../../../Hooks/useAuth/UseAuth";
 import UseAxiosSecure from "./../../../Hooks/UseAxios/UseAxiosSecure";
 import { toast } from "react-toastify";
@@ -22,7 +23,7 @@ const BuyerHome = () => {
       return res.data;
     },
   });
-  // console.log(buyer_State);
+  console.log(buyer_State);
   // for form preview
 
   const { data: fullDetails = [], refetch: fetchForm } = useQuery({
@@ -96,29 +97,57 @@ const BuyerHome = () => {
       toast.error(error);
     }
   };
+  // chart  
+  const chart = [
+    { name: "Total Purchase", value:buyer_State .pendingTaskCount },
+    { name: "Total Task", value: buyer_State.totalPayment },
+    { name: "Submissions", value: buyer_State.totalTaskCount }
+  ];
   return (
     <>
-      {/* buyer state section  */}
-      <div className="flex justify-around items-center">
-        <div className="flex justify-center items-center">
-          <h2 className="font-bold lg:text-2xl">
-            My Total Tasks:
-            <span className="ml-3">{buyer_State.totalTaskCount}</span>
-          </h2>
-        </div>
-        <div className="flex justify-center items-center">
-          <h2 className="font-bold lg:text-2xl">
-            Pendding Tasks:
-            <span className="ml-3">{buyer_State.pendingTaskCount}</span>
-          </h2>
-        </div>
-        <div className="flex justify-center items-center">
-          <h2 className="font-bold lg:text-2xl">
-            My Total Payment:
-            <span className="ml-3">${buyer_State.totalPayments}</span>
-          </h2>
-        </div>
-      </div>
+    
+
+{/* buyer state section */}
+<div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+  {/* Total Tasks Card */}
+  <div className="flex items-center p-6 bg-white rounded-lg shadow-sm border-l-4 border-blue-500">
+    <div className="p-3 mr-4 bg-blue-500 text-white rounded-full">
+      <FaListAlt className="w-8 h-8" />
+    </div>
+    <div>
+      <p className="mb-2 text-sm font-medium text-gray-600">Total Tasks</p>
+      <p className="text-2xl font-semibold text-gray-700">
+        {buyer_State.totalTaskCount}
+      </p>
+    </div>
+  </div>
+
+  {/* Pending Tasks Card */}
+  <div className="flex items-center p-6 bg-white rounded-lg shadow-sm border-l-4 border-yellow-500">
+    <div className="p-3 mr-4 bg-yellow-500 text-white rounded-full">
+      <FaClock className="w-8 h-8" />
+    </div>
+    <div>
+      <p className="mb-2 text-sm font-medium text-gray-600">Pending Tasks</p>
+      <p className="text-2xl font-semibold text-gray-700">
+        {buyer_State.pendingTaskCount}
+      </p>
+    </div>
+  </div>
+
+  {/* Total Payment Card */}
+  <div className="flex items-center p-6 bg-white rounded-lg shadow-sm border-l-4 border-green-500">
+    <div className="p-3 mr-4 bg-green-500 text-white rounded-full">
+      <FaDollarSign className="w-8 h-8" />
+    </div>
+    <div>
+      <p className="mb-2 text-sm font-medium text-gray-600">Total Payment</p>
+      <p className="text-2xl font-semibold text-gray-700">
+        ${buyer_State.totalPayments}
+      </p>
+    </div>
+  </div>
+</div>
       {/* Buyer form with submition details   */}
       <div className="overflow-x-auto mt-2 sm:mt-4">
         <table className="table">
