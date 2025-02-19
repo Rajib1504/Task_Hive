@@ -25,6 +25,7 @@ import BuyerRoute from "./Private/BuyerRoute";
 import Subbmissions from "./../Dashbord/Worker/Submissions/Subbmissions";
 import Blog from './../Pages/Blog/Blog';
 import CareersPage from "../Pages/CareersPage/CareersPage";
+import Profile from "../Dashbord/Profile/Profile";
 
 const Router = createBrowserRouter([
   {
@@ -67,6 +68,12 @@ const Router = createBrowserRouter([
     ),
     children: [
       {
+        path: "profile",
+        element: (
+            <Profile/>
+        ),
+      },
+      {
         path: "workerHome",
         element: (
           <WorkerRoute>
@@ -74,6 +81,7 @@ const Router = createBrowserRouter([
           </WorkerRoute>
         ),
       },
+    
       {
         path: "/dashbord/taskList",
         element: (

@@ -32,6 +32,9 @@ const Dashbord = () => {
                       <NavLink to={"/dashbord/workerHome"}>Worker Home</NavLink>
                     </li>
                     <li className="bg-base-200">
+                      <NavLink to={"/dashbord/profile"}>Profile</NavLink>
+                    </li>
+                    <li className="bg-base-200">
                       <NavLink to={"/dashbord/taskList"}>Task List</NavLink>
                     </li>
                     <li className="bg-base-200">
@@ -50,6 +53,9 @@ const Dashbord = () => {
                     {/* Buyer Section */}
                     <li className="bg-base-200">
                       <NavLink to={"/dashbord/buyerHome"}>Buyer Home</NavLink>
+                    </li>
+                    <li className="bg-base-200">
+                      <NavLink to={"/dashbord/profile"}>Profile</NavLink>
                     </li>
                     <li className="bg-base-200">
                       <NavLink to={"/dashbord/addNewTask"}>
@@ -79,6 +85,9 @@ const Dashbord = () => {
                       <NavLink to={"/dashbord/adminHome"}>Admin Home</NavLink>
                     </li>
                     <li className="bg-base-200">
+                      <NavLink to={"/dashbord/profile"}>Profile</NavLink>
+                    </li>
+                    <li className="bg-base-200">
                       <NavLink to={"/dashbord/mannageRoutes"}>
                         Manage Users
                       </NavLink>
@@ -96,7 +105,7 @@ const Dashbord = () => {
         </div>
 
         {/* Main Content Area */}
-        <div className="flex-1 overflow-auto bg-gray-50 sm:p-6">
+        <div className="flex-1 min-h-screen overflow-auto bg-gray-50 sm:p-6">
           <Outlet />
         </div>
       </div>
