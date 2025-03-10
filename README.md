@@ -6,7 +6,7 @@
 
 ---
 
-## 🚀 Project Overview
+## 🚀 Project Overview 
 
 **TaskHive** is a full-stack micro-task and earning platform designed to connect Workers and Buyers. The platform allows Workers to complete small tasks and earn money, while Buyers can post tasks and request workers. TaskHive incorporates a coin-based payment system, payment gateway integration via **Stripe**, role-based access control, and real-time notifications to ensure a smooth user experience.
 
