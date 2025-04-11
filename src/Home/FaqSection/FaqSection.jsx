@@ -8,7 +8,7 @@ const FaqSection = () => {
         subHeading={"Find answers to common questions about using TaskHive."}
       ></SectionTitle>
       <div className="flex justify-center">
-        <div className="join join-vertical w-full lg:w-11/12 mx-auto">
+        <div className="join join-vertical w-11/12 mx-auto">
           <div className="collapse collapse-arrow join-item">
             <input type="radio" name="my-accordion-4" defaultChecked />
             <div className="collapse-title text-lg md:text-2xl font-bold">

@@ -93,8 +93,8 @@ const Navbar = () => {
   // }, [user?.email]);
 
   return (
-    <div className="z-50 container sticky top-0 ">
-      <div className="navbar bg-primary">
+    <div className="z-50  bg-primary sticky top-0 ">
+      <div className="navbar px-0 w-11/12 mx-auto ">
         <div className="navbar-start">
           <div className="dropdown">
             <div
@@ -127,10 +127,10 @@ const Navbar = () => {
           {user ? (
             <>
               <div className="flex  justify-center items-center">
-                <NavLink to={"/"} className="flex  justify-center items-center">
+                <NavLink to={"/"} className="flex justify-center items-center">
                   <img
                     src="https://i.ibb.co/LkNYRKf/Black-and-White-Minimalist-Professional-Initial-Logo-removebg-preview.png"
-                    className="lg:h-16 lg:w-16  h-10 w-10"
+                    className="lg:h-16 lg:w-16 rounded-full  p-0 m-0 h-10 w-10"
                     alt=""
                   />
                   <p className=" hidden md:block  lg:block md:text-2xl lg:text-2xl font-bold ">

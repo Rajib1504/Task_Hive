@@ -10,7 +10,7 @@ const Location = () => {
   }, []);
 
   return (
-    <section className="w-full lg:w-11/12 mx-auto my-12">
+    <section className="w-11/12 p-4 mx-auto my-12">
        <SectionTitle
         heading={"Expand Your Reach with Us"}
         subHeading={"Work from Anywhere, Anytime – Connect with Global Clients Today!"}
@@ -27,7 +27,7 @@ const Location = () => {
 
         {/* Right Side - Content */}
         <div data-aos="fade-left">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-800">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-800">
             Work from Anywhere, Anytime!
           </h2>
           <p className="text-gray-600 mt-4">
@@ -39,7 +39,7 @@ const Location = () => {
             <li>💰 Payments in multiple currencies</li>
             <li>⚡ Instant task access from any device</li>
           </ul>
-          <Link to={'/career'} button className=" bg-blue-600 text-white py-2 px-6 rounded-lg shadow-md hover:bg-blue-700 transition">
+          <Link to={'/career'} button className=" bg-buttonColor text-white py-2 px-6 rounded-lg shadow-md hover:bg-buttonHover transition">
             Get Started
           </Link>
         </div>

@@ -5,7 +5,10 @@ import { FaArrowRight, FaMoneyBill } from "react-icons/fa";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
+import UseRole from "../../Hooks/UseRole/UseRole";
 const FeaturedBenefits = () => {
+  const [role] = UseRole();
   useEffect(() => {
     AOS.init({
       duration: 1000,
@@ -20,7 +23,7 @@ const FeaturedBenefits = () => {
           "Empowering your journey to success with seamless management, trust, and secure Payment."
         }
       ></SectionTitle>
-      <div className="w-full md:w-2/3 mx-auto">
+      <div className="w-full md:w-11/12 p-4 mx-auto">
         <div className="py-14">
           <div
             className="bg-primary rounded-lg shadow-xl py-10 px-6"
@@ -30,7 +33,7 @@ const FeaturedBenefits = () => {
             <div className="container mx-auto flex flex-col lg:flex-row items-center lg:justify-between">
               {/* Left Side Content */}
               <div
-                className="w-full md:max-w-lg"
+                className="w-full "
                 data-aos="slide-right"
                 data-aos-delay="300"
               >
@@ -70,14 +73,18 @@ const FeaturedBenefits = () => {
                   </li>
                 </ul>
 
-                <button
-                  className="flex items-center gap-3 md:px-5 px-4 md:py-3 py-2 bg-buttonColor hover:bg-buttonHover text-lg rounded-lg text-white"
+                <Link   to={`${
+                (role === "Worker" && "/dashbord/workerHome") ||
+                (role === "Buyer" && "/dashbord/buyerHome") ||
+                (role === "Admin" && "/dashbord/adminHome")
+              }`}
+                  className="flex items-center gap-3 md:px-5 px-4 md:py-3 py-2 bg-buttonColor w-fit hover:bg-buttonHover btn btn-neutral text-lg rounded-lg text-white"
                   data-aos="zoom-in"
                   data-aos-delay="700"
                 >
                   <FaArrowRight size={20} />
                   Get Started
-                </button>
+                </Link>
               </div>
 
               {/* Right Side Image */}

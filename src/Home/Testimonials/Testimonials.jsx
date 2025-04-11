@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 // swiper imports
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Navigation, Autoplay } from "swiper/modules";
+import {  Navigation, Autoplay } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/pagination";
@@ -16,6 +16,7 @@ import SectionTitle from "../Shared/SectionTitle/SectionTitle";
 
 const Testimonials = () => {
   const [reviews, setReviews] = useState([]);
+  console.log(reviews)
   useEffect(() => {
     fetch("https://task-hive-server-ten.vercel.app/review")
       .then((res) => res.json())
@@ -41,7 +42,7 @@ const Testimonials = () => {
               clickable: true,
             }}
             navigation={true}
-            modules={[Pagination, Autoplay, Navigation]}
+            modules={[ Autoplay, Navigation]}
             className="mySwiper"
           >
             {reviews.map((review) => (

@@ -50,23 +50,23 @@ const Login = () => {
         setLoading(false);
       });
   };
-  const handelGoogle = () => {
-    googleSignin(email, password)
-      .then((res) => {
-        const googleUser = res.user;
-        setUser(googleUser);
-        toast.success(`Login Successfull ${googleUser.email}`);
-        setLoading(false);
+  // const handelGoogle = () => {
+  //   googleSignin(email, password)
+  //     .then((res) => {
+  //       const googleUser = res.user;
+  //       setUser(googleUser);
+  //       toast.success(`Login Successfull ${googleUser.email}`);
+  //       setLoading(false);
 
-        navigate("/");
-      })
-      .catch((err) => {
-        const errorM = err.message;
-        // console.log(errorM);
-        toast.error(`Opps! ${errorM}`);
-        setLoading(false);
-      });
-  };
+  //       navigate("/");
+  //     })
+  //     .catch((err) => {
+  //       const errorM = err.message;
+  //       // console.log(errorM);
+  //       toast.error(`Opps! ${errorM}`);
+  //       setLoading(false);
+  //     });
+  // };
   return (
     <>
       <div className="flex items-center min-h-screen justify-center pt-2 pb-4 sm:pt-4 bg-gradient-to-bl from-primary">
@@ -133,8 +133,8 @@ const Login = () => {
             </button>
           </form>
           {/* Google Login Button */}
-         <p className="text-red-400 text-sm mt-2">Register first if you don't have an account</p> 
-          <button
+         {/* <p className="text-red-400 text-sm mt-2">Register first if you don't have an account</p>  */}
+          {/* <button
             onClick={handelGoogle}
             className="w-full px-4 py-2 mt-4 text-gray-700 border  bg-secondary hover:from-secondary hover:to-buttonColor transform hover:scale-105 transition duration-300 ease-in rounded-lg focus:outline-none"
           >
@@ -146,7 +146,7 @@ const Login = () => {
               />
               <p className="text-white">Google Login</p>
             </div>
-          </button>
+          </button> */}
           {/* Link to Register Page */}
           <p className="mt-4 text-sm text-center text-gray-600">
             Don't have an account?{" "}

@@ -14,10 +14,11 @@ const Refferal = () => {
        <SectionTitle
         heading={"Refer & Earn"}
         subHeading={"Invite your friends to TaskHive and earn bonus coins..."}
-      ></SectionTitle>  
-        <div className="w-full lg:w-11/12 mx-auto p-10 bg-gradient-to-r from-buttonColor to-secondary rounded-lg text-white shadow-lg" data-aos="fade-up">
+      ></SectionTitle> 
+      <div className="w-11/12 p-4 mx-auto "> 
+        <div className="w-full  mx-auto   bg-gradient-to-r from-buttonColor to-secondary rounded-lg text-white shadow-lg" data-aos="fade-up">
       
-      <div className="flex flex-col lg:flex-row items-center gap-8">
+      <div className="flex flex-col lg:flex-row p-10 items-center gap-8">
         <div className="lg:w-1/2 text-center lg:text-left" data-aos="fade-right">
           <h2 className="text-3xl font-bold mb-4 flex items-center gap-2">
             <FaUserFriends className="text-borderColor" /> Refer & Earn!
@@ -26,7 +27,7 @@ const Refferal = () => {
             Invite your friends to TaskHive and earn **bonus coins** when they sign up & complete their first task. More friends = More rewards!
           </p>
           <button className="px-6 py-3 bg-borderColor flex gap-1 text-black font-semibold rounded-full hover:bg-buttonHover transition" data-aos="zoom-in"><FaCopy className="text-xl"/>
-          https://gMH7mYTd/tks-165645546-stock-photo-referrals-holographic
+          <span>gMH7mYTd/tks-165645546-stock-photo-referrals-holographic</span>
           </button>
         </div>
         <div className="lg:w-1/2 flex justify-center" data-aos="fade-left">
@@ -37,7 +38,7 @@ const Refferal = () => {
           />
         </div>
       </div>
-      <div className="mt-8 flex justify-center gap-6" data-aos="fade-up">
+      <div className="mt-8 flex pb-2 justify-center gap-6" data-aos="fade-up">
         <div className="flex items-center gap-2 bg-white text-black px-4 py-2 rounded-lg shadow-md">
           <FaGift className="text-green-500" /> Get Rewarded Instantly
         </div>
@@ -45,6 +46,7 @@ const Refferal = () => {
           <FaCoins className="text-yellow-500" /> Earn More with Every Referral
         </div>
       </div>
+    </div>
     </div>
     </>
 

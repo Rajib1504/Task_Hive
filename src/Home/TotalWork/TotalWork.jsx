@@ -72,8 +72,8 @@ const TotalWork = () => {
           "Discover the impact we've made and the opportunities waiting for you."
         }
       />
-      <div className="max-w-6xl mx-auto mt-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="w-11/12 mx-auto mt-12">
+        <div className="grid grid-cols-1  lg:grid-cols-3 gap-8">
           {stats.map((stat, index) => (
             <StatCard key={index} {...stat} />
           ))}

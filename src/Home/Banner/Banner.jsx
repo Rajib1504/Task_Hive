@@ -34,7 +34,8 @@ const Banner = () => {
           <div className="absolute inset-0 bg-black/20"></div>
           <div className="absolute inset-0 bg-gradient-to-r from-black/10 to-transparent"></div>
           
-          <div className="absolute top-1/2 left-10 transform -translate-y-1/2 text-left text-white z-10">
+          <div className="absolute   top-1/2 w-full  transform -translate-y-1/2 text-left text-white z-10">
+<div className="w-11/12 mx-auto  p-4">
             <h2 className="text-xl sm:text-2xl lg:text-4xl font-bold drop-shadow-lg">
               Unlock Your Earning Potential
             </h2>
@@ -54,6 +55,7 @@ const Banner = () => {
                   <p>Explore Tasks</p>
                 </div>
               </button>
+              </div>
             </div>
           </div>
         </div>
@@ -69,7 +71,8 @@ const Banner = () => {
           <div className="absolute inset-0 bg-black/40"></div>
           <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent"></div>
           
-          <div className="absolute top-1/2 left-10 transform -translate-y-1/2 text-left text-white z-10">
+           <div className="absolute   top-1/2 w-full  transform -translate-y-1/2 text-left text-white z-10">
+<div className="w-11/12 mx-auto  p-4">
             <h2 className="text-xl sm:text-2xl lg:text-4xl font-bold drop-shadow-lg">
               Hire Top Talent for Micro-Tasks
             </h2>
@@ -89,6 +92,7 @@ const Banner = () => {
                   <p>See Submissions</p>
                 </div>
               </button>
+              </div>
             </div>
           </div>
         </div>
@@ -104,7 +108,8 @@ const Banner = () => {
           <div className="absolute inset-0 bg-black/40"></div>
           <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent"></div>
           
-          <div className="absolute top-1/2 left-10 transform -translate-y-1/2 text-left text-white z-10">
+                    <div className="absolute   top-1/2 w-full  transform -translate-y-1/2 text-left text-white z-10">
+<div className="w-11/12 mx-auto  p-4">
             <h2 className="text-xl sm:text-2xl lg:text-4xl font-bold drop-shadow-lg">
               Grow Your Skills, Earn Rewards
             </h2>
@@ -124,6 +129,7 @@ const Banner = () => {
                   <p>View Tasks</p>
                 </div>
               </button>
+              </div>
             </div>
           </div>
         </div>
@@ -139,7 +145,8 @@ const Banner = () => {
           <div className="absolute inset-0 bg-black/40"></div>
           <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent"></div>
           
-          <div className="absolute top-1/2 left-10 transform -translate-y-1/2 text-left text-white z-10">
+                    <div className="absolute   top-1/2 w-full  transform -translate-y-1/2 text-left text-white z-10">
+<div className="w-11/12 mx-auto  p-4">
             <h2 className="text-xl sm:text-2xl lg:text-4xl font-bold drop-shadow-lg">
               Secure & Simple Payments
             </h2>
@@ -159,6 +166,7 @@ const Banner = () => {
                   <p>Purchase Coins</p>
                 </div>
               </button>
+              </div>
             </div>
           </div>
         </div>
