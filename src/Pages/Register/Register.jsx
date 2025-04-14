@@ -34,6 +34,7 @@ const Register = () => {
       register(email, password)
         .then((res) => {
           const newUser = res.user;
+
           // console.log(newUser);
           // updateUserProfile
           updateUserProfile(name, photoURL).then(() => {
@@ -45,7 +46,7 @@ const Register = () => {
             };
             axiosPublic.post("/user", userInfo).then((res) => {
               if (res.data.insertedId) {
-                // console.log("user created to the database");
+                console.log("user created to the database");
                 toast.success(`Registerd by ${newUser.email}`);
                 setLoading(false);
                 refetch();

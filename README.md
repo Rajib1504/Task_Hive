@@ -2,11 +2,11 @@
 
 **Admin Username:** radhanath1542@gmail.com  
 **Admin Password:** Rajib1234!  
-**Live Site URL:** [TaskHive Live Site](https://taskhive-40a4a.web.app)
+**Live Site URL:** [TaskHive Live Site](https://taskhive-40a4a.web.app) 
 
 ---
 
-## 🚀 Project Overview
+## 🚀 Project Overview 
 
 **TaskHive** is a full-stack micro-task and earning platform designed to connect Workers and Buyers. The platform allows Workers to complete small tasks and earn money, while Buyers can post tasks and request workers. TaskHive incorporates a coin-based payment system, payment gateway integration via **Stripe**, role-based access control, and real-time notifications to ensure a smooth user experience.
 
