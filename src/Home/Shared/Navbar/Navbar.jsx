@@ -18,15 +18,7 @@ const Navbar = () => {
   if (loading) {
     <Loading></Loading>;
   }
-  const SignOut = () => {
-    logOut()
-      .then((res) => {
-        toast.success("logout successfully");
-      })
-      .catch((err) => {
-        toast.error(err.message);
-      });
-  };
+ 
   const link = (
     <>
       {!user && (
@@ -77,7 +69,7 @@ const Navbar = () => {
 
       <li>
         <a
-          href="https://github.com/Programming-Hero-Web-Course4/b10a12-client-side-Rajib1504"
+          href="https://github.com/Rajib1504/Task_Hive"
           target="_blank"
         >
           Join As Developer
@@ -166,7 +158,7 @@ const Navbar = () => {
           </div>
         )}
         {user && (
-          <div className="navbar-end flex gap-2 ">
+          <div className=" flex gap-2 justify-between  ">
               <div className=" hidden lg:flex">
             <ul className="menu menu-horizontal px-1">{link}</ul>
           </div>
@@ -174,12 +166,7 @@ const Navbar = () => {
               <HiCurrencyDollar className="text-yellow-400 text-2xl" />
               {coin}
             </button>
-            <button
-              onClick={SignOut}
-              className="btn lg:btn-ghost btn-xs md:btn-sm  border-borderColor text-red-300 "
-            >
-              log out
-            </button>
+           
             <div
               className=" tooltip  tooltip-bottom mr-4"
               data-tip={user?.displayName}
@@ -188,7 +175,7 @@ const Navbar = () => {
                 <img
                   src={user.photoURL}
                   alt="User Icon"
-                  className="w-5 sm:w-10 rounded-full"
+                  className="w-5 sm:w-10  rounded-full"
                 />
               ) : (
                 <CircleUserRound />
