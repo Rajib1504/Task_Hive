@@ -1,7 +1,7 @@
 # TaskHive
 
-**Admin Username:** radhanath1542@gmail.com  
-**Admin Password:** Rajib1234!  
+**Admin Username:** kiron@gmil.com 
+**Admin Password:** Rajib123!  
 **Live Site URL:** [TaskHive Live Site](https://taskhive-40a4a.web.app) 
 
 ---
@@ -96,8 +96,8 @@ With three key roles—Worker, Buyer, and Admin—TaskHive offers a dynamic and 
 
 2. **Log In Using Admin Credentials**:  
    To test the admin features, use the following credentials:
-   - **Username**: radhanath1542@gmail.com
-   - **Password**: Rajib1234!
+   - **Username**: kiron@gmil.com
+   - **Password**: Rajib123!
 
 3. **Role-Specific Dashboards**:  
    After logging in, select the role-specific dashboard to explore the functionalities:
