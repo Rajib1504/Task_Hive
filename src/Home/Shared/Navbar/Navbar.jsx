@@ -13,7 +13,7 @@ const Navbar = () => {
   const [coin] = useCoins();
   const [role] = UseRole();
   // console.log(coin);
-  const { user, logOut, loading } = UseAuth();
+  const { user, loading } = UseAuth();
   const axiosPublic = useAxiosPublic();
   if (loading) {
     <Loading></Loading>;
@@ -86,8 +86,8 @@ const Navbar = () => {
 
   return (
     <div className="z-50  bg-primary sticky top-0 ">
-      <div className="navbar px-0 w-11/12 mx-auto ">
-        <div className="navbar-start">
+      <div className="navbar px-0 w-11/12 mx-auto justify-between">
+        <div className="">
           <div className="dropdown">
             <div
               tabIndex={0}
@@ -153,8 +153,8 @@ const Navbar = () => {
           //   <ul className="menu menu-horizontal px-1">{link}</ul>
           // </div>
        (
-          <div className="navbar-end hidden lg:flex">
-            <ul className="menu menu-horizontal px-1">{link}</ul>
+          <div className=" border-2 border-blue-700 hidden lg:flex">
+            <ul className="menu menu-horizontal px-2">{link}</ul>
           </div>
         )}
         {user && (
