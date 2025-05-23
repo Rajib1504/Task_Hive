@@ -153,7 +153,7 @@ const Navbar = () => {
           //   <ul className="menu menu-horizontal px-1">{link}</ul>
           // </div>
        (
-          <div className=" border-2 border-blue-700 hidden lg:flex">
+          <div className="  hidden lg:flex">
             <ul className="menu menu-horizontal px-2">{link}</ul>
           </div>
         )}
